@@ -900,12 +900,12 @@ footer {
       <option value="family">Famille A → Z</option>
       <option value="priceAsc">Prix croissant</option>
       <option value="priceDesc">Prix décroissant</option>
-      <option value="rarity">Rareté (commun → très rare)</option>
+      
     </select>
 
   </div>
 
-  <p class="price-note">Prix indicatifs au kilo : cotations de gros et relevés de marché, variables selon l'origine, la saison et la qualité. Les espèces non cotées ne disposent pas d'un prix fiable dans les relevés consultés. Repères consultés le 13 novembre 2026 : <a href="https://husfarm.com/fr/produit/champignon/" target="_blank" rel="noopener">cotations des marchés français</a> ; <a href="https://hallesx.com/marche" target="_blank" rel="noopener">relevés de marchés</a>. Ces prix de gros ne sont pas des prix garantis au détail.</p>
+  <p class="price-note">Prix indicatifs au kilo : cotations de gros et relevés de marché, variables selon l'origine, la saison et la qualité. Les espèces non cotées ne disposent pas d'un prix fiable dans les relevés consultés. Repères consultés le 13 novembre 2026 (morille : 15–21 juin 2026) : <a href="https://husfarm.com/fr/prix/min-rungis/cepe-france-petit/" target="_blank" rel="noopener">cèpes et girolles – Rungis</a> ; <a href="https://fruitveg.pays.fr.eu.org/produit/morille" target="_blank" rel="noopener">morilles – RNM / Rungis</a> ; <a href="https://husfarm.com/fr/produit/champignon/" target="_blank" rel="noopener">autres cotations de gros</a>. Ces prix de gros ne sont pas des prix garantis au détail.</p>
   </section>
   </details>
   <div class="catalogue-heading">
@@ -961,7 +961,7 @@ footer {
       <a href="https://hdf.fongifrance.fr/" target="_blank" rel="noopener">Atlas mycologique des Hauts-de-France</a> ·
       <a href="https://www.anses.fr/fr/actualite/cueillette-consommation-champignons-attention-aux-risques-dintoxications" target="_blank" rel="noopener">Anses – Sécurité des cueillettes</a>
     </p>
-    <p>Les périodes de fructification sont indicatives et peuvent varier selon les conditions météorologiques et les milieux. Ce catalogue est un support documentaire : il ne permet pas d’identifier avec certitude un champignon ni de garantir sa comestibilité. Ne consommez jamais une récolte sur la seule base d’une fiche ou d’une photographie ; faites-la contrôler par un pharmacien ou une association mycologique.</p>
+    <p>Les prix indiqués sont des cotations de gros, hors taxes, relevées sur des marchés précis et non des prix de vente au détail. Les cotations varient selon l’origine, la qualité et la saison. Les périodes de fructification sont indicatives et peuvent varier selon les conditions météorologiques et les milieux. Ce catalogue est un support documentaire : il ne permet pas d’identifier avec certitude un champignon ni de garantir sa comestibilité. Ne consommez jamais une récolte sur la seule base d’une fiche ou d’une photographie ; faites-la contrôler par un pharmacien ou une association mycologique.</p>
     <p><a href="https://www.anses.fr/fr/actualite/cueillette-consommation-champignons-attention-aux-risques-dintoxications" target="_blank" rel="noopener">Conseils de sécurité de l’Anses</a></p>
   </div>
 
@@ -1040,8 +1040,8 @@ const mushrooms = [
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
     priceMin: 15,
-    priceMax: 30,
-    priceLabel: "15–30 € / kg (repère de marché, selon origine)",
+    priceMax: 24,
+    priceLabel: "15–24 € / kg (girolle import, gros, Rungis, 13/11/2026)",
 
     category: "comestible",
 
@@ -1069,9 +1069,9 @@ const mushrooms = [
     family: "Morchellacées",
     habitatType: "Forêt de feuillus / lisière",
     seasonGroup: "Printemps",
-    priceMin: 40,
-    priceMax: 46,
-    priceLabel: "40–46 € / kg (cotation relevée en juin 2026)",
+    priceMin: 43,
+    priceMax: 43,
+    priceLabel: "43 € / kg (gros, Rungis, 15–21/06/2026)",
 
     category: "comestible",
 
@@ -1455,7 +1455,7 @@ const mushrooms = [
     description: "Amanite jaune pâle à ivoire, souvent ornée de fragments de voile sur le chapeau.",
     habitat: "Bois de feuillus et de conifères.",
     season: "Été et automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Espèce non recherchée pour l’alimentation, à l’odeur caractéristique de pomme de terre crue. Une confusion avec l’Amanite phalloïde, mortelle, est possible. Ne pas consommer."
   },
 
   {
@@ -1606,7 +1606,7 @@ const mushrooms = [
     source: "https://www.inaturalist.org/search?q=Boletus%20reticulatus",
     description: "Cèpe à chapeau brun clair souvent craquelé par temps sec et pied finement réticulé.",
     habitat: "Forêts de feuillus, notamment sous les chênes et les hêtres.",
-    season: "Été et automne",
+    season: "Fin du printemps à début d’automne (mai–septembre)",
     details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
   },
 
@@ -1852,7 +1852,7 @@ const mushrooms = [
     image: "https://commons.wikimedia.org/wiki/Special:FilePath/Leccinum_aurantiacum.jpg",
     source: "https://www.inaturalist.org/search?q=Leccinum%20aurantiacum",
     description: "Bolet à chapeau roux orangé et pied blanc couvert de mèches foncées.",
-    habitat: "Sous les peupliers et autres feuillus selon les formes.",
+    habitat: "En association avec les peupliers et les trembles, dans les bois et leurs lisières.",
     season: "Été et automne",
     details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
   },
@@ -1873,7 +1873,7 @@ const mushrooms = [
     description: "Bolet de taille moyenne à chapeau velouté, brun olivâtre et pores jaunes.",
     habitat: "Bois de feuillus et forêts mixtes.",
     season: "Été et automne",
-    details: "Bolet velouté des bois de feuillus et des forêts mixtes. La nomenclature de cette espèce varie selon les référentiels ; le nom affiché ici est conservé comme nom d’usage du catalogue."
+    details: "Bolet velouté des bois de feuillus et des forêts mixtes. Le nom scientifique Xerocomus subtomentosus est retenu par Index Fungorum et figure dans le catalogue mycologique français."
   },
 
   {
@@ -2158,7 +2158,7 @@ const mushrooms = [
     description: "Champignon en touffes à chapeau et pied couverts d’écailles brunes dressées.",
     habitat: "À la base des arbres, sur souches et bois enterré.",
     season: "Automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Espèce non recommandée à la consommation. Des réactions indésirables ont été rapportées ; éviter toute consommation, notamment en association avec l’alcool."
   },
 
   {
@@ -2557,7 +2557,7 @@ const mushrooms = [
     description: "Petite chanterelle brun jaune, à pied creux et plis espacés sous le chapeau.",
     habitat: "Forêts humides de conifères et bois moussus.",
     season: "Automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Chanterelle en tube reconnaissable à son pied creux, souvent jaune, et à son chapeau brun en entonnoir. L’identification doit être confirmée par un spécialiste avant toute consommation."
   },
 
   {
@@ -2595,7 +2595,7 @@ const mushrooms = [
     description: "Champignon blanc en boule portant de longues aiguilles pendantes.",
     habitat: "Sur troncs et grosses branches de feuillus, notamment hêtres et chênes.",
     season: "Automne",
-    details: "Espèce patrimoniale dans plusieurs régions et susceptible de faire l’objet de mesures locales de protection. Vérifier la réglementation locale avant toute cueillette ; privilégier l’observation."
+    details: "Champignon blanc en forme de pompon, poussant sur le bois de feuillus. Observer sans cueillir lorsque la réglementation locale ou le statut du site n’est pas connu."
   },
 
   {
@@ -2861,7 +2861,7 @@ const mushrooms = [
     description: "Truffe souterraine à peau noire verruqueuse et chair claire marbrée.",
     habitat: "Sols calcaires sous chênes, noisetiers et charmes.",
     season: "Été et automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Truffe souterraine associée à des feuillus, notamment chênes, noisetiers et charmes, sur sols calcaires. Le nom Tuber uncinatum est souvent employé pour la forme automnale."
   },
 
   {
