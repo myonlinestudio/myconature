@@ -3,93 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#183b2b">
-<title>Quiz des cèpes | MycoNature</title>
+<meta name="theme-color" content="#14291f">
+<meta name="description" content="Teste tes connaissances sur les cèpes, progresse et débloque les branches de ton arbre mycologique.">
+<title>Académie MycoNature | Quiz mycologique</title>
 <style>
-:root{--green:#183b2b;--light:#f5f5ef;--gold:#c6a66b;--text:#242820}
+:root{--forest:#14291f;--forest2:#203d2d;--moss:#64785a;--paper:#f4f0e6;--cream:#fbf9f3;--gold:#b99b62;--ink:#263329;--muted:#778074;--line:#e5e0d4;--white:#fff}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:var(--light);color:var(--text);min-height:100vh}
-header{background:var(--green);color:#fff;padding:16px 7%;display:flex;justify-content:space-between;align-items:center;gap:16px}
-.logo{font:25px Georgia,serif;letter-spacing:2px;color:#fff;text-decoration:none}
-header nav{display:flex;gap:22px;align-items:center}
-header nav a{color:#fff;text-decoration:none;font-size:14px}
-header nav a:hover{text-decoration:underline}
-.quiz-page{max-width:1000px;margin:0 auto;padding:44px 22px 70px}
-.quiz-hero{text-align:center;padding:36px 20px 30px}
-.quiz-eyebrow{color:#8b7448;text-transform:uppercase;letter-spacing:.15em;font-size:12px;font-weight:700}
-.quiz-hero h1{font:clamp(36px,6vw,58px) Georgia,serif;color:var(--green);margin:14px 0}
-.quiz-hero p{max-width:650px;margin:auto;color:#626b60;line-height:1.7;font-size:16px}
-.quiz-box{max-width:760px;margin:0 auto;background:#fff;border-radius:16px;padding:clamp(20px,4vw,34px);box-shadow:0 10px 35px rgba(23,44,29,.08)}
-.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:18px}
-.quiz-kicker{color:#71806e;font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:700}
-.quiz-box h2{color:var(--green);font:bold 27px Georgia,serif;margin:5px 0 12px}
-.quiz-box p{line-height:1.6}
-.quiz-career{background:#f3f5ef;padding:16px;border-radius:10px;margin:18px 0 24px}
-.quiz-career-line{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px}
-.quiz-progress{height:9px;background:#e2e7dd;border-radius:9px;overflow:hidden;margin-top:11px}
-.quiz-progress>span{display:block;height:100%;background:#b99a5d;transition:width .25s}
-.quiz-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
-.quiz-level{border:1px solid #dce2d8;border-radius:10px;background:white;color:#294432;padding:18px 10px;cursor:pointer;font-weight:700;transition:.2s}
-.quiz-level:hover{border-color:#b99a5d;background:#faf8f1;transform:translateY(-2px)}
-.quiz-level small{display:block;margin-top:7px;color:#777;font-weight:400;line-height:1.4}
-.quiz-primary{display:inline-flex;justify-content:center;border:0;border-radius:6px;padding:13px 20px;background:var(--green);color:#fff;font-weight:700;cursor:pointer}
-.quiz-primary:hover{background:#315b40}
-.quiz-question-meta{display:flex;justify-content:space-between;color:#687365;font-size:13px;margin:18px 0 9px}
-.quiz-question{font:bold 22px Georgia,serif;color:#263d2c;line-height:1.35;margin:20px 0}
-.quiz-answers{display:grid;gap:10px}
-.quiz-answer{width:100%;text-align:left;padding:14px 15px;border:1px solid #dce2d8;border-radius:8px;background:#fff;color:#28352a;cursor:pointer;line-height:1.45}
-.quiz-answer:disabled{cursor:default;opacity:1}
-.quiz-answer.correct{border-color:#3d8150;background:#edf7ee}
-.quiz-answer.incorrect{border-color:#b75c48;background:#fff0ec}
-.quiz-explanation{margin:16px 0;padding:15px;background:#f3f5ef;border-left:3px solid #b99a5d;border-radius:5px;line-height:1.6}
-.quiz-result{text-align:center;padding:12px 0 4px}
-.quiz-result-score{color:var(--green);font:bold 42px Georgia,serif;margin:14px 0}
-.quiz-note{color:#777;font-size:12px;margin-top:16px;line-height:1.5}
-.quiz-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:25px 0}
-.quiz-benefit{background:#fff;padding:17px;border-radius:10px;text-align:center;border:1px solid #e5e8e0}
-.quiz-benefit strong{display:block;color:var(--green);margin:6px 0}
-.quiz-benefit span{font-size:13px;color:#6b7068;line-height:1.5}
-footer{background:var(--green);color:#fff;text-align:center;padding:26px 20px;font-size:13px;line-height:1.7}
-.quiz-launch{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid rgba(255,255,255,.55);border-radius:24px;background:rgba(255,255,255,.08);color:#fff;font-weight:700;cursor:pointer;white-space:nowrap}.quiz-launch:hover{background:rgba(255,255,255,.16)}.quiz-launch svg{width:19px;height:19px}#quizOverlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(8,20,13,.78);padding:18px;align-items:center;justify-content:center}#quizOverlay.is-visible{display:flex}.quiz-box{width:min(680px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:14px;padding:clamp(20px,4vw,32px);box-shadow:0 20px 70px #0005}.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:18px}.quiz-kicker{color:#71806e;font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:700}.quiz-close{border:0;background:#f0f2ed;color:#314b36;width:38px;height:38px;border-radius:50%;font-size:23px;cursor:pointer}.quiz-box h2{color:var(--green);font:bold 29px Georgia,serif;margin:5px 0 12px}.quiz-box p{line-height:1.6}.quiz-career{background:#f3f5ef;padding:14px 16px;border-radius:9px;margin:16px 0 20px}.quiz-career-line{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px}.quiz-progress{height:8px;background:#e2e7dd;border-radius:9px;overflow:hidden;margin-top:10px}.quiz-progress>span{display:block;height:100%;background:#b99a5d;transition:width .25s}.quiz-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0}.quiz-level{border:1px solid #dce2d8;border-radius:9px;background:white;color:#294432;padding:14px 8px;cursor:pointer;font-weight:700}.quiz-level:hover{border-color:#b99a5d;background:#faf8f1}.quiz-level small{display:block;margin-top:5px;color:#777;font-weight:400}.quiz-primary{display:inline-flex;justify-content:center;border:0;border-radius:6px;padding:13px 20px;background:var(--green);color:#fff;font-weight:700;cursor:pointer}.quiz-question-meta{display:flex;justify-content:space-between;color:#687365;font-size:13px;margin:18px 0 9px}.quiz-question{font:bold 22px Georgia,serif;color:#263d2c;line-height:1.35;margin-bottom:18px}.quiz-answers{display:grid;gap:10px}.quiz-answer{width:100%;text-align:left;padding:14px 15px;border:1px solid #dce2d8;border-radius:8px;background:#fff;color:#28352a;cursor:pointer;line-height:1.45}.quiz-answer:disabled{cursor:default;opacity:1}.quiz-answer.correct{border-color:#3d8150;background:#edf7ee}.quiz-answer.incorrect{border-color:#b75c48;background:#fff0ec}.quiz-explanation{margin:16px 0;padding:15px;background:#f3f5ef;border-left:3px solid #b99a5d;border-radius:5px;line-height:1.6}.quiz-result{text-align:center;padding:12px 0 4px}.quiz-result-score{color:var(--green);font:bold 42px Georgia,serif;margin:14px 0}.quiz-note{color:#777;font-size:12px;margin-top:16px;line-height:1.5}@media(max-width:600px){.header-actions{gap:9px}.quiz-launch{width:42px;height:42px;min-height:42px;padding:0;justify-content:center;border-radius:50%;font-size:0}.quiz-launch svg{width:21px;height:21px}.quiz-levels{gap:6px}.quiz-level{padding:12px 4px;font-size:13px}.quiz-box h2{font-size:25px}}
-
-@media(max-width:600px){header{padding:14px 5%}.logo{font-size:20px}header nav{gap:12px}header nav a{font-size:12px}.quiz-page{padding:25px 14px 45px}.quiz-hero{padding:20px 8px 24px}.quiz-levels{gap:7px}.quiz-level{padding:14px 5px;font-size:13px}.quiz-benefits{grid-template-columns:1fr}.quiz-box h2{font-size:23px}}
+body{font-family:Arial,sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
+a{color:inherit}
+.site-header{height:76px;background:var(--forest);color:#f9f6ed;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,7vw,100px);border-bottom:1px solid rgba(185,155,98,.35)}
+.brand{font:23px Georgia,serif;letter-spacing:.17em;text-decoration:none;white-space:nowrap}
+.brand span{color:#d0b77e}
+.header-nav{display:flex;align-items:center;gap:28px}
+.header-nav a{font-size:13px;color:#e8e4d8;text-decoration:none;letter-spacing:.04em}
+.header-nav a:hover{color:#d9bd80}
+.page{max-width:1120px;margin:auto;padding:38px 24px 80px}
+.hero{position:relative;overflow:hidden;min-height:340px;padding:clamp(32px,6vw,70px);border-radius:5px;background:radial-gradient(ellipse at 78% 18%,rgba(185,155,98,.18),transparent 36%),linear-gradient(120deg,#14291f 0%,#203b2b 65%,#2e4934 100%);color:#f8f4e9;display:flex;align-items:center}
+.hero:after{content:"✳";position:absolute;right:6%;top:5%;font:clamp(150px,24vw,270px) Georgia,serif;color:rgba(218,198,151,.08);transform:rotate(-18deg);pointer-events:none}
+.hero-copy{position:relative;z-index:1;max-width:660px}
+.eyebrow{font-size:10px;letter-spacing:.23em;text-transform:uppercase;color:#d0b77e;font-weight:700}
+.hero h1{font:clamp(38px,6vw,66px)/1.04 Georgia,serif;letter-spacing:-.025em;margin:19px 0 16px;max-width:650px}
+.hero p{max-width:540px;color:#d7ddd2;line-height:1.75;font-size:15px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 19px;border:1px solid transparent;border-radius:3px;font-weight:700;font-size:13px;text-decoration:none;cursor:pointer;transition:.2s}
+.btn-gold{background:var(--gold);color:#17271d}.btn-gold:hover{background:#d0b77e;transform:translateY(-1px)}
+.btn-outline{border-color:rgba(255,255,255,.45);color:#fff;background:transparent}.btn-outline:hover{background:rgba(255,255,255,.09)}
+.section-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.19em;color:#9a8050;font-weight:700}
+.section-title{font:clamp(27px,4vw,36px) Georgia,serif;color:var(--forest);margin:9px 0 8px}
+.section-intro{color:var(--muted);font-size:14px;line-height:1.7;max-width:650px}
+.dashboard{display:grid;grid-template-columns:1.3fr repeat(3,1fr);gap:12px;margin:24px 0 40px}
+.stat{background:var(--cream);border:1px solid var(--line);padding:18px 19px;min-height:94px}
+.stat-label{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.13em;margin-bottom:10px}
+.stat strong{font:26px Georgia,serif;color:var(--forest)}
+.stat small{font-size:11px;color:var(--muted);margin-left:4px}
+.rank-stat{background:#e9e6d9}
+.rank-stat strong{font-size:21px}
+.intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 48px}
+.intro-card{padding:20px;background:rgba(255,255,255,.58);border:1px solid var(--line)}
+.intro-icon{font-size:19px}
+.intro-card h3{font:19px Georgia,serif;color:var(--forest);margin:12px 0 7px}
+.intro-card p{font-size:12px;line-height:1.65;color:var(--muted)}
+.panel{background:var(--cream);border:1px solid var(--line);padding:clamp(20px,4vw,34px);margin-top:24px}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:20px}
+.panel h2{font:27px Georgia,serif;color:var(--forest)}
+.career-box{background:#eeece2;padding:17px 19px;margin:18px 0 22px}
+.career-line{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px}
+.progress{height:7px;background:#dedbce;margin-top:11px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--gold);transition:width .25s}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+.level{border:1px solid #ded9cb;background:#fff;padding:20px 15px;text-align:left;cursor:pointer;transition:.2s;color:var(--forest)}
+.level:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 20px #182d1b0d}
+.level strong{font:20px Georgia,serif;display:block;margin:8px 0}
+.level small{font-size:11px;line-height:1.5;color:var(--muted)}
+.level .level-mark{font-size:18px;color:#9c8558}
+.note{font-size:11px;line-height:1.6;color:var(--muted);margin-top:14px}
+.question-meta{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:12px;margin:18px 0 10px}
+.question{font:25px/1.35 Georgia,serif;color:var(--forest);margin:22px 0}
+.answers{display:grid;gap:9px}
+.answer{width:100%;padding:15px 16px;text-align:left;border:1px solid #dedbd0;background:white;color:var(--ink);cursor:pointer;font-size:14px;line-height:1.5}
+.answer:hover:not(:disabled){border-color:var(--gold);background:#fbf8f0}
+.answer:disabled{opacity:1;cursor:default}
+.answer.correct{border-color:#59815c;background:#edf4e9}
+.answer.incorrect{border-color:#b46c59;background:#fbefeb}
+.explanation{margin:18px 0;padding:16px;background:#efeee6;border-left:3px solid var(--gold);font-size:13px;line-height:1.7}
+.result{text-align:center;padding:20px 0}
+.result-score{font:50px Georgia,serif;color:var(--forest);margin:15px 0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.hidden{display:none!important}
+.tree-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin:30px 0 20px}
+.tree-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.legend-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:var(--gold)}
+.legend-dot.locked{background:#d9d7cf}
+.tree-summary{background:#e9e6d9;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px;font-size:13px}
+.tree-summary strong{font:22px Georgia,serif;color:var(--forest)}
+.tree-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.branch{background:#fbfaf6;border:1px solid var(--line);padding:19px 17px;position:relative;overflow:hidden}
+.branch:before{content:"";position:absolute;left:29px;top:58px;bottom:24px;width:1px;background:#d9d5c8}
+.branch-head{display:flex;align-items:center;gap:11px;margin-bottom:16px}
+.branch-symbol{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#e9e6d9;color:var(--forest);font-size:15px;z-index:1}
+.branch h3{font:18px Georgia,serif;color:var(--forest)}
+.branch-sub{font-size:10px;color:var(--muted);margin-top:3px}
+.achievement{position:relative;padding:11px 10px 12px 35px;margin:9px 0 0;min-height:70px;border-bottom:1px solid #eeece5}
+.achievement:last-child{border-bottom:0}
+.achievement:before{content:"";position:absolute;left:6px;top:16px;width:10px;height:10px;border-radius:50%;background:#d5d3cb;border:2px solid #fbfaf6;z-index:1}
+.achievement.unlocked:before{background:var(--gold);box-shadow:0 0 0 3px #b99b6226}
+.achievement strong{display:block;font-size:12px;color:#9a9a8d}
+.achievement.unlocked strong{color:var(--forest)}
+.achievement p{font-size:11px;color:var(--muted);line-height:1.5;margin:5px 0}
+.achievement-status{font-size:10px;color:#a09e93}
+.achievement.unlocked .achievement-status{color:#8b7041;font-weight:700}
+.tree-empty{padding:24px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);margin-top:15px;font-size:13px;line-height:1.7}
+footer{background:var(--forest);color:#d9dfd4;text-align:center;padding:26px 20px;font-size:11px;letter-spacing:.04em}
+footer a{color:#d2b97e;text-decoration:none}
+@media(max-width:760px){.dashboard{grid-template-columns:repeat(2,1fr)}.rank-stat{grid-column:span 2}.tree-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.site-header{height:66px;padding:0 17px}.brand{font-size:19px}.header-nav{gap:13px}.header-nav a{font-size:11px}.page{padding:20px 14px 55px}.hero{min-height:360px;padding:30px 23px}.hero h1{font-size:42px}.intro-grid{grid-template-columns:1fr;gap:9px;margin-bottom:35px}.intro-card{display:grid;grid-template-columns:32px 1fr;column-gap:8px;padding:14px}.intro-icon{grid-row:span 2}.intro-card h3{margin:0 0 4px}.levels{grid-template-columns:1fr}.level{display:flex;align-items:center;gap:13px;padding:14px}.level strong{margin:0 0 3px}.level .level-mark{font-size:22px}.tree-grid{grid-template-columns:1fr}.tree-summary{align-items:flex-start;flex-direction:column}.question{font-size:22px}}
 </style>
 </head>
 <body>
-<header>
-<a class="logo" href="index.html">🍄 MYCONATURE</a>
-<nav><a href="index.html">Accueil du site</a><a href="index.html#catalogue">Catalogue</a></nav>
+<header class="site-header">
+<a class="brand" href="index.html">MYCO<span>NATURE</span></a>
+<nav class="header-nav"><a href="index.html">Le catalogue</a><a href="#parcours">Mon parcours</a></nav>
 </header>
-<main class="quiz-page">
-<section class="quiz-hero">
-<div class="quiz-eyebrow">MycoNature · Espace d’apprentissage</div>
-<h1>Le quiz des cèpes</h1>
-<p>Prêt à tester ton œil de mycologue ? Réponds à des questions aléatoires, découvre les explications et fais évoluer ton rang au fil de tes parties.</p>
+<main class="page">
+<section class="hero">
+<div class="hero-copy">
+<div class="eyebrow">L'académie MycoNature · Depuis la forêt</div>
+<h1>La connaissance pousse à chaque découverte.</h1>
+<p>Explore les secrets des cèpes, affine ton regard et construis ton propre parcours de mycologue. Chaque bonne réponse fait grandir ton savoir.</p>
+<div class="hero-actions">
+<a class="btn btn-gold" href="#parcours">Commencer l'expérience <span>↗</span></a>
+<button class="btn btn-outline" type="button" onclick="showTree()">Voir mon arbre des savoirs</button>
+</div>
+</div>
 </section>
-<section class="quiz-benefits" aria-label="Fonctionnalités du quiz">
-<div class="quiz-benefit"><div>🎯</div><strong>3 difficultés</strong><span>Des premières notions aux questions expertes.</span></div>
-<div class="quiz-benefit"><div>🧠</div><strong>Apprendre en jouant</strong><span>Une explication après chaque réponse.</span></div>
-<div class="quiz-benefit"><div>🏆</div><strong>Évoluer</strong><span>Des points cumulés et un rang qui progresse.</span></div>
+<section class="dashboard" aria-label="Statistiques personnelles">
+<div class="stat rank-stat"><span class="stat-label">Mon rang actuel</span><strong id="dashRank">🌱 Débutant</strong></div>
+<div class="stat"><span class="stat-label">Points gagnés</span><strong id="dashPoints">0</strong></div>
+<div class="stat"><span class="stat-label">Bonnes réponses</span><strong id="dashCorrect">0</strong></div>
+<div class="stat"><span class="stat-label">Meilleure série</span><strong id="dashStreak">0</strong><small> d'affilée</small></div>
 </section>
-<section class="quiz-box">
-<div class="quiz-top"><div><div class="quiz-kicker">Ton parcours mycologique</div><h2>Choisis ton défi</h2></div></div>
-<div class="quiz-career">
-<div class="quiz-career-line"><strong id="quizRank">🌱 Débutant</strong><span><strong id="quizPoints">0</strong> points cumulés</span></div>
-<div class="quiz-progress"><span id="quizCareerBar" style="width:0%"></span></div>
-<p id="quizNextRank" style="font-size:12px;color:#687365;margin-top:8px">Encore 50 points pour le niveau suivant.</p>
+<section>
+<div class="section-kicker">Un apprentissage vivant</div>
+<h2 class="section-title">Bien plus qu'un simple quiz.</h2>
+<p class="section-intro">Trois façons de progresser : apprendre les fondamentaux, reconnaître les détails qui font la différence et comprendre la science des champignons.</p>
+<div class="intro-grid">
+<article class="intro-card"><div class="intro-icon">⌕</div><h3>Observer</h3><p>Forme, pied, pores, chapeau : apprends à repérer les indices essentiels.</p></article>
+<article class="intro-card"><div class="intro-icon">♧</div><h3>Comprendre</h3><p>Découvre les relations entre les champignons, les arbres et leur milieu.</p></article>
+<article class="intro-card"><div class="intro-icon">✧</div><h3>Maîtriser</h3><p>Fais progresser tes connaissances et débloque des distinctions au fil des réponses.</p></article>
+</div>
+</section>
+<section id="parcours" class="panel">
+<div class="panel-head"><div><div class="section-kicker">Ton entraînement</div><h2>Choisis ton niveau</h2></div></div>
+<div class="career-box">
+<div class="career-line"><strong id="quizRank">🌱 Débutant</strong><span><strong id="quizPoints">0</strong> points cumulés</span></div>
+<div class="progress"><span id="quizCareerBar" style="width:0%"></span></div>
+<p id="quizNextRank" class="note">Encore 50 points pour le niveau suivant.</p>
 </div>
 <div id="quizContent">
-<p>Chaque partie comprend 5 questions. Une bonne réponse rapporte 10 points. Sélectionne une difficulté pour commencer.</p>
-<div class="quiz-levels">
-<button class="quiz-level" onclick="startQuiz('facile')">🌱 Facile<small>Les bases et les caractéristiques essentielles</small></button>
-<button class="quiz-level" onclick="startQuiz('intermediaire')">🍃 Intermédiaire<small>Reconnaissance et connaissances mycologiques</small></button>
-<button class="quiz-level" onclick="startQuiz('expert')">🌳 Expert<small>Aller plus loin dans les détails</small></button>
+<p class="section-intro">Chaque partie comprend 5 questions aléatoires. Une bonne réponse rapporte 10 points et enrichit tes statistiques.</p>
+<div class="levels">
+<button class="level" onclick="startQuiz('facile')"><span class="level-mark">Ⅰ</span><span><strong>Découverte</strong><small>Les bases et les caractéristiques essentielles · Facile</small></span></button>
+<button class="level" onclick="startQuiz('intermediaire')"><span class="level-mark">Ⅱ</span><span><strong>Connaisseur</strong><small>Reconnaissance et connaissances mycologiques · Intermédiaire</small></span></button>
+<button class="level" onclick="startQuiz('expert')"><span class="level-mark">Ⅲ</span><span><strong>Expert</strong><small>Taxonomie, écologie et subtilités · Difficile</small></span></button>
 </div>
-<p class="quiz-note">Tes points sont conservés sur cet appareil. Le rang « Professionnel » est un objectif ludique, pas une qualification ou une certification.</p>
+<p class="note">Tes points et tes statistiques sont conservés sur cet appareil. Le rang « Professionnel » est un objectif ludique, pas une qualification ni une certification mycologique.</p>
 </div>
 </section>
+<section id="treeView" class="hidden">
+<div class="tree-intro">
+<div><div class="section-kicker">Ton évolution personnelle</div><h2 class="section-title">L'arbre des savoirs</h2><p class="section-intro">Chaque branche grandit selon tes réponses. Les succès se débloquent grâce à tes points, ta régularité et tes domaines de maîtrise.</p></div>
+<button class="btn btn-gold" onclick="hideTree()">← Retour au quiz</button>
+</div>
+<div class="tree-summary"><div><div class="section-kicker">Récolte de connaissances</div><strong id="treeUnlocked">0 / 12 succès</strong></div><div id="treePercent">L'arbre commence à pousser…</div></div>
+<div class="tree-legend"><span><i class="legend-dot"></i> Succès débloqué</span><span><i class="legend-dot locked"></i> À découvrir</span></div>
+<div id="treeGrid" class="tree-grid"></div>
+<div class="tree-empty">Continue à jouer : tes branches se mettent à jour automatiquement après chaque réponse. Les statistiques sont enregistrées sur cet appareil.</div>
+</section>
 </main>
-<footer>🍄 MYCONATURE · Apprendre, observer et respecter le monde des champignons.<br><a href="index.html" style="color:#fff">Retour au catalogue</a></footer>
+<footer>MYCONATURE · <a href="index.html">Retourner explorer le catalogue</a> · Observer, apprendre, préserver.</footer>
 <script>
 const cepesQuiz={
 facile:[
@@ -117,19 +188,63 @@ expert:[
 ["Pourquoi deux bolets ressemblant à des cèpes peuvent-ils appartenir à des espèces différentes ?",["Des caractères microscopiques, chimiques et génétiques peuvent les distinguer","La couleur du chapeau suffit toujours","Ils sont forcément de la même espèce","Seule leur taille change"],0,"La taxonomie des bolets peut nécessiter des caractères microscopiques, des réactions chimiques et parfois des analyses moléculaires."]
 ]};
 const quizRanks=[{name:"Débutant",icon:"🌱",min:0,next:50},{name:"Intermédiaire",icon:"🍃",min:50,next:120},{name:"Avancé",icon:"🌳",min:120,next:200},{name:"Professionnel",icon:"🏆",min:200,next:null}];
+const categories={
+identification:{label:"Identification",icon:"⌕",desc:"Reconnaître les espèces et leurs caractères"},
+anatomie:{label:"Anatomie",icon:"◉",desc:"Comprendre les formes, pores, tubes et tissus"},
+ecologie:{label:"Écologie",icon:"♧",desc:"Explorer les arbres, habitats et symbioses"},
+vigilance:{label:"Vigilance",icon:"⚑",desc:"Connaître les confusions et les espèces toxiques"},
+science:{label:"Sciences",icon:"✧",desc:"Approfondir la biologie et la classification"}
+};
+const branches=[
+{key:"identification",title:"L'œil du naturaliste",icon:"⌕",sub:"Identification",achievements:[
+{id:"id_first",name:"Premier regard",desc:"Réussir 1 question d'identification.",goal:1,metric:"category",cat:"identification"},
+{id:"id_five",name:"Œil exercé",desc:"Réussir 5 questions d'identification.",goal:5,metric:"category",cat:"identification"},
+{id:"id_master",name:"Observateur attentif",desc:"Réussir 12 questions d'identification.",goal:12,metric:"category",cat:"identification"}]},
+{key:"anatomie",title:"L'architecte du sporophore",icon:"◉",sub:"Anatomie",achievements:[
+{id:"an_first",name:"Sous le chapeau",desc:"Réussir 1 question d'anatomie.",goal:1,metric:"category",cat:"anatomie"},
+{id:"an_five",name:"Connaisseur des pores",desc:"Réussir 5 questions d'anatomie.",goal:5,metric:"category",cat:"anatomie"},
+{id:"an_master",name:"Anatomiste",desc:"Réussir 10 questions d'anatomie.",goal:10,metric:"category",cat:"anatomie"}]},
+{key:"ecologie",title:"L'allié de la forêt",icon:"♧",sub:"Écologie",achievements:[
+{id:"eco_first",name:"Racines liées",desc:"Réussir 1 question d'écologie.",goal:1,metric:"category",cat:"ecologie"},
+{id:"eco_five",name:"Compagnon des arbres",desc:"Réussir 5 questions d'écologie.",goal:5,metric:"category",cat:"ecologie"},
+{id:"eco_master",name:"Gardien des sous-bois",desc:"Réussir 10 questions d'écologie.",goal:10,metric:"category",cat:"ecologie"}]},
+{key:"vigilance",title:"Le regard prudent",icon:"⚑",sub:"Vigilance",achievements:[
+{id:"vig_first",name:"Prudence éclairée",desc:"Réussir 1 question sur les risques et confusions.",goal:1,metric:"category",cat:"vigilance"},
+{id:"vig_five",name:"Vigilant confirmé",desc:"Réussir 5 questions de vigilance.",goal:5,metric:"category",cat:"vigilance"},
+{id:"vig_master",name:"Sentinelle mycologique",desc:"Réussir 10 questions de vigilance.",goal:10,metric:"category",cat:"vigilance"}]},
+{key:"science",title:"L'esprit scientifique",icon:"✧",sub:"Sciences",achievements:[
+{id:"sci_first",name:"Curiosité naturelle",desc:"Réussir 1 question scientifique.",goal:1,metric:"category",cat:"science"},
+{id:"sci_five",name:"Esprit chercheur",desc:"Réussir 5 questions scientifiques.",goal:5,metric:"category",cat:"science"},
+{id:"sci_master",name:"Naturaliste éclairé",desc:"Réussir 10 questions scientifiques.",goal:10,metric:"category",cat:"science"}]},
+{key:"constance",title:"La voie de la constance",icon:"✦",sub:"Régularité et progression",achievements:[
+{id:"points_50",name:"Première récolte",desc:"Cumuler 50 points.",goal:50,metric:"points"},
+{id:"points_200",name:"Récolte abondante",desc:"Cumuler 200 points.",goal:200,metric:"points"},
+{id:"streak_3",name:"Belle série",desc:"Enchaîner 3 bonnes réponses.",goal:3,metric:"streak"},
+{id:"streak_5",name:"Sans fausse note",desc:"Enchaîner 5 bonnes réponses.",goal:5,metric:"streak"},
+{id:"played_25",name:"Apprenti assidu",desc:"Répondre à 25 questions.",goal:25,metric:"attempts"},
+{id:"perfect_5",name:"Partie parfaite",desc:"Réussir les 5 questions d'une même partie.",goal:1,metric:"perfect"}
+]}
+];
 let quizState={level:"facile",questions:[],index:0,correct:0,answered:false};
+function freshStats(){return{attempts:0,correct:0,streak:0,bestStreak:0,perfectGames:0,byCategory:Object.fromEntries(Object.keys(categories).map(k=>[k,{attempts:0,correct:0}]))}}
+function getStats(){try{const saved=JSON.parse(localStorage.getItem("myconatureQuizStats")||"null");if(!saved)return freshStats();const base=freshStats();return{...base,...saved,byCategory:{...base.byCategory,...(saved.byCategory||{})}}}catch(e){return freshStats()}}
+function saveStats(s){try{localStorage.setItem("myconatureQuizStats",JSON.stringify(s))}catch(e){}}
 function getQuizPoints(){try{return Math.max(0,Number(localStorage.getItem("myconatureQuizPoints"))||0)}catch(e){return 0}}
 function setQuizPoints(n){try{localStorage.setItem("myconatureQuizPoints",String(n))}catch(e){}}
-function updateQuizCareer(){const p=getQuizPoints();const r=[...quizRanks].reverse().find(x=>p>=x.min)||quizRanks[0];const next=r.next;document.getElementById("quizRank").textContent=r.icon+" "+r.name;document.getElementById("quizPoints").textContent=p;document.getElementById("quizCareerBar").style.width=next===null?"100%":Math.min(100,(p-r.min)/(next-r.min)*100)+"%";document.getElementById("quizNextRank").textContent=next===null?"Rang maximal atteint dans ce premier parcours !":(next-p)+" points avant le rang "+quizRanks[quizRanks.indexOf(r)+1].name+"."}
-function openQuiz(){document.getElementById("quizOverlay").classList.add("is-visible");document.body.style.overflow="hidden";updateQuizCareer()}
-function closeQuiz(){document.getElementById("quizOverlay").classList.remove("is-visible");document.body.style.overflow=""}
-function startQuiz(level){quizState={level:level,questions:cepesQuiz[level].slice().sort(()=>Math.random()-.5).slice(0,5),index:0,correct:0,answered:false};renderQuizQuestion()}
-function renderQuizQuestion(){const s=quizState,q=s.questions[s.index],names={facile:"Facile",intermediaire:"Intermédiaire",expert:"Expert"};let html='<div class="quiz-question-meta"><span>'+names[s.level]+'</span><span>Question '+(s.index+1)+' / 5</span></div><div class="quiz-progress"><span style="width:'+(s.index/5*100)+'%"></span></div><div class="quiz-question">'+q[0]+'</div><div class="quiz-answers">';q[1].forEach((a,i)=>{html+='<button class="quiz-answer" type="button" onclick="answerQuiz('+i+')">'+String.fromCharCode(65+i)+'. '+a+'</button>'});html+='</div><div id="quizFeedback"></div>';document.getElementById("quizContent").innerHTML=html}
-function answerQuiz(choice){if(quizState.answered)return;quizState.answered=true;const q=quizState.questions[quizState.index],buttons=document.querySelectorAll(".quiz-answer"),good=choice===q[2];buttons.forEach((b,i)=>{b.disabled=true;if(i===q[2])b.classList.add("correct");else if(i===choice)b.classList.add("incorrect")});if(good){quizState.correct++;setQuizPoints(getQuizPoints()+10);updateQuizCareer()}document.getElementById("quizFeedback").innerHTML='<div class="quiz-explanation"><strong>'+(good?"Bonne réponse ! +10 points":"Pas tout à fait.")+'</strong><br>'+q[3]+'</div><button class="quiz-primary" type="button" onclick="nextQuizQuestion()">'+(quizState.index===4?"Voir mon résultat":"Question suivante")+'</button>'}
-function nextQuizQuestion(){if(quizState.index<4){quizState.index++;quizState.answered=false;renderQuizQuestion();return}const score=quizState.correct*10;document.getElementById("quizContent").innerHTML='<div class="quiz-result"><div class="quiz-kicker">Partie terminée</div><h2>Bien joué !</h2><div class="quiz-result-score">'+quizState.correct+' / 5</div><p>'+score+' points gagnés pendant cette partie.</p><p>Ton total : <strong>'+getQuizPoints()+' points</strong>.</p><div class="quiz-explanation">Continue à t’entraîner sur les trois niveaux pour faire progresser ton rang mycologique.</div><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px"><button class="quiz-primary" onclick="startQuiz(\''+quizState.level+'\')">Rejouer ce niveau</button><button class="quiz-primary" onclick="showQuizLevels()">Changer de niveau</button></div><p class="quiz-note">Le rang « Professionnel » est un niveau ludique, pas une qualification ni une certification mycologique.</p></div>';updateQuizCareer()}
-function showQuizLevels(){document.getElementById("quizContent").innerHTML='<p>Choisis ton niveau pour lancer une nouvelle série de 5 questions aléatoires.</p><div class="quiz-levels"><button class="quiz-level" onclick="startQuiz(\'facile\')">Facile<small>Les bases</small></button><button class="quiz-level" onclick="startQuiz(\'intermediaire\')">Intermédiaire<small>Bien connaître</small></button><button class="quiz-level" onclick="startQuiz(\'expert\')">Expert<small>Aller plus loin</small></button></div>'}
-
-updateQuizCareer();
+function getRank(p){return [...quizRanks].reverse().find(x=>p>=x.min)||quizRanks[0]}
+function updateDashboard(){const p=getQuizPoints(),s=getStats(),r=getRank(p),next=r.next;document.getElementById("dashRank").textContent=r.icon+" "+r.name;document.getElementById("dashPoints").textContent=p;document.getElementById("dashCorrect").textContent=s.correct;document.getElementById("dashStreak").textContent=s.bestStreak;document.getElementById("quizRank").textContent=r.icon+" "+r.name;document.getElementById("quizPoints").textContent=p;document.getElementById("quizCareerBar").style.width=next===null?"100%":Math.min(100,(p-r.min)/(next-r.min)*100)+"%";document.getElementById("quizNextRank").textContent=next===null?"Rang maximal atteint dans ce parcours !":(next-p)+" points avant le rang "+quizRanks[quizRanks.indexOf(r)+1].name+"."}
+function classifyQuestion(q){const t=q[0].toLowerCase()+" "+q[3].toLowerCase();if(/tox|amer|confond|risque|satan|mortel|comestib/.test(t))return"vigilance";if(/mycorhiz|arbre|associ|habitat|écolog|ecolog|pin |chêne|hêtre|forêt|forestier/.test(t))return"ecologie";if(/tube|por(e|es)|sporophore|spore|surface fertile|lamelle|hyménophore|pied|chapeau|bleuissement|bleuir/.test(t))return"anatomie";if(/taxonom|microscop|génét|genet|chimique|classification|biolog/.test(t))return"science";return"identification"}
+function recordAnswer(q,good){const s=getStats(),cat=classifyQuestion(q);s.attempts++;s.byCategory[cat].attempts++;if(good){s.correct++;s.byCategory[cat].correct++;s.streak++;s.bestStreak=Math.max(s.bestStreak,s.streak);setQuizPoints(getQuizPoints()+10)}else{s.streak=0}saveStats(s);updateDashboard();if(document.getElementById("treeView")&&!document.getElementById("treeView").classList.contains("hidden"))renderTree()}
+function startQuiz(level){quizState={level,questions:cepesQuiz[level].slice().sort(()=>Math.random()-.5).slice(0,5),index:0,correct:0,answered:false};document.getElementById("treeView").classList.add("hidden");document.getElementById("parcours").classList.remove("hidden");document.getElementById("quizContent").classList.remove("hidden");renderQuestion();document.getElementById("parcours").scrollIntoView({behavior:"smooth",block:"start"})}
+function renderQuestion(){const s=quizState,q=s.questions[s.index],names={facile:"Découverte · Facile",intermediaire:"Connaisseur · Intermédiaire",expert:"Expert"};let h='<div class="question-meta"><span>'+names[s.level]+'</span><span>Question '+(s.index+1)+' / 5</span></div><div class="progress"><span style="width:'+(s.index/5*100)+'%"></span></div><div class="question">'+q[0]+'</div><div class="answers">';q[1].forEach((a,i)=>{h+='<button class="answer" type="button" onclick="answerQuiz('+i+')">'+String.fromCharCode(65+i)+'. '+a+'</button>'});h+='</div><div id="quizFeedback"></div>';document.getElementById("quizContent").innerHTML=h}
+function answerQuiz(choice){if(quizState.answered)return;quizState.answered=true;const q=quizState.questions[quizState.index],buttons=document.querySelectorAll(".answer"),good=choice===q[2];buttons.forEach((b,i)=>{b.disabled=true;if(i===q[2])b.classList.add("correct");else if(i===choice)b.classList.add("incorrect")});if(good)quizState.correct++;recordAnswer(q,good);const cat=categories[classifyQuestion(q)].label;document.getElementById("quizFeedback").innerHTML='<div class="explanation"><strong>'+(good?"Bonne réponse · +10 points":"Pas tout à fait")+'</strong><br>'+q[3]+'<br><small>Compétence travaillée : '+cat+'</small></div><button class="btn btn-gold" type="button" onclick="nextQuestion()">'+(quizState.index===4?"Voir mon résultat":"Question suivante →")+'</button>'}
+function nextQuestion(){if(quizState.index<4){quizState.index++;quizState.answered=false;renderQuestion();return}if(quizState.correct===5){const s=getStats();s.perfectGames++;saveStats(s)}const score=quizState.correct*10;document.getElementById("quizContent").innerHTML='<div class="result"><div class="section-kicker">Fin de la session</div><h2 class="section-title">Ta récolte du jour</h2><div class="result-score">'+quizState.correct+' / 5</div><p>'+score+' points gagnés pendant cette partie.</p><p class="section-intro" style="margin:12px auto">Ton total : <strong>'+getQuizPoints()+' points</strong>. Ton arbre des savoirs vient d'être actualisé.</p><div class="actions" style="justify-content:center"><button class="btn btn-gold" onclick="startQuiz(\''+quizState.level+'\')">Rejouer ce niveau</button><button class="btn btn-outline" style="color:var(--forest);border-color:var(--line)" onclick="showTree()">Voir mes succès</button><button class="btn btn-outline" style="color:var(--forest);border-color:var(--line)" onclick="showLevels()">Changer de niveau</button></div></div>';updateDashboard()}
+function showLevels(){document.getElementById("quizContent").innerHTML='<p class="section-intro">Choisis une difficulté pour lancer une nouvelle série de cinq questions.</p><div class="levels"><button class="level" onclick="startQuiz(\'facile\')"><span class="level-mark">Ⅰ</span><span><strong>Découverte</strong><small>Facile</small></span></button><button class="level" onclick="startQuiz(\'intermediaire\')"><span class="level-mark">Ⅱ</span><span><strong>Connaisseur</strong><small>Intermédiaire</small></span></button><button class="level" onclick="startQuiz(\'expert\')"><span class="level-mark">Ⅲ</span><span><strong>Expert</strong><small>Difficile</small></span></button></div>'}
+function progressFor(a,s){if(a.metric==="category")return s.byCategory[a.cat].correct;if(a.metric==="points")return getQuizPoints();if(a.metric==="streak")return s.bestStreak;if(a.metric==="attempts")return s.attempts;if(a.metric==="perfect")return s.perfectGames;return 0}
+function renderTree(){const s=getStats();let total=0,unlocked=0;const html=branches.map(branch=>{const items=branch.achievements.map(a=>{total++;const v=progressFor(a,s),done=v>=a.goal;if(done)unlocked++;const pct=Math.min(100,v/a.goal*100);return'<article class="achievement '+(done?"unlocked":"")+'"><strong>'+(done?"✦ ":"")+a.name+'</strong><p>'+a.desc+'</p><div class="progress"><span style="width:'+pct+'%"></span></div><div class="achievement-status">'+(done?"Succès débloqué":Math.min(v,a.goal)+' / '+a.goal+' · progression')+'</div></article>'}).join("");return'<section class="branch"><div class="branch-head"><div class="branch-symbol">'+branch.icon+'</div><div><h3>'+branch.title+'</h3><div class="branch-sub">'+branch.sub+'</div></div></div>'+items+'</section>'}).join("");document.getElementById("treeGrid").innerHTML=html;document.getElementById("treeUnlocked").textContent=unlocked+" / "+total+" succès";document.getElementById("treePercent").textContent=Math.round(unlocked/total*100)+" % de l'arbre révélé"}
+function showTree(){document.getElementById("quizContent").classList.add("hidden");document.getElementById("parcours").classList.add("hidden");document.getElementById("treeView").classList.remove("hidden");renderTree();document.getElementById("treeView").scrollIntoView({behavior:"smooth",block:"start"})}
+function hideTree(){document.getElementById("treeView").classList.add("hidden");document.getElementById("parcours").classList.remove("hidden");document.getElementById("quizContent").classList.remove("hidden");document.getElementById("parcours").scrollIntoView({behavior:"smooth",block:"start"})}
+updateDashboard();
 </script>
 </body>
 </html>
