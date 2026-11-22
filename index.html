@@ -831,7 +831,7 @@ footer {
     </select>
     <select id="rarityFilter" onchange="filterMushrooms()" aria-label="Filtrer par fréquence">
       <option value="all">Toutes les fréquences</option>
-      <option>Commun</option><option>Assez courant</option><option>Peu courant</option><option>Rare</option>
+      <option>Commun</option><option>Rare</option><option>Très rare</option>
     </select>
     <select id="seasonFilter" onchange="filterMushrooms()" aria-label="Filtrer par saison">
       <option value="all">Toutes les saisons</option>
@@ -851,7 +851,7 @@ footer {
       <option value="family">Famille A → Z</option>
       <option value="priceAsc">Prix croissant</option>
       <option value="priceDesc">Prix décroissant</option>
-      <option value="rarity">Fréquence (courant → peu courant)</option>
+      <option value="rarity">Rareté (commun → très rare)</option>
     </select>
 
   </div>
@@ -1005,7 +1005,7 @@ const mushrooms = [
     latin: "Morchella esculenta",
     family: "Morchellacées",
     habitatType: "Forêt de feuillus / lisière",
-    rarity: "Rare",
+    rarity: "Commun",
     seasonGroup: "Printemps",
     priceMin: 40,
     priceMax: 46,
@@ -1082,7 +1082,7 @@ const mushrooms = [
 {
   "name": "Coprin chevelu",
   "latin": "Coprinus comatus",
-    family: "Psathyrellacées",
+    family: "Agaricacées",
     habitatType: "Prairie / pelouse",
     rarity: "Commun",
     seasonGroup: "Printemps–automne",
@@ -1230,7 +1230,7 @@ const mushrooms = [
   "latin": "Russula virescens",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Rare",
+    rarity: "Commun",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1376,7 +1376,7 @@ function filterMushrooms() {
     return matchesSearch && matchesCategory && matchesFamily && matchesHabitat && matchesRarity && matchesSeason && matchesPrice;
   });
 
-  const rarityOrder = {"Commun": 1, "Assez courant": 2, "Peu courant": 3, "Rare": 4};
+  const rarityOrder = {"Commun": 1, "Rare": 2, "Très rare": 3};
   filtered.sort((a,b) => {
     if (sort === "name") return a.name.localeCompare(b.name, "fr");
     if (sort === "family") return a.family.localeCompare(b.family, "fr") || a.name.localeCompare(b.name, "fr");
