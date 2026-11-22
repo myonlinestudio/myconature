@@ -47,6 +47,8 @@ body {
 }
 
 header {
+  position: relative;
+  z-index: 20;
   background: var(--green);
   color: white;
   padding: 16px 7%;
@@ -77,6 +79,7 @@ header {
   flex: 0 0 44px;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
 }
 .menu-toggle span {
   display: block;
@@ -1222,12 +1225,20 @@ function toggleFilters(force) {
   button.setAttribute("aria-label", shouldOpen ? "Fermer les filtres" : "Ouvrir les filtres");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const filterButton = document.getElementById("filterToggle");
-  const closeButton = document.getElementById("filterClose");
-  if (filterButton) filterButton.addEventListener("click", () => toggleFilters());
-  if (closeButton) closeButton.addEventListener("click", () => toggleFilters(false));
-});
+// Gestion déléguée des commandes du panneau : fonctionne même si le script
+// est chargé après la création du bouton et capte aussi les clics sur les traits.
+document.addEventListener("click", (event) => {
+  const toggleButton = event.target.closest("#filterToggle");
+  const closeButton = event.target.closest("#filterClose");
+
+  if (toggleButton) {
+    event.preventDefault();
+    toggleFilters();
+  } else if (closeButton) {
+    event.preventDefault();
+    toggleFilters(false);
+  }
+}, true);
 
 function filterMushrooms() {
 
