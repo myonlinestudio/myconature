@@ -90,7 +90,7 @@ header {
   background: white;
 }
 .filter-panel {
-  display: none;
+  display: block;
   margin: 0 0 28px;
   padding: 22px;
   background: white;
@@ -98,7 +98,6 @@ header {
   border-radius: 10px;
   box-shadow: 0 5px 20px rgba(0,0,0,.06);
 }
-.filter-panel:target { display: block; }
 .filter-panel-heading {
   display: flex;
   align-items: center;
@@ -625,9 +624,7 @@ footer {
       <a href="#catalogue">Catalogue</a>
       <a href="#apropos">À propos</a>
     </nav>
-    <a class="menu-toggle" id="filterToggle" href="#filterPanel" aria-label="Ouvrir les filtres">
-      <span></span><span></span><span></span>
-    </a>
+    
   </div>
 </header>
 
@@ -671,7 +668,7 @@ footer {
   <section class="filter-panel" id="filterPanel" aria-label="Filtres et recherche">
     <div class="filter-panel-heading">
       <h2>Personnaliser le catalogue</h2>
-      <a class="filter-close" id="filterClose" href="#catalogue">Fermer ×</a>
+      
     </div>
   <div class="controls">
 
