@@ -92,7 +92,7 @@ a{color:inherit}
 .achievement p{font-size:11px;color:var(--muted);line-height:1.5;margin:5px 0}
 .achievement-status{font-size:10px;color:#a09e93}
 .achievement.unlocked .achievement-status{color:#8b7041;font-weight:700}
-.living-tree{margin:18px 0 24px;padding:18px;background:linear-gradient(180deg,#eef0e7,#e6e8dc);border:1px solid #dfe1d4;display:flex;justify-content:center;align-items:center;min-height:230px;overflow:hidden}.living-tree svg{width:min(100%,650px);height:auto;max-height:290px}.tree-empty{padding:24px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);margin-top:15px;font-size:13px;line-height:1.7}
+.living-tree{margin:18px 0 24px;padding:10px;background:#141918;border:1px solid #554936;display:flex;justify-content:center;align-items:center;min-height:320px;overflow-x:auto;overflow-y:hidden;border-radius:16px}.living-tree svg{width:min(100%,850px);min-width:560px;height:auto;max-height:none;display:block}.tree-empty{padding:24px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);margin-top:15px;font-size:13px;line-height:1.7}
 footer{background:var(--forest);color:#d9dfd4;text-align:center;padding:26px 20px;font-size:11px;letter-spacing:.04em}
 footer a{color:#d2b97e;text-decoration:none}
 @media(max-width:760px){.dashboard{grid-template-columns:repeat(2,1fr)}.rank-stat{grid-column:span 2}.tree-grid{grid-template-columns:repeat(2,1fr)}}
@@ -278,29 +278,40 @@ function showLevels(){document.getElementById("quizContent").innerHTML='<p class
 function progressFor(a,s){if(a.metric==="category")return s.byCategory[a.cat].correct;if(a.metric==="points")return getQuizPoints();if(a.metric==="streak")return s.bestStreak;if(a.metric==="attempts")return s.attempts;if(a.metric==="correct")return s.correct;if(a.metric==="perfect")return s.perfectGames;return 0}
 function renderTree(){const s=getStats();let total=0,unlocked=0;const html=branches.map(branch=>{const items=branch.achievements.map(a=>{total++;const v=progressFor(a,s),done=v>=a.goal;if(done)unlocked++;const pct=Math.min(100,v/a.goal*100);return'<article class="achievement '+(done?"unlocked":"")+'"><strong>'+(done?"✦ ":"")+a.name+'</strong><p>'+a.desc+'</p><div class="progress"><span style="width:'+pct+'%"></span></div><div class="achievement-status">'+(done?"Succès débloqué":Math.min(v,a.goal)+' / '+a.goal+' · progression')+'</div></article>'}).join("");return'<section class="branch"><div class="branch-head"><div class="branch-symbol">'+branch.icon+'</div><div><h3>'+branch.title+'</h3><div class="branch-sub">'+branch.sub+'</div></div></div>'+items+'</section>'}).join("");document.getElementById("treeGrid").innerHTML=html;document.getElementById("treeUnlocked").textContent=unlocked+" / "+total+" succès";document.getElementById("treePercent").textContent=Math.round(unlocked/total*100)+" % de l'arbre révélé";renderLivingTree(s)}
 function renderLivingTree(s){
- const counts=branches.map(b=>b.achievements.filter(a=>progressFor(a,s)>=a.goal).length);
- const total=counts.reduce((x,y)=>x+y,0),all=branches.reduce((n,b)=>n+b.achievements.length,0),pct=Math.round(total/all*100);
- const palettes=["#69845d","#a18a5e","#66856a","#b17c58","#82919a","#9b8355"];
- const limbPaths=["M500 310 C465 250 440 180 420 95","M500 315 C535 250 570 180 600 95","M480 335 C400 300 310 240 190 165","M520 335 C600 300 690 240 810 165","M485 365 C390 365 300 355 185 330","M515 365 C610 365 700 355 815 330"];
- const rootPaths=["M485 425 C440 455 390 470 300 485 C250 495 210 510 165 530","M495 430 C465 475 450 500 425 535 C405 555 385 570 350 585","M500 430 C500 480 500 520 500 575","M505 430 C535 475 550 500 575 535 C595 555 615 570 650 585","M515 425 C560 455 610 470 700 485 C750 495 790 510 835 530"];
- let foliage="",limbs="",roots="",markers="",labels="";
- const clusters=[[215,140,90,57],[315,100,105,65],[435,85,100,62],[565,85,100,62],[685,105,105,65],[785,145,90,57],[160,225,80,58],[285,205,105,68],[430,180,110,70],[570,180,110,70],[715,205,105,68],[840,225,80,58],[350,270,105,58],[500,255,125,75],[650,270,105,58]];
- clusters.forEach((c,i)=>{const active=i<Math.ceil(pct/6.67);foliage+='<ellipse cx="'+c[0]+'" cy="'+c[1]+'" rx="'+c[2]+'" ry="'+c[3]+'" fill="'+(active?"#55724f":"#aab7a1")+'" opacity="'+(active?".28":".18")+'"/>';for(let j=0;j<10;j++){const ang=(j*137.5+i*19)*Math.PI/180,x=c[0]+Math.cos(ang)*c[2]*.63,y=c[1]+Math.sin(ang)*c[3]*.63,on=active&&((i+j)%3!==0);foliage+='<path d="M'+x.toFixed(1)+' '+y.toFixed(1)+' q-12 -12 -18 -2 q6 14 18 2 q11 -12 17 -3 q-4 12 -17 3" fill="'+(on?["#496b48","#607d51","#819566"][j%3]:["#aab7a1","#bac5b1"][j%2])+'" opacity="'+(on?".95":".55")+'"/>'}});
- limbPaths.forEach((d,i)=>{limbs+='<path d="'+d+'" fill="none" stroke="'+(i<2?"#79583e":"#876548")+'" stroke-width="'+(i<2?11:8)+'" stroke-linecap="round"/>'});
- rootPaths.forEach((d,i)=>{roots+='<path d="'+d+'" fill="none" stroke="#79583e" stroke-width="'+(i===2?18:13)+'" stroke-linecap="round"/>';roots+='<path d="'+d+'" fill="none" stroke="#b08b65" stroke-width="2" opacity=".55" stroke-linecap="round"/>'});
- const trunk='<path d="M466 430 C465 390 478 355 470 315 C458 270 485 230 490 190 C494 150 485 120 500 85 C514 135 506 170 515 210 C528 270 520 320 532 365 C540 400 536 420 534 440 Z" fill="url(#bark)" stroke="#634a36" stroke-width="2"/><path d="M486 420 C482 365 495 330 486 285 C478 245 501 205 501 155" fill="none" stroke="#c19a6d" stroke-width="5" opacity=".5"/>';
- const info=[
- {title:"IDENTIFICATION",sub:0,pts:[[265,215],[235,190],[210,165],[190,145]],label:[80,105]},
- {title:"ANATOMIE",sub:1,pts:[[465,210],[450,165],[435,125],[420,95]],label:[350,30]},
- {title:"ÉCOLOGIE",sub:2,pts:[[735,215],[765,190],[790,165],[810,145]],label:[760,105]},
- {title:"VIGILANCE",sub:3,pts:[[270,350],[235,345],[205,335],[185,330]],label:[40,285]},
- {title:"SCIENCES",sub:4,pts:[[730,350],[765,345],[795,335],[815,330]],label:[810,285]},
- {title:"RÉGULARITÉ & PROGRESSION",sub:5,pts:[[455,485],[425,535],[500,575],[575,535],[545,485],[300,485],[700,485],[350,585],[650,585],[165,530],[835,530],[390,505],[610,505],[250,510],[750,510],[450,560],[550,560],[210,495],[790,495],[500,545]],label:[425,610]}
+ const palette=["#6b9bd2","#b28bd1","#d49a60","#c56e68","#9caa62","#6cae9e"];
+ const total=branches.reduce((n,b)=>n+b.achievements.filter(x=>progressFor(x,s)>=x.goal).length,0),all=branches.reduce((n,b)=>n+b.achievements.length,0),pct=Math.round(total/all*100);
+ const hubs=[[230,340],[370,175],[630,175],[770,340],[370,570],[630,570]];
+ const hubTitles=["IDENTIFICATION","ANATOMIE","ÉCOLOGIE","VIGILANCE","SCIENCES","RÉGULARITÉ"];
+ const hubIcons=["⌕","◉","♧","⚑","✧","✦"];
+ const positions=[
+ [[95,235],[150,170],[75,105],[250,100]],
+ [[295,75],[245,30],[365,40],[430,95]],
+ [[705,75],[755,30],[635,40],[570,95]],
+ [[905,235],[850,170],[925,105],[750,100]],
+ [[295,700],[245,755],[365,755],[430,690]],
+ [[705,700],[755,755],[635,755],[570,690]]
  ];
- info.forEach((p,k)=>{const branch=branches[k],done=counts[k],lx=p.label[0],ly=p.label[1],w=k===5?250:150;labels+='<g><rect x="'+lx+'" y="'+ly+'" width="'+w+'" height="25" rx="12" fill="#f8f7f1" stroke="'+palettes[k]+'" stroke-width="1.2"/><text x="'+(lx+w/2)+'" y="'+(ly+16)+'" text-anchor="middle" font-size="'+(k===5?9:10)+'" font-family="Arial" font-weight="700" letter-spacing=".5" fill="#354536">'+p.title+'</text><text x="'+(lx+w/2)+'" y="'+(ly+39)+'" text-anchor="middle" font-size="9" font-family="Arial" fill="#657263">'+done+' / '+branch.achievements.length+' succès débloqués</text></g>';
- branch.achievements.forEach((ach,i)=>{const pos=p.pts[i]||[500,400],v=progressFor(ach,s),ok=v>=ach.goal;markers+='<g><circle cx="'+pos[0]+'" cy="'+pos[1]+'" r="'+(ok?8:6)+'" fill="'+(ok?"#d7b66d":"#f5f2e9")+'" stroke="'+(ok?"#8a6c39":"#8c9887")+'" stroke-width="2"/><circle cx="'+pos[0]+'" cy="'+pos[1]+'" r="2" fill="'+(ok?"#fff4d5":"#aab2a4")+'"/><title>'+ach.name+" — "+(ok?"débloqué":"à débloquer")+" ("+Math.min(v,ach.goal)+"/"+ach.goal+")"+'</title></g>'});
+ let lines="",nodes="",labels="";
+ // Cercle de liaison central : les familles de savoirs partent toutes du noyau MycoNature.
+ lines+='<circle cx="500" cy="390" r="215" fill="none" stroke="#6e5945" stroke-width="2" opacity=".75"/><circle cx="500" cy="390" r="205" fill="none" stroke="#c1a27a" stroke-width="1" stroke-dasharray="3 9" opacity=".65"/>';
+ hubs.forEach((p,k)=>{const color=palette[k],ach=branches[k].achievements,done=ach.filter(x=>progressFor(x,s)>=x.goal).length;const isRoot=k>=4;
+ const anchorX=p[0],anchorY=p[1];
+ lines+='<path d="M500 390 Q'+((500+anchorX)/2)+' '+((390+anchorY)/2-((k%2)?-24:24))+' '+anchorX+' '+anchorY+'" fill="none" stroke="#8c765e" stroke-width="4" stroke-linecap="round"/>';
+ // branches connect each achievement in a branching progression path.
+ const pts=positions[k];
+ if(k===5){
+  const rootPts=[[705,700],[755,755],[635,755],[570,690],[800,815],[700,850],[600,835],[500,865],[400,835],[300,850],[200,815],[245,755],[365,755],[430,690],[565,900],[435,900],[150,880],[850,880],[335,930],[665,930]];
+  ach.forEach((item,i)=>{const q=rootPts[i]||[500,900];const parent=i<4?[anchorX,anchorY]:rootPts[i-4];lines+='<path d="M'+parent[0]+' '+parent[1]+' Q'+((parent[0]+q[0])/2)+' '+(Math.max(parent[1],q[1])+22)+' '+q[0]+' '+q[1]+'" fill="none" stroke="#8c765e" stroke-width="3" stroke-linecap="round"/>';});
+  ach.forEach((item,i)=>{const q=rootPts[i]||[500,900],v=progressFor(item,s),ok=v>=item.goal;nodes+=nodeMarkup(q[0],q[1],item,ok,color,v);});
+ }else{
+  ach.forEach((item,i)=>{const q=pts[i],parent=i===0?[anchorX,anchorY]:pts[i-1];lines+='<path d="M'+parent[0]+' '+parent[1]+' L'+q[0]+' '+q[1]+'" fill="none" stroke="#8c765e" stroke-width="3" stroke-linecap="round"/>';const v=progressFor(item,s),ok=v>=item.goal;nodes+=nodeMarkup(q[0],q[1],item,ok,color,v);});
+ }
+ nodes+='<circle cx="'+anchorX+'" cy="'+anchorY+'" r="31" fill="#171b1b" stroke="'+color+'" stroke-width="4"/><circle cx="'+anchorX+'" cy="'+anchorY+'" r="24" fill="#252b2b" stroke="#c3a77d" stroke-width="1.5"/><text x="'+anchorX+'" y="'+(anchorY+8)+'" text-anchor="middle" font-size="24" fill="'+color+'">'+hubIcons[k]+'</text>';
+ const lx=anchorX,ly=anchorY+(isRoot?57:-49);labels+='<text x="'+lx+'" y="'+ly+'" text-anchor="middle" font-size="10" font-family="Arial" font-weight="700" letter-spacing="1.1" fill="#e2d5c1">'+hubTitles[k]+'</text><text x="'+lx+'" y="'+(ly+14)+'" text-anchor="middle" font-size="9" font-family="Arial" fill="#bba98f">'+done+' / '+ach.length+' acquis</text>';
  });
- document.getElementById("livingTree").innerHTML='<svg viewBox="0 0 1000 650" role="img" aria-label="Arbre de progression mycologique avec compétences réparties dans les branches et les racines"><defs><linearGradient id="bark" x1="0" x2="1"><stop offset="0" stop-color="#5d4635"/><stop offset=".42" stop-color="#98704c"/><stop offset=".7" stop-color="#76563e"/><stop offset="1" stop-color="#4f3c2e"/></linearGradient></defs><ellipse cx="500" cy="435" rx="235" ry="14" fill="#8d9a7c" opacity=".15"/>'+foliage+limbs+trunk+roots+markers+labels+'<path d="M300 435 Q500 420 700 435" fill="none" stroke="#9a8c6e" stroke-width="2"/><text x="500" y="642" text-anchor="middle" font-size="10" fill="#66705e" letter-spacing="2">MYCONATURE · '+total+' / '+all+' SUCCÈS · '+pct+'%</text></svg>';
+ function nodeMarkup(x,y,item,ok,color,v){return '<g><circle cx="'+x+'" cy="'+y+'" r="17" fill="#171b1b" stroke="'+(ok?color:"#766c5e")+'" stroke-width="3"/><circle cx="'+x+'" cy="'+y+'" r="12" fill="'+(ok?color:"#343638")+'" opacity="'+(ok?".95":".75")+'"/><circle cx="'+x+'" cy="'+y+'" r="5" fill="'+(ok?"#fff0c8":"#8d8b82")+'" opacity="'+(ok?"1":".45")+'"/><title>'+item.name+" — "+(ok?"débloqué":"verrouillé")+" ("+Math.min(v,item.goal)+"/"+item.goal+")"+'</title></g>'}
+ const core='<circle cx="500" cy="390" r="55" fill="#171b1b" stroke="#b99b70" stroke-width="4"/><circle cx="500" cy="390" r="45" fill="#252a29" stroke="#77634d" stroke-width="2"/><path d="M500 357 C475 372 473 395 500 423 C527 395 525 372 500 357Z" fill="#9d7953"/><path d="M500 370 L500 410 M500 388 L480 380 M500 393 L520 380" stroke="#e1c79d" stroke-width="2" fill="none"/><text x="500" y="445" text-anchor="middle" font-size="9" fill="#e7d9c3" letter-spacing="1.5">MYCONATURE</text>';
+ document.getElementById("livingTree").innerHTML='<svg viewBox="0 0 1000 970" role="img" aria-label="Arbre de compétences en réseau, avec branches, racines et succès à débloquer"><defs><radialGradient id="skillBg"><stop offset="0" stop-color="#242b29"/><stop offset="1" stop-color="#141918"/></radialGradient><linearGradient id="skillMetal" x1="0" x2="1"><stop offset="0" stop-color="#72583f"/><stop offset=".5" stop-color="#d0b58b"/><stop offset="1" stop-color="#72583f"/></linearGradient></defs><rect width="1000" height="970" rx="20" fill="url(#skillBg)"/>'+lines+core+nodes+labels+'<text x="500" y="955" text-anchor="middle" font-size="11" fill="#c4b49b" letter-spacing="2">ARBRE DES SAVOIRS · '+total+' / '+all+' COMPÉTENCES · '+pct+'%</text></svg>';
 }
 function showTree(){updateDashboard();document.getElementById("quizContent").classList.add("hidden");document.getElementById("parcours").classList.add("hidden");document.getElementById("treeView").classList.remove("hidden");renderTree();document.getElementById("treeView").scrollIntoView({behavior:"smooth",block:"start"})}
 function hideTree(){document.getElementById("treeView").classList.add("hidden");document.getElementById("parcours").classList.remove("hidden");document.getElementById("quizContent").classList.remove("hidden");document.getElementById("parcours").scrollIntoView({behavior:"smooth",block:"start"})}
