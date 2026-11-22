@@ -72,6 +72,11 @@ header {
   border-radius: 7px;
   background: transparent;
   cursor: pointer;
+  position: relative;
+  z-index: 5;
+  flex: 0 0 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 .menu-toggle span {
   display: block;
@@ -616,7 +621,7 @@ footer {
       <a href="#catalogue">Catalogue</a>
       <a href="#apropos">À propos</a>
     </nav>
-    <button class="menu-toggle" id="filterToggle" type="button" aria-label="Ouvrir les filtres" aria-expanded="false" aria-controls="filterPanel" onclick="toggleFilters()">
+    <button class="menu-toggle" id="filterToggle" type="button" aria-label="Ouvrir les filtres" aria-expanded="false" aria-controls="filterPanel">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -662,7 +667,7 @@ footer {
   <section class="filter-panel" id="filterPanel" aria-label="Filtres et recherche">
     <div class="filter-panel-heading">
       <h2>Personnaliser le catalogue</h2>
-      <button type="button" class="filter-close" onclick="toggleFilters(false)">Fermer ×</button>
+      <button type="button" class="filter-close" id="filterClose">Fermer ×</button>
     </div>
   <div class="controls">
 
@@ -1216,6 +1221,13 @@ function toggleFilters(force) {
   button.setAttribute("aria-expanded", String(shouldOpen));
   button.setAttribute("aria-label", shouldOpen ? "Fermer les filtres" : "Ouvrir les filtres");
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const filterButton = document.getElementById("filterToggle");
+  const closeButton = document.getElementById("filterClose");
+  if (filterButton) filterButton.addEventListener("click", () => toggleFilters());
+  if (closeButton) closeButton.addEventListener("click", () => toggleFilters(false));
+});
 
 function filterMushrooms() {
 
