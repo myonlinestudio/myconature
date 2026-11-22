@@ -198,9 +198,48 @@ footer{background:#0b1211;color:#c7cbbf}
 .stat,.intro-card,.panel,.career-box,.skill-detail{border-radius:18px}
 .tree-toolbar button{border-radius:13px}
 @media(max-width:700px){.levels{grid-template-columns:1fr}.level{min-height:100px}.level-lock{font-size:9px;padding:5px 8px}}
+
+/* Décor forestier d'ambiance : discret, fixe et non-interactif */
+.ambient-forest{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:.46}
+.ambient-forest svg{width:100%;height:100%;display:block}
+.ambient-forest svg g:nth-of-type(2){transform-origin:center;animation:forestCanopy 12s ease-in-out infinite alternate}
+.ambient-forest svg g:nth-of-type(3){transform-origin:center;animation:forestCanopy 16s ease-in-out infinite alternate-reverse}
+.site-header,.page,footer{position:relative;z-index:1}
+.site-header,.page{isolation:isolate}
+@keyframes forestCanopy{0%{translate:0 0;rotate:-.35deg}100%{translate:0 5px;rotate:.45deg}}
+@media(max-width:700px){.ambient-forest{opacity:.27}.ambient-forest svg{width:150%;max-width:none;transform:translateX(-16%)}}
+@media(prefers-reduced-motion:reduce){.ambient-forest svg g{animation:none!important}}
 </style>
 </head>
 <body>
+<div class="ambient-forest" aria-hidden="true">
+<svg viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMin slice">
+<defs>
+ <linearGradient id="ambientBark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8a7657"/><stop offset=".5" stop-color="#4c624c"/><stop offset="1" stop-color="#263e32"/></linearGradient>
+ <linearGradient id="ambientLeaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#91a875"/><stop offset=".55" stop-color="#567451"/><stop offset="1" stop-color="#304d3c"/></linearGradient>
+ <linearGradient id="ambientGold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b9a071"/><stop offset="1" stop-color="#647d58"/></linearGradient>
+</defs>
+<g fill="none" stroke="url(#ambientBark)" stroke-linecap="round">
+ <path d="M-45 40 C90 125 75 245 185 320 S275 470 340 560" stroke-width="12" opacity=".42"/>
+ <path d="M20 170 C120 175 155 125 215 75 M135 250 C220 230 270 180 300 110 M210 330 C300 325 350 275 390 215" stroke-width="5" opacity=".36"/>
+ <path d="M1485 20 C1350 125 1380 245 1260 325 S1165 475 1100 565" stroke-width="12" opacity=".4"/>
+ <path d="M1420 165 C1320 175 1285 125 1225 75 M1305 250 C1220 230 1170 180 1140 110 M1230 330 C1140 325 1090 275 1050 215" stroke-width="5" opacity=".34"/>
+ <path d="M-30 770 C80 710 95 640 160 590 M1470 760 C1360 700 1345 635 1280 585" stroke-width="7" opacity=".3"/>
+</g>
+<g fill="url(#ambientLeaf)" stroke="#9aaa7d" stroke-width="1" opacity=".78">
+ <path d="M90 140 C35 80 12 125 28 165 C50 195 78 174 90 140Z"/><path d="M135 195 C95 130 65 165 80 205 C100 225 125 215 135 195Z"/>
+ <path d="M210 105 C155 45 130 85 150 125 C170 145 198 130 210 105Z"/><path d="M260 245 C200 185 180 225 200 265 C225 285 250 270 260 245Z"/>
+ <path d="M330 310 C270 250 245 285 265 325 C290 345 315 335 330 310Z"/>
+ <path d="M1350 135 C1405 75 1428 120 1412 160 C1390 190 1362 170 1350 135Z"/><path d="M1305 195 C1345 130 1375 165 1360 205 C1340 225 1315 215 1305 195Z"/>
+ <path d="M1230 105 C1285 45 1310 85 1290 125 C1270 145 1242 130 1230 105Z"/><path d="M1180 245 C1240 185 1260 225 1240 265 C1215 285 1190 270 1180 245Z"/>
+ <path d="M1110 310 C1170 250 1195 285 1175 325 C1150 345 1125 335 1110 310Z"/>
+ <path d="M80 690 C20 640 0 680 20 715 C45 735 68 720 80 690Z"/><path d="M1360 685 C1420 635 1440 675 1420 710 C1395 730 1372 715 1360 685Z"/>
+</g>
+<g fill="url(#ambientGold)" opacity=".72">
+ <path d="M175 405 C135 365 115 395 130 425 C150 442 168 425 175 405Z"/><path d="M1265 405 C1305 365 1325 395 1310 425 C1290 442 1272 425 1265 405Z"/>
+ <path d="M365 80 C325 40 305 70 320 100 C340 117 358 100 365 80Z"/><path d="M1075 80 C1115 40 1135 70 1120 100 C1100 117 1082 100 1075 80Z"/>
+</g>
+</svg></div>
 <header class="site-header">
 <a class="brand" href="index.html">MYCO<span>NATURE</span></a>
 <nav class="header-nav"><a href="index.html">Le catalogue</a><a href="#parcours">Mon parcours</a></nav>
