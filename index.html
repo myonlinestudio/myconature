@@ -515,6 +515,87 @@ nav a {
 
 }
 
+.species-heading {
+  padding: 8px 0 22px;
+  border-bottom: 1px solid #e8ebe4;
+}
+.species-heading h2 {
+  margin: 12px 0 3px;
+  color: var(--green);
+  font-family: Georgia, serif;
+  font-size: 30px;
+  line-height: 1.15;
+}
+.species-tag {
+  display: inline-block;
+  padding: 6px 11px;
+  border-radius: 20px;
+  background: #edf2e9;
+  color: #405c43;
+  font-size: 12px;
+  font-weight: 700;
+}
+.species-latin {
+  margin: 0 !important;
+  color: #777;
+  font-style: italic;
+}
+.species-intro {
+  margin: 16px 0 0 !important;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.species-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 20px 0 24px;
+}
+.detail-item {
+  min-width: 0;
+  padding: 13px 14px;
+  border-radius: 8px;
+  background: #f5f7f2;
+}
+.detail-item span {
+  display: block;
+  margin-bottom: 5px;
+  color: #777e73;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.detail-item strong {
+  display: block;
+  color: #293b2d;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.species-section { margin: 22px 0; }
+.species-section h3 {
+  margin: 0 0 8px;
+  color: var(--green);
+  font-family: Georgia, serif;
+  font-size: 20px;
+}
+.species-section p { margin: 0; color: #4f554d; line-height: 1.65; }
+.species-caution {
+  margin-top: 22px !important;
+  padding: 13px 15px;
+  border-left: 3px solid #bd7841;
+  border-radius: 4px;
+  background: #fff6ed;
+  color: #81451f;
+  font-size: 12px;
+  line-height: 1.5 !important;
+}
+@media(max-width:600px) {
+  .species-heading h2 { font-size: 25px; }
+  .species-facts { gap: 8px; }
+  .detail-item { padding: 11px; }
+  .detail-item strong { font-size: 13px; }
+}
 .modal-content h2 {
 
   color: var(--green);
@@ -1293,37 +1374,43 @@ function filterMushrooms() {
 
 function showDetails(mushroom) {
 
+  const photos = (mushroom.photos || [mushroom.image]).filter(Boolean);
+  const price = mushroom.priceLabel && !/non cot|non commercial/i.test(mushroom.priceLabel)
+    ? `<div class="detail-item"><span>Prix indicatif</span><strong>${mushroom.priceLabel}</strong></div>`
+    : "";
+
   document.getElementById("modalText").innerHTML = `
+    <div class="species-heading">
+      <span class="species-tag">${mushroom.tag}</span>
+      <h2>${mushroom.name}</h2>
+      <p class="species-latin">${mushroom.latin}</p>
+      <p class="species-intro">${mushroom.description}</p>
+    </div>
 
-    <h2>${mushroom.name}</h2>
+    <div class="species-facts">
+      <div class="detail-item"><span>Famille</span><strong>${mushroom.family}</strong></div>
+      <div class="detail-item"><span>Milieu</span><strong>${mushroom.habitatType}</strong></div>
+      <div class="detail-item"><span>Saison</span><strong>${mushroom.season}</strong></div>
+      <div class="detail-item"><span>Fréquence</span><strong>${mushroom.rarity}</strong></div>
+      ${price}
+    </div>
 
-    <p><i>${mushroom.latin}</i></p>
+    <section class="species-section">
+      <h3>Où le trouver ?</h3>
+      <p>${mushroom.habitat}</p>
+    </section>
 
-    <p><strong>Catégorie :</strong> ${mushroom.tag}</p>
-    <p><strong>Famille :</strong> ${mushroom.family}</p>
-    <p><strong>Milieu :</strong> ${mushroom.habitatType} — ${mushroom.habitat}</p>
-    <p><strong>Fréquence indicative :</strong> ${mushroom.rarity}</p>
-    <p><strong>Prix indicatif :</strong> ${mushroom.priceLabel}</p>
+    <section class="species-section">
+      <h3>À propos de cette espèce</h3>
+      <p>${mushroom.details}</p>
+    </section>
 
-    <p><strong>Description :</strong> ${mushroom.description}</p>
+    <section class="species-section">
+      <h3>En photos</h3>
+      <div class="modal-gallery">${photos.map((photo, index) => `<a href="${photo}" target="_blank" rel="noopener" aria-label="Ouvrir la photographie ${index + 1} de ${mushroom.name}"><img src="${photo}" alt="${mushroom.name} — photographie ${index + 1}" loading="lazy"></a>`).join("")}</div>
+    </section>
 
-    <p><strong>Habitat :</strong> ${mushroom.habitat}</p>
-
-    <p><strong>Période :</strong> ${mushroom.season}</p>
-
-    <p><strong>Informations :</strong> ${mushroom.details}</p>
-
-    <p><strong>Photographies :</strong></p>
-    <div class="modal-gallery">${(mushroom.photos || [mushroom.image]).filter(Boolean).map((photo, index) => `<a href="${photo}" target="_blank" rel="noopener" aria-label="Ouvrir la photographie ${index + 1} de ${mushroom.name}"><img src="${photo}" alt="${mushroom.name} — photographie ${index + 1}" loading="lazy"></a>`).join("")}</div>
-
-    <p style="color:#9b401f;font-size:13px">
-
-      Identification indicative uniquement. Ne jamais consommer
-
-      un champignon sans validation par un spécialiste.
-
-    </p>
-
+    <p class="species-caution">Identification indicative : ne consommez jamais un champignon sans validation par un spécialiste.</p>
   `;
 
   document.getElementById("modal").style.display = "flex";
