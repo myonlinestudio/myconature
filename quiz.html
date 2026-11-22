@@ -97,6 +97,46 @@ footer{background:var(--forest);color:#d9dfd4;text-align:center;padding:26px 20p
 footer a{color:#d2b97e;text-decoration:none}
 @media(max-width:760px){.dashboard{grid-template-columns:repeat(2,1fr)}.rank-stat{grid-column:span 2}.tree-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.site-header{height:66px;padding:0 17px}.brand{font-size:19px}.header-nav{gap:13px}.header-nav a{font-size:11px}.page{padding:20px 14px 55px}.hero{min-height:360px;padding:30px 23px}.hero h1{font-size:42px}.intro-grid{grid-template-columns:1fr;gap:9px;margin-bottom:35px}.intro-card{display:grid;grid-template-columns:32px 1fr;column-gap:8px;padding:14px}.intro-icon{grid-row:span 2}.intro-card h3{margin:0 0 4px}.levels{grid-template-columns:1fr}.level{display:flex;align-items:center;gap:13px;padding:14px}.level strong{margin:0 0 3px}.level .level-mark{font-size:22px}.tree-grid{grid-template-columns:1fr}.tree-summary{align-items:flex-start;flex-direction:column}.question{font-size:22px}}
+
+/* Accueil minimaliste — finition éditoriale */
+body{background:#f8f7f3;color:#28342c;font-family:Arial,sans-serif}
+.site-header{height:72px;background:#fbfaf7;color:#26352b;border-bottom:1px solid #e9e6dd}
+.brand{font-size:20px;letter-spacing:.19em;color:#26352b}
+.brand span{color:#9b8355}
+.header-nav a{color:#59645a}
+.header-nav a:hover{color:#9b8355}
+.page{max-width:1060px;padding-top:42px}
+.hero{min-height:300px;padding:clamp(30px,5vw,58px);border:1px solid #e8e4d9;border-radius:2px;background:#eeeee7;color:#26352b}
+.hero:after{content:none}
+.eyebrow{color:#8d754b;letter-spacing:.2em}
+.hero h1{font-size:clamp(36px,5vw,57px);font-weight:400;letter-spacing:-.035em;max-width:590px}
+.hero p{color:#657066;font-size:14px;max-width:490px}
+.btn{border-radius:2px;font-weight:600;letter-spacing:.015em}
+.btn-gold{background:#34483a;color:#fff;border-color:#34483a}
+.btn-gold:hover{background:#26382c}
+.btn-outline{border-color:#b8b7aa;color:#34483a}
+.btn-outline:hover{background:#e4e5dc}
+.section-kicker{color:#92794e}
+.section-title,.panel h2{font-weight:400;letter-spacing:-.02em}
+.dashboard{gap:10px;margin:20px 0 43px}
+.stat{background:#fbfaf7;border-color:#e8e5dc;padding:17px 18px}
+.rank-stat{background:#eeeee7}
+.stat strong{font-weight:400}
+.intro-card{background:#fbfaf7;border-color:#e8e5dc}
+.intro-card h3{font-weight:400}
+.panel{background:#fbfaf7;border-color:#e8e5dc;border-radius:2px}
+.level{background:#fff;border-color:#e8e5dc;border-radius:2px}
+.level:hover{border-color:#9b8355;box-shadow:0 5px 16px #26352b0a}
+.career-box{background:#f0efe8}
+.progress{background:#e5e3da}
+.progress span{background:#9b8355}
+.tree-summary{background:#eeeee7}
+.branch{background:#fbfaf7;border-color:#e8e5dc}
+.branch h3{font-weight:400}
+.living-tree{background:#eeefe8;border-color:#e2e4d9}
+footer{background:#26382c}
+@media(max-width:560px){.page{padding-top:20px}.hero{min-height:330px;background:#eeeee7}.hero h1{font-size:39px}}
+
 </style>
 </head>
 <body>
@@ -154,7 +194,7 @@ footer a{color:#d2b97e;text-decoration:none}
 <div><div class="section-kicker">Ton évolution personnelle</div><h2 class="section-title">L'arbre des savoirs</h2><p class="section-intro">Chaque branche grandit selon tes réponses. Les succès se débloquent grâce à tes points, ta régularité et tes domaines de maîtrise.</p></div>
 <button class="btn btn-gold" onclick="hideTree()">← Retour au quiz</button>
 </div>
-<div class="tree-summary"><div><div class="section-kicker">Récolte de connaissances</div><strong id="treeUnlocked">0 / 12 succès</strong></div><div id="treePercent">L'arbre commence à pousser…</div></div>
+<div class="tree-summary"><div><div class="section-kicker">Récolte de connaissances</div><strong id="treeUnlocked">0 / 45 succès</strong></div><div id="treePercent">L'arbre commence à pousser…</div></div>
 <div class="tree-legend"><span><i class="legend-dot"></i> Succès débloqué</span><span><i class="legend-dot locked"></i> À découvrir</span></div>
 <div id="livingTree" class="living-tree" aria-label="Arbre de progression vivant"></div>
 <div id="treeGrid" class="tree-grid"></div>
@@ -222,7 +262,7 @@ const branches=[
 ];
 let quizState={level:"facile",questions:[],index:0,correct:0,answered:false};
 function freshStats(){return{attempts:0,correct:0,streak:0,bestStreak:0,perfectGames:0,byCategory:Object.fromEntries(Object.keys(categories).map(k=>[k,{attempts:0,correct:0}]))}}
-function getStats(){try{const saved=JSON.parse(localStorage.getItem("myconatureQuizStats")||"null");if(!saved)return freshStats();const base=freshStats();return{...base,...saved,byCategory:{...base.byCategory,...(saved.byCategory||{})}}}catch(e){return freshStats()}}
+function getStats(){try{const saved=JSON.parse(localStorage.getItem("myconatureQuizStats")||"null");if(!saved)return freshStats();const base=freshStats();const merged={...base,...saved,byCategory:{}};Object.keys(base.byCategory).forEach(k=>{merged.byCategory[k]={...base.byCategory[k],...((saved.byCategory||{})[k]||{})}});merged.attempts=Number(merged.attempts)||0;merged.correct=Number(merged.correct)||0;merged.streak=Number(merged.streak)||0;merged.bestStreak=Number(merged.bestStreak)||0;merged.perfectGames=Number(merged.perfectGames)||0;return merged}catch(e){return freshStats()}}
 function saveStats(s){try{localStorage.setItem("myconatureQuizStats",JSON.stringify(s))}catch(e){}}
 function getQuizPoints(){try{return Math.max(0,Number(localStorage.getItem("myconatureQuizPoints"))||0)}catch(e){return 0}}
 function setQuizPoints(n){try{localStorage.setItem("myconatureQuizPoints",String(n))}catch(e){}}
@@ -233,12 +273,12 @@ function recordAnswer(q,good){const s=getStats(),cat=classifyQuestion(q);s.attem
 function startQuiz(level){quizState={level,questions:cepesQuiz[level].slice().sort(()=>Math.random()-.5).slice(0,5),index:0,correct:0,answered:false};document.getElementById("treeView").classList.add("hidden");document.getElementById("parcours").classList.remove("hidden");document.getElementById("quizContent").classList.remove("hidden");renderQuestion();document.getElementById("parcours").scrollIntoView({behavior:"smooth",block:"start"})}
 function renderQuestion(){const s=quizState,q=s.questions[s.index],names={facile:"Découverte · Facile",intermediaire:"Connaisseur · Intermédiaire",expert:"Expert"};let h='<div class="question-meta"><span>'+names[s.level]+'</span><span>Question '+(s.index+1)+' / 5</span></div><div class="progress"><span style="width:'+(s.index/5*100)+'%"></span></div><div class="question">'+q[0]+'</div><div class="answers">';q[1].forEach((a,i)=>{h+='<button class="answer" type="button" onclick="answerQuiz('+i+')">'+String.fromCharCode(65+i)+'. '+a+'</button>'});h+='</div><div id="quizFeedback"></div>';document.getElementById("quizContent").innerHTML=h}
 function answerQuiz(choice){if(quizState.answered)return;quizState.answered=true;const q=quizState.questions[quizState.index],buttons=document.querySelectorAll(".answer"),good=choice===q[2];buttons.forEach((b,i)=>{b.disabled=true;if(i===q[2])b.classList.add("correct");else if(i===choice)b.classList.add("incorrect")});if(good)quizState.correct++;recordAnswer(q,good);const cat=categories[classifyQuestion(q)].label;document.getElementById("quizFeedback").innerHTML='<div class="explanation"><strong>'+(good?"Bonne réponse · +10 points":"Pas tout à fait")+'</strong><br>'+q[3]+'<br><small>Compétence travaillée : '+cat+'</small></div><button class="btn btn-gold" type="button" onclick="nextQuestion()">'+(quizState.index===4?"Voir mon résultat":"Question suivante →")+'</button>'}
-function nextQuestion(){if(quizState.index<4){quizState.index++;quizState.answered=false;renderQuestion();return}if(quizState.correct===5){const s=getStats();s.perfectGames++;saveStats(s)}const score=quizState.correct*10;document.getElementById("quizContent").innerHTML='<div class="result"><div class="section-kicker">Fin de la session</div><h2 class="section-title">Ta récolte du jour</h2><div class="result-score">'+quizState.correct+' / 5</div><p>'+score+' points gagnés pendant cette partie.</p><p class="section-intro" style="margin:12px auto">Ton total : <strong>'+getQuizPoints()+' points</strong>. Ton arbre des savoirs vient d'être actualisé.</p><div class="actions" style="justify-content:center"><button class="btn btn-gold" onclick="startQuiz(\''+quizState.level+'\')">Rejouer ce niveau</button><button class="btn btn-outline" style="color:var(--forest);border-color:var(--line)" onclick="showTree()">Voir mes succès</button><button class="btn btn-outline" style="color:var(--forest);border-color:var(--line)" onclick="showLevels()">Changer de niveau</button></div></div>';updateDashboard()}
+function nextQuestion(){if(quizState.index<4){quizState.index++;quizState.answered=false;renderQuestion();return}if(quizState.correct===5){const s=getStats();s.perfectGames++;saveStats(s)}const score=quizState.correct*10;document.getElementById("quizContent").innerHTML='<div class="result"><div class="section-kicker">Fin de la session</div><h2 class="section-title">Ta récolte du jour</h2><div class="result-score">'+quizState.correct+' / 5</div><p>'+score+' points gagnés pendant cette partie.</p><p class="section-intro" style="margin:12px auto">Ton total : <strong>'+getQuizPoints()+' points</strong>. Ton arbre des savoirs vient d’être actualisé.</p><div class="actions" style="justify-content:center"><button class="btn btn-gold" onclick="startQuiz(\''+quizState.level+'\')">Rejouer ce niveau</button><button class="btn btn-outline" style="color:var(--forest);border-color:var(--line)" onclick="showTree()">Voir mes succès</button><button class="btn btn-outline" style="color:var(--forest);border-color:var(--line)" onclick="showLevels()">Changer de niveau</button></div></div>';updateDashboard()}
 function showLevels(){document.getElementById("quizContent").innerHTML='<p class="section-intro">Choisis une difficulté pour lancer une nouvelle série de cinq questions.</p><div class="levels"><button class="level" onclick="startQuiz(\'facile\')"><span class="level-mark">Ⅰ</span><span><strong>Découverte</strong><small>Facile</small></span></button><button class="level" onclick="startQuiz(\'intermediaire\')"><span class="level-mark">Ⅱ</span><span><strong>Connaisseur</strong><small>Intermédiaire</small></span></button><button class="level" onclick="startQuiz(\'expert\')"><span class="level-mark">Ⅲ</span><span><strong>Expert</strong><small>Difficile</small></span></button></div>'}
 function progressFor(a,s){if(a.metric==="category")return s.byCategory[a.cat].correct;if(a.metric==="points")return getQuizPoints();if(a.metric==="streak")return s.bestStreak;if(a.metric==="attempts")return s.attempts;if(a.metric==="correct")return s.correct;if(a.metric==="perfect")return s.perfectGames;return 0}
 function renderTree(){const s=getStats();let total=0,unlocked=0;const html=branches.map(branch=>{const items=branch.achievements.map(a=>{total++;const v=progressFor(a,s),done=v>=a.goal;if(done)unlocked++;const pct=Math.min(100,v/a.goal*100);return'<article class="achievement '+(done?"unlocked":"")+'"><strong>'+(done?"✦ ":"")+a.name+'</strong><p>'+a.desc+'</p><div class="progress"><span style="width:'+pct+'%"></span></div><div class="achievement-status">'+(done?"Succès débloqué":Math.min(v,a.goal)+' / '+a.goal+' · progression')+'</div></article>'}).join("");return'<section class="branch"><div class="branch-head"><div class="branch-symbol">'+branch.icon+'</div><div><h3>'+branch.title+'</h3><div class="branch-sub">'+branch.sub+'</div></div></div>'+items+'</section>'}).join("");document.getElementById("treeGrid").innerHTML=html;document.getElementById("treeUnlocked").textContent=unlocked+" / "+total+" succès";document.getElementById("treePercent").textContent=Math.round(unlocked/total*100)+" % de l'arbre révélé";renderLivingTree(s)}
 function renderLivingTree(s){const counts=branches.map(b=>b.achievements.filter(a=>progressFor(a,s)>=a.goal).length);const total=counts.reduce((x,y)=>x+y,0);const groups=[{x:337,y:62,n:counts[0]},{x:230,y:105,n:counts[1]},{x:445,y:105,n:counts[2]},{x:145,y:170,n:counts[3]},{x:530,y:170,n:counts[4]},{x:337,y:155,n:counts[5]}];let leaves="";groups.forEach((g,k)=>{for(let i=0;i<8;i++){const ang=i*2.4,x=g.x+Math.cos(ang)*(14+i*2),y=g.y+Math.sin(ang)*(9+i*1.5),active=i<Math.ceil(g.n/branches[k].achievements.length*8);leaves+='<ellipse cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" rx="13" ry="6" transform="rotate('+(i%2?35:-35)+' '+x.toFixed(1)+' '+y.toFixed(1)+')" fill="'+(active?"#b99b62":"#c6cbbd")+'" opacity="'+(active?1:.55)+'"/>'}});document.getElementById("livingTree").innerHTML='<svg viewBox="0 0 674 270" role="img" aria-label="Arbre de progression dont les feuilles dorées montrent les succès débloqués"><path d="M337 258 C322 210 350 170 337 110 M337 190 C285 155 230 130 145 170 M337 185 C390 145 450 130 530 170 M337 150 C300 105 270 100 230 105 M337 150 C380 100 410 100 445 105" fill="none" stroke="#806a45" stroke-width="9" stroke-linecap="round"/>'+leaves+'<path d="M280 258 Q337 246 394 258" fill="none" stroke="#8b7650" stroke-width="3"/><text x="337" y="270" text-anchor="middle" font-size="9" fill="#66705e" letter-spacing="2">MYCONATURE · '+total+' SUCCÈS DÉBLOQUÉS</text></svg>'}
-function showTree(){document.getElementById("quizContent").classList.add("hidden");document.getElementById("parcours").classList.add("hidden");document.getElementById("treeView").classList.remove("hidden");renderTree();document.getElementById("treeView").scrollIntoView({behavior:"smooth",block:"start"})}
+function showTree(){updateDashboard();document.getElementById("quizContent").classList.add("hidden");document.getElementById("parcours").classList.add("hidden");document.getElementById("treeView").classList.remove("hidden");renderTree();document.getElementById("treeView").scrollIntoView({behavior:"smooth",block:"start"})}
 function hideTree(){document.getElementById("treeView").classList.add("hidden");document.getElementById("parcours").classList.remove("hidden");document.getElementById("quizContent").classList.remove("hidden");document.getElementById("parcours").scrollIntoView({behavior:"smooth",block:"start"})}
 updateDashboard();
 </script>
