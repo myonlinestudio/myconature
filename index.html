@@ -223,9 +223,24 @@ nav a {
 }
 
 .controls select {
-
   min-width: 170px;
-
+}
+.catalog-meta {
+  color: #626b60;
+  font-size: 12px;
+  line-height: 1.55;
+  margin: 0 0 12px;
+}
+.price-note {
+  max-width: 1150px;
+  margin: -12px auto 24px;
+  padding: 0 25px;
+  color: #6b7068;
+  font-size: 12px;
+  line-height: 1.6;
+}
+@media(max-width:600px) {
+  .controls select { width: 100%; }
 }
 
 .grid {
@@ -610,20 +625,51 @@ footer {
 
     >
 
-    <select id="category" onchange="filterMushrooms()">
-
-      <option value="all">Toutes les catégories</option>
-
-      <option value="comestible">Espèces réputées comestibles</option>
-
-      <option value="toxique">Espèces toxiques</option>
-
-      <option value="autre">Autres espèces</option>
-
+    <select id="category" onchange="filterMushrooms()" aria-label="Filtrer par comestibilité">
+      <option value="all">Toutes les comestibilités</option>
+      <option value="comestible">Réputés comestibles</option>
+      <option value="toxique">Toxiques / mortels</option>
+      <option value="autre">Autres / prudence</option>
+    </select>
+    <select id="familyFilter" onchange="filterMushrooms()" aria-label="Filtrer par famille">
+      <option value="all">Toutes les familles</option>
+      <option>Agaricacées</option><option>Amanitacées</option><option>Boletacées</option>
+      <option>Cantharellacées</option><option>Hydnacées</option><option>Hygrophoropsidacées</option>
+      <option>Morchellacées</option><option>Psathyrellacées</option><option>Russulacées</option>
+    </select>
+    <select id="habitatFilter" onchange="filterMushrooms()" aria-label="Filtrer par habitat">
+      <option value="all">Tous les habitats</option>
+      <option>Forêt mixte</option><option>Forêt de feuillus</option><option>Forêt de conifères</option>
+      <option>Forêt de feuillus / lisière</option><option>Prairie / lisière</option><option>Prairie / pelouse</option>
+    </select>
+    <select id="rarityFilter" onchange="filterMushrooms()" aria-label="Filtrer par fréquence">
+      <option value="all">Toutes les fréquences</option>
+      <option>Commun</option><option>Assez courant</option><option>Peu courant</option><option>Rare</option>
+    </select>
+    <select id="seasonFilter" onchange="filterMushrooms()" aria-label="Filtrer par saison">
+      <option value="all">Toutes les saisons</option>
+      <option>Printemps</option><option>Été–automne</option><option>Automne</option><option>Fin été–automne</option>
+      <option>Printemps–automne</option><option>Été–début automne</option>
+    </select>
+    <select id="priceFilter" onchange="filterMushrooms()" aria-label="Filtrer par prix au kilo">
+      <option value="all">Tous les prix / non cotés</option>
+      <option value="under25">Moins de 25 €/kg</option>
+      <option value="25to50">25 à 50 €/kg</option>
+      <option value="over50">Plus de 50 €/kg</option>
+      <option value="unquoted">Prix non coté</option>
+    </select>
+    <select id="sortBy" onchange="filterMushrooms()" aria-label="Trier le catalogue">
+      <option value="default">Ordre du catalogue</option>
+      <option value="name">Nom A → Z</option>
+      <option value="family">Famille A → Z</option>
+      <option value="priceAsc">Prix croissant</option>
+      <option value="priceDesc">Prix décroissant</option>
+      <option value="rarity">Fréquence (courant → peu courant)</option>
     </select>
 
   </div>
 
+  <p class="price-note">Prix indicatifs au kilo : cotations de gros et relevés de marché, variables selon l'origine, la saison et la qualité. Les espèces non cotées ne disposent pas d'un prix fiable dans les relevés consultés. Repères consultés le 13 novembre 2026 : <a href="https://husfarm.com/fr/produit/champignon/" target="_blank" rel="noopener">cotations des marchés français</a> ; <a href="https://hallesx.com/marche" target="_blank" rel="noopener">relevés de marchés</a>. Ces prix de gros ne sont pas des prix garantis au détail.</p>
   <div class="grid" id="mushroomGrid"></div>
 
 </main>
@@ -671,6 +717,13 @@ const mushrooms = [
     name: "Amanite tue-mouches",
 
     latin: "Amanita muscaria",
+    family: "Amanitacées",
+    habitatType: "Forêt mixte",
+    rarity: "Commun",
+    seasonGroup: "Été–automne",
+    priceMin: null,
+    priceMax: null,
+    priceLabel: "Non cotée",
 
     category: "toxique",
 
@@ -695,6 +748,13 @@ const mushrooms = [
     name: "Cèpe de Bordeaux",
 
     latin: "Boletus edulis",
+    family: "Boletacées",
+    habitatType: "Forêt mixte",
+    rarity: "Assez courant",
+    seasonGroup: "Été–automne",
+    priceMin: 20,
+    priceMax: 38,
+    priceLabel: "20–38 € / kg (gros, Rungis, 13/11/2026)",
 
     category: "comestible",
 
@@ -719,6 +779,13 @@ const mushrooms = [
     name: "Girolle",
 
     latin: "Cantharellus cibarius",
+    family: "Cantharellacées",
+    habitatType: "Forêt mixte",
+    rarity: "Assez courant",
+    seasonGroup: "Été–automne",
+    priceMin: 15,
+    priceMax: 30,
+    priceLabel: "15–30 € / kg (repère de marché, selon origine)",
 
     category: "comestible",
 
@@ -743,6 +810,13 @@ const mushrooms = [
     name: "Morille comestible",
 
     latin: "Morchella esculenta",
+    family: "Morchellacées",
+    habitatType: "Forêt de feuillus / lisière",
+    rarity: "Peu courant",
+    seasonGroup: "Printemps",
+    priceMin: 40,
+    priceMax: 46,
+    priceLabel: "40–46 € / kg (cotation relevée en juin 2026)",
 
     category: "comestible",
 
@@ -766,6 +840,13 @@ const mushrooms = [
 {
   "name": "Pied-de-mouton",
   "latin": "Hydnum repandum",
+    family: "Hydnacées",
+    habitatType: "Forêt mixte",
+    rarity: "Assez courant",
+    seasonGroup: "Été–automne",
+    priceMin: 15,
+    priceMax: 22,
+    priceLabel: "15–22 € / kg (import, gros, 13/11/2026)",
   "category": "comestible",
   "tag": "Réputé comestible — identification à confirmer",
   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Hydnum_repandum.jpg",
@@ -783,6 +864,13 @@ const mushrooms = [
 {
   "name": "Coulemelle",
   "latin": "Macrolepiota procera",
+    family: "Agaricacées",
+    habitatType: "Prairie / lisière",
+    rarity: "Assez courant",
+    seasonGroup: "Été–automne",
+    priceMin: null,
+    priceMax: null,
+    priceLabel: "Non cotée régulièrement",
   "category": "comestible",
   "tag": "Réputée comestible — risque de confusion",
   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Macrolepiota_procera.jpg",
@@ -801,6 +889,13 @@ const mushrooms = [
 {
   "name": "Coprin chevelu",
   "latin": "Coprinus comatus",
+    family: "Psathyrellacées",
+    habitatType: "Prairie / pelouse",
+    rarity: "Commun",
+    seasonGroup: "Printemps–automne",
+    priceMin: null,
+    priceMax: null,
+    priceLabel: "Non coté régulièrement",
   "category": "comestible",
   "tag": "Comestibilité conditionnelle — très frais uniquement",
   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Coprinus_comatus.jpg",
@@ -818,6 +913,13 @@ const mushrooms = [
 {
   "name": "Trompette-de-la-mort",
   "latin": "Craterellus cornucopioides",
+    family: "Cantharellacées",
+    habitatType: "Forêt de feuillus",
+    rarity: "Assez courant",
+    seasonGroup: "Automne",
+    priceMin: 16,
+    priceMax: 25,
+    priceLabel: "16–25 € / kg (import, gros, 13/11/2026)",
   "category": "comestible",
   "tag": "Réputée comestible — identification à confirmer",
   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Craterellus_cornucopioides.jpg",
@@ -835,6 +937,13 @@ const mushrooms = [
 {
   "name": "Amanite phalloïde",
   "latin": "Amanita phalloides",
+    family: "Amanitacées",
+    habitatType: "Forêt de feuillus",
+    rarity: "Assez courant",
+    seasonGroup: "Fin été–automne",
+    priceMin: null,
+    priceMax: null,
+    priceLabel: "Non commercialisé",
   "category": "toxique",
   "tag": "Mortelle",
   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Amanita_phalloides.jpg",
@@ -852,6 +961,13 @@ const mushrooms = [
 {
   "name": "Rosé-des-prés",
   "latin": "Agaricus campestris",
+    family: "Agaricacées",
+    habitatType: "Prairie / pelouse",
+    rarity: "Assez courant",
+    seasonGroup: "Printemps–automne",
+    priceMin: null,
+    priceMax: null,
+    priceLabel: "Non coté régulièrement",
   "category": "comestible",
   "tag": "Comestibilité à confirmer — confusion possible",
   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Agaricus_campestris.jpg",
@@ -870,6 +986,13 @@ const mushrooms = [
 {
   "name": "Lactaire délicieux",
   "latin": "Lactarius deliciosus",
+    family: "Russulacées",
+    habitatType: "Forêt de conifères",
+    rarity: "Assez courant",
+    seasonGroup: "Fin été–automne",
+    priceMin: null,
+    priceMax: null,
+    priceLabel: "Non coté régulièrement",
   "category": "comestible",
   "tag": "Réputé comestible — identification à confirmer",
   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Lactarius_deliciosus.jpg",
@@ -888,6 +1011,13 @@ const mushrooms = [
 {
   "name": "Bolet Satan",
   "latin": "Rubroboletus satanas",
+    family: "Boletacées",
+    habitatType: "Forêt de feuillus",
+    rarity: "Peu courant",
+    seasonGroup: "Été–début automne",
+    priceMin: null,
+    priceMax: null,
+    priceLabel: "Non commercialisé",
   "category": "toxique",
   "tag": "Toxique",
   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Boletus_satanas.jpg",
@@ -905,6 +1035,13 @@ const mushrooms = [
 {
   "name": "Russule verdoyante",
   "latin": "Russula virescens",
+    family: "Russulacées",
+    habitatType: "Forêt de feuillus",
+    rarity: "Peu courant",
+    seasonGroup: "Été–automne",
+    priceMin: null,
+    priceMax: null,
+    priceLabel: "Non coté régulièrement",
   "category": "autre",
   "tag": "Comestibilité non recommandée sans expertise",
   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Russula_virescens.jpg",
@@ -922,6 +1059,13 @@ const mushrooms = [
 {
   "name": "Fausse girolle",
   "latin": "Hygrophoropsis aurantiaca",
+    family: "Hygrophoropsidacées",
+    habitatType: "Forêt de conifères",
+    rarity: "Commun",
+    seasonGroup: "Fin été–automne",
+    priceMin: null,
+    priceMax: null,
+    priceLabel: "Non coté régulièrement",
   "category": "autre",
   "tag": "Comestibilité déconseillée",
   "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Hygrophoropsis_aurantiaca.jpg",
@@ -964,6 +1108,7 @@ function displayMushrooms(list) {
       <div class="card-content">
 
         <span class="tag">${mushroom.tag}</span>
+        <div class="catalog-meta"><strong>Famille :</strong> ${mushroom.family} · <strong>Prix :</strong> ${mushroom.priceLabel}</div>
 
         <h3>${mushroom.name}</h3>
 
@@ -1013,28 +1158,40 @@ function filterMushrooms() {
 
     .value.toLowerCase();
 
-  const category = document
-
-    .getElementById("category")
-
-    .value;
+  const value = (id) => document.getElementById(id).value;
+  const category = value("category");
+  const family = value("familyFilter");
+  const habitat = value("habitatFilter");
+  const rarity = value("rarityFilter");
+  const season = value("seasonFilter");
+  const price = value("priceFilter");
+  const sort = value("sortBy");
 
   const filtered = mushrooms.filter((m) => {
-
-    const matchesSearch =
-
-      m.name.toLowerCase().includes(search) ||
-
-      m.latin.toLowerCase().includes(search);
-
-    const matchesCategory =
-
-      category === "all" || m.category === category;
-
-    return matchesSearch && matchesCategory;
-
+    const matchesSearch = m.name.toLowerCase().includes(search) || m.latin.toLowerCase().includes(search);
+    const matchesCategory = category === "all" || m.category === category;
+    const matchesFamily = family === "all" || m.family === family;
+    const matchesHabitat = habitat === "all" || m.habitatType === habitat;
+    const matchesRarity = rarity === "all" || m.rarity === rarity;
+    const matchesSeason = season === "all" || m.seasonGroup === season;
+    const matchesPrice =
+      price === "all" ||
+      (price === "unquoted" && m.priceMin === null) ||
+      (price === "under25" && m.priceMin !== null && m.priceMin < 25) ||
+      (price === "25to50" && m.priceMin !== null && m.priceMax <= 50 && m.priceMax >= 25) ||
+      (price === "over50" && m.priceMin !== null && m.priceMax > 50);
+    return matchesSearch && matchesCategory && matchesFamily && matchesHabitat && matchesRarity && matchesSeason && matchesPrice;
   });
 
+  const rarityOrder = {"Commun": 1, "Assez courant": 2, "Peu courant": 3, "Rare": 4};
+  filtered.sort((a,b) => {
+    if (sort === "name") return a.name.localeCompare(b.name, "fr");
+    if (sort === "family") return a.family.localeCompare(b.family, "fr") || a.name.localeCompare(b.name, "fr");
+    if (sort === "priceAsc") return (a.priceMin ?? Infinity) - (b.priceMin ?? Infinity);
+    if (sort === "priceDesc") return (b.priceMax ?? -Infinity) - (a.priceMax ?? -Infinity);
+    if (sort === "rarity") return (rarityOrder[a.rarity] ?? 99) - (rarityOrder[b.rarity] ?? 99);
+    return 0;
+  });
   displayMushrooms(filtered);
 
 }
@@ -1048,6 +1205,10 @@ function showDetails(mushroom) {
     <p><i>${mushroom.latin}</i></p>
 
     <p><strong>Catégorie :</strong> ${mushroom.tag}</p>
+    <p><strong>Famille :</strong> ${mushroom.family}</p>
+    <p><strong>Milieu :</strong> ${mushroom.habitatType} — ${mushroom.habitat}</p>
+    <p><strong>Fréquence indicative :</strong> ${mushroom.rarity}</p>
+    <p><strong>Prix indicatif :</strong> ${mushroom.priceLabel}</p>
 
     <p><strong>Description :</strong> ${mushroom.description}</p>
 
