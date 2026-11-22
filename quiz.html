@@ -137,6 +137,33 @@ body{background:#f8f7f3;color:#28342c;font-family:Arial,sans-serif}
 footer{background:#26382c}
 @media(max-width:560px){.page{padding-top:20px}.hero{min-height:330px;background:#eeeee7}.hero h1{font-size:39px}}
 
+
+/* Thème nocturne MycoNature */
+:root{--forest:#101b19;--forest2:#172522;--moss:#8a9a76;--paper:#111817;--cream:#1b2422;--gold:#c5a66f;--ink:#e8e4d9;--muted:#a4aaa0;--line:#35413c;--white:#202a27}
+body{background:#111817;color:#e8e4d9}
+.site-header{background:#0b1211;border-bottom-color:#66553a}
+.page{color:#e8e4d9}
+.hero{background:radial-gradient(ellipse at 78% 18%,rgba(197,166,111,.13),transparent 38%),linear-gradient(120deg,#101a18,#182723 65%,#24352d);border:1px solid #35443a}
+.section-title,.panel h2,.intro-card h3,.stat strong,.question{color:#e9e2d3}
+.section-kicker{color:#c5a66f}
+.section-intro,.note,.stat-label,.stat small,.intro-card p{color:#aab1a7}
+.stat,.panel,.intro-card{background:#1a2421;border-color:#35413a;color:#e8e4d9}
+.rank-stat,.career-box{background:#222d28}
+.level{background:#202a26;border-color:#3b4940;color:#e9e2d3}
+.level small{color:#aab1a7}
+.answer{background:#202a27;border-color:#3b4940;color:#e8e4d9}
+.answer:hover:not(:disabled){background:#29362f}
+.answer.correct{background:#23382b;border-color:#6d9a70}
+.answer.incorrect{background:#3a2926;border-color:#b97968}
+.tree-toolbar{color:#aeb6aa}
+.tree-toolbar button{background:#26332e;color:#eadfc9;border-color:#67583e}
+.tree-toolbar button:hover{background:#34443b}
+.living-tree{background:#0b1110;border-color:#62513a;box-shadow:inset 0 0 60px #0008}
+.skill-detail{background:#1a2421;border-color:#465247;color:#e8e4d9}
+.skill-detail strong{color:#e2c58d}
+.skill-detail .detail-progress{background:#35413b}
+.tree-empty{background:#1a2421;border-color:#465247;color:#aab1a7}
+footer{background:#0b1211;color:#c7cbbf}
 </style>
 </head>
 <body>
@@ -306,19 +333,32 @@ function renderLivingTree(s){
  }else{
   ach.forEach((item,i)=>{const q=pts[i],parent=i===0?[anchorX,anchorY]:pts[i-1];lines+='<path d="M'+parent[0]+' '+parent[1]+' L'+q[0]+' '+q[1]+'" fill="none" stroke="#8c765e" stroke-width="3" stroke-linecap="round"/>';const v=progressFor(item,s),ok=v>=item.goal;nodes+=nodeMarkup(q[0],q[1],item,ok,color,v,k,i);});
  }
- nodes+='<g class="skill-hub" data-branch="' +k+ '" tabindex="0" role="button" aria-label="' +hubTitles[k]+'"><circle cx="'+anchorX+'" cy="'+anchorY+'" r="31" fill="#171b1b" stroke="'+color+'" stroke-width="4"/><circle cx="'+anchorX+'" cy="'+anchorY+'" r="24" fill="#252b2b" stroke="#c3a77d" stroke-width="1.5"/><text x="'+anchorX+'" y="'+(anchorY+8)+'" text-anchor="middle" font-size="24" fill="'+color+'">'+hubIcons[k]+'</text></g>';
+ nodes+='<g class="skill-hub" data-x="' +anchorX+ '" data-y="' +anchorY+ '" data-branch="' +k+ '" tabindex="0" role="button" aria-label="' +hubTitles[k]+'"><circle cx="'+anchorX+'" cy="'+anchorY+'" r="31" fill="#171b1b" stroke="'+color+'" stroke-width="4"/><circle cx="'+anchorX+'" cy="'+anchorY+'" r="24" fill="#252b2b" stroke="#c3a77d" stroke-width="1.5"/><text x="'+anchorX+'" y="'+(anchorY+8)+'" text-anchor="middle" font-size="24" fill="'+color+'">'+hubIcons[k]+'</text></g>';
  const lx=anchorX,ly=anchorY+(isRoot?57:-49);labels+='<text x="'+lx+'" y="'+ly+'" text-anchor="middle" font-size="10" font-family="Arial" font-weight="700" letter-spacing="1.1" fill="#e2d5c1">'+hubTitles[k]+'</text><text x="'+lx+'" y="'+(ly+14)+'" text-anchor="middle" font-size="9" font-family="Arial" fill="#bba98f">'+done+' / '+ach.length+' acquis</text>';
  });
- function nodeMarkup(x,y,item,ok,color,v,bi,ai){return '<g class="skill-node" data-branch="' +bi+ '" data-achievement="' +ai+ '" tabindex="0" role="button" aria-label="' +item.name+'"><circle cx="'+x+'" cy="'+y+'" r="17" fill="#171b1b" stroke="'+(ok?color:"#766c5e")+'" stroke-width="3"/><circle cx="'+x+'" cy="'+y+'" r="12" fill="'+(ok?color:"#343638")+'" opacity="'+(ok?".95":".75")+'"/><circle cx="'+x+'" cy="'+y+'" r="5" fill="'+(ok?"#fff0c8":"#8d8b82")+'" opacity="'+(ok?"1":".45")+'"/><title>'+item.name+" — "+(ok?"débloqué":"verrouillé")+" ("+Math.min(v,item.goal)+"/"+item.goal+")"+'</title></g>'}
+ function nodeMarkup(x,y,item,ok,color,v,bi,ai){return '<g class="skill-node" data-x="' +x+ '" data-y="' +y+ '" data-branch="' +bi+ '" data-achievement="' +ai+ '" tabindex="0" role="button" aria-label="' +item.name+'"><circle cx="'+x+'" cy="'+y+'" r="17" fill="#171b1b" stroke="'+(ok?color:"#766c5e")+'" stroke-width="3"/><circle cx="'+x+'" cy="'+y+'" r="12" fill="'+(ok?color:"#343638")+'" opacity="'+(ok?".95":".75")+'"/><circle cx="'+x+'" cy="'+y+'" r="5" fill="'+(ok?"#fff0c8":"#8d8b82")+'" opacity="'+(ok?"1":".45")+'"/><title>'+item.name+" — "+(ok?"débloqué":"verrouillé")+" ("+Math.min(v,item.goal)+"/"+item.goal+")"+'</title></g>'}
  const core='<circle cx="500" cy="390" r="55" fill="#171b1b" stroke="#b99b70" stroke-width="4"/><circle cx="500" cy="390" r="45" fill="#252a29" stroke="#77634d" stroke-width="2"/><path d="M500 357 C475 372 473 395 500 423 C527 395 525 372 500 357Z" fill="#9d7953"/><path d="M500 370 L500 410 M500 388 L480 380 M500 393 L520 380" stroke="#e1c79d" stroke-width="2" fill="none"/><text x="500" y="445" text-anchor="middle" font-size="9" fill="#e7d9c3" letter-spacing="1.5">MYCONATURE</text>';
  document.getElementById("livingTree").innerHTML='<svg viewBox="0 0 1000 970" role="img" aria-label="Arbre de compétences en réseau, avec branches, racines et succès à débloquer"><defs><radialGradient id="skillBg"><stop offset="0" stop-color="#242b29"/><stop offset="1" stop-color="#141918"/></radialGradient><linearGradient id="skillMetal" x1="0" x2="1"><stop offset="0" stop-color="#72583f"/><stop offset=".5" stop-color="#d0b58b"/><stop offset="1" stop-color="#72583f"/></linearGradient></defs><rect width="1000" height="970" rx="20" fill="url(#skillBg)"/>'+lines+core+nodes+labels+'<text x="500" y="955" text-anchor="middle" font-size="11" fill="#c4b49b" letter-spacing="2">ARBRE DES SAVOIRS · '+total+' / '+all+' COMPÉTENCES · '+pct+'%</text></svg>';
 }
 
-function zoomSkillTree(direction){const el=document.getElementById("livingTree"),svg=el&&el.querySelector("svg");if(!svg)return;const current=parseFloat(svg.dataset.zoom||"1.4"),next=Math.max(.75,Math.min(3,current+(direction*.2)));svg.dataset.zoom=String(next);svg.style.width=(1000*next)+"px";svg.style.minWidth=(1000*next)+"px"}
-function resetSkillTree(){const el=document.getElementById("livingTree"),svg=el&&el.querySelector("svg");if(!el||!svg)return;svg.dataset.zoom="1.4";svg.style.width="1400px";svg.style.minWidth="1400px";el.scrollLeft=Math.max(0,(el.scrollWidth-el.clientWidth)/2);el.scrollTop=Math.max(0,(el.scrollHeight-el.clientHeight)/2)}
-function initSkillTreeNavigation(){const el=document.getElementById("livingTree"),svg=el&&el.querySelector("svg");if(!el||!svg||el.dataset.ready)return;el.dataset.ready="1";let down=false,sx=0,sy=0,sl=0,st=0,moved=false;el.addEventListener("pointerdown",e=>{if(e.target.closest(".skill-node,.skill-hub"))return;down=true;moved=false;sx=e.clientX;sy=e.clientY;sl=el.scrollLeft;st=el.scrollTop;el.classList.add("is-dragging")});el.addEventListener("pointermove",e=>{if(!down)return;const dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)+Math.abs(dy)>5)moved=true;el.scrollLeft=sl-dx;el.scrollTop=st-dy});["pointerup","pointercancel","pointerleave"].forEach(n=>el.addEventListener(n,()=>{down=false;el.classList.remove("is-dragging")}));el.addEventListener("click",e=>{const node=e.target.closest(".skill-node");const hub=e.target.closest(".skill-hub");if(node){showSkillDetail(Number(node.dataset.branch),Number(node.dataset.achievement))}else if(hub){showBranchDetail(Number(hub.dataset.branch))}});el.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&(e.target.classList.contains("skill-node")||e.target.classList.contains("skill-hub"))){e.preventDefault();e.target.dispatchEvent(new MouseEvent("click",{bubbles:true}))}})}
-function showSkillDetail(bi,ai){const a=branches[bi].achievements[ai],s=getStats(),v=progressFor(a,s),ok=v>=a.goal,p=Math.min(100,v/a.goal*100);document.getElementById("skillDetail").innerHTML="<strong>"+a.name+"</strong> · "+(ok?"Succès débloqué ✨":"À débloquer")+"<br>"+a.desc+'<div class="detail-progress"><span style="width:'+p+'%"></span></div><small>'+Math.min(v,a.goal)+" / "+a.goal+" · "+Math.round(p)+" % de progression</small>"}
-function showBranchDetail(bi){const b=branches[bi],s=getStats(),done=b.achievements.filter(a=>progressFor(a,s)>=a.goal).length;document.getElementById("skillDetail").innerHTML="<strong>"+b.title+"</strong> · "+b.sub+"<br>"+done+" succès débloqués sur "+b.achievements.length+". Sélectionne un médaillon de cette famille pour afficher son objectif."}
+function zoomSkillTree(direction){const el=document.getElementById("livingTree"),svg=el&&el.querySelector("svg");if(!svg)return;const current=parseFloat(svg.dataset.zoom||"0.85"),next=Math.max(.75,Math.min(3,current+(direction*.2)));svg.dataset.zoom=String(next);svg.style.width=(1000*next)+"px";svg.style.minWidth=(1000*next)+"px"}
+function resetSkillTree(){const el=document.getElementById("livingTree"),svg=el&&el.querySelector("svg");if(!el||!svg)return;svg.dataset.zoom="0.85";svg.style.width="850px";svg.style.minWidth="850px";el.scrollLeft=Math.max(0,(el.scrollWidth-el.clientWidth)/2);el.scrollTop=Math.max(0,(el.scrollHeight-el.clientHeight)/2)}
+function initSkillTreeNavigation(){const el=document.getElementById("livingTree"),svg=el&&el.querySelector("svg");if(!el||!svg||el.dataset.ready)return;el.dataset.ready="1";let down=false,sx=0,sy=0,sl=0,st=0,moved=false;el.addEventListener("pointerdown",e=>{if(e.target.closest(".skill-node,.skill-hub"))return;down=true;moved=false;sx=e.clientX;sy=e.clientY;sl=el.scrollLeft;st=el.scrollTop;el.classList.add("is-dragging")});el.addEventListener("pointermove",e=>{if(!down)return;const dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)+Math.abs(dy)>5)moved=true;el.scrollLeft=sl-dx;el.scrollTop=st-dy});["pointerup","pointercancel","pointerleave"].forEach(n=>el.addEventListener(n,()=>{down=false;el.classList.remove("is-dragging")}));el.addEventListener("click",e=>{const node=e.target.closest(".skill-node");const hub=e.target.closest(".skill-hub");if(node){showSkillDetail(Number(node.dataset.branch),Number(node.dataset.achievement),Number(node.dataset.x),Number(node.dataset.y))}else if(hub){showBranchDetail(Number(hub.dataset.branch),Number(hub.dataset.x),Number(hub.dataset.y))}});el.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&(e.target.classList.contains("skill-node")||e.target.classList.contains("skill-hub"))){e.preventDefault();e.target.dispatchEvent(new MouseEvent("click",{bubbles:true}))}})}
+
+function treeEscape(v){return String(v||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function drawTreePopup(title,description,status,progress,color,x,y){
+ const svg=document.querySelector("#livingTree svg");if(!svg)return;
+ const old=svg.querySelector("#treeSkillPopup");if(old)old.remove();
+ const w=310,h=144,px=Math.max(12,Math.min(678,(x||500)+28>690?(x||500)-w-28:(x||500)+28)),py=Math.max(12,Math.min(810,(y||390)-55));
+ const words=String(description||"").split(/\s+/);let rows=[],line="";
+ words.forEach(word=>{if((line+" "+word).trim().length>43){rows.push(line);line=word}else line=(line+" "+word).trim()});if(line)rows.push(line);rows=rows.slice(0,3);
+ const desc=rows.map((r,i)=>'<text x="16" y="'+(61+i*15)+'" font-size="11" fill="#d0d2c8">'+treeEscape(r)+'</text>').join("");
+ const g='<g id="treeSkillPopup" transform="translate('+px+' '+py+')" style="pointer-events:none"><rect width="'+w+'" height="'+h+'" rx="13" fill="#17211f" stroke="'+color+'" stroke-width="2"/><path d="M14 37 H296" stroke="#5a604f" opacity=".8"/><text x="16" y="24" font-size="13" font-weight="700" fill="#ead7b1">'+treeEscape(title.slice(0,38))+'</text>'+desc+'<text x="16" y="112" font-size="11" fill="#e3c17e">'+treeEscape(status)+'</text><rect x="16" y="122" width="278" height="6" rx="3" fill="#39443d"/><rect x="16" y="122" width="'+Math.max(0,Math.min(278,278*progress/100))+'" height="6" rx="3" fill="'+color+'"/></g>';
+ svg.insertAdjacentHTML("beforeend",g);
+}
+
+function showSkillDetail(bi,ai,x,y){const a=branches[bi].achievements[ai],s=getStats(),v=progressFor(a,s),ok=v>=a.goal,p=Math.min(100,v/a.goal*100);document.getElementById("skillDetail").innerHTML="<strong>"+a.name+"</strong> · "+(ok?"Succès débloqué ✨":"À débloquer")+"<br>"+a.desc+'<div class="detail-progress"><span style="width:'+p+'%"></span></div><small>'+Math.min(v,a.goal)+" / "+a.goal+" · "+Math.round(p)+" % de progression</small>";drawTreePopup(a.name,a.desc,ok?"SUCCÈS DÉBLOQUÉ":"ENCORE "+Math.max(0,a.goal-v)+" POUR DÉBLOQUER",p,palette[bi]||"#c5a66f",x,y)}
+function showBranchDetail(bi,x,y){const b=branches[bi],s=getStats(),done=b.achievements.filter(a=>progressFor(a,s)>=a.goal).length;document.getElementById("skillDetail").innerHTML="<strong>"+b.title+"</strong> · "+b.sub+"<br>"+done+" succès débloqués sur "+b.achievements.length+". Sélectionne un médaillon de cette famille pour afficher son objectif.";drawTreePopup(b.title,b.sub+" — Cette famille regroupe "+b.achievements.length+" objectifs à découvrir et à maîtriser.",done+" / "+b.achievements.length+" SUCCÈS DÉBLOQUÉS",Math.round(done/b.achievements.length*100),palette[bi]||"#c5a66f",x,y)}
 
 function showTree(){updateDashboard();document.getElementById("quizContent").classList.add("hidden");document.getElementById("parcours").classList.add("hidden");document.getElementById("treeView").classList.remove("hidden");renderTree();resetSkillTree();document.getElementById("treeView").scrollIntoView({behavior:"smooth",block:"start"})}
 function hideTree(){document.getElementById("treeView").classList.add("hidden");document.getElementById("parcours").classList.remove("hidden");document.getElementById("quizContent").classList.remove("hidden");document.getElementById("parcours").scrollIntoView({behavior:"smooth",block:"start"})}
