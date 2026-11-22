@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#183b2b">
+
+<title>MycoNature | Catalogue des champignons</title>
+
+<style>
+
+:root {
+
+  --green: #183b2b;
+
+  --light: #f5f5ef;
+
+  --gold: #c6a66b;
+
+  --text: #242820;
+
+}
+
+* {
+
+  box-sizing: border-box;
+
+  margin: 0;
+
+  padding: 0;
+
+}
+
+body {
+
+  font-family: Arial, sans-serif;
+
+  background: var(--light);
+
+  color: var(--text);
+
+}
+
+header {
+
+  background: var(--green);
+
+  color: white;
+
+  padding: 22px 7%;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+}
+
+.logo {
+
+  font-family: Georgia, serif;
+
+  font-size: 25px;
+
+  letter-spacing: 2px;
+
+}
+
+nav a {
+
+  color: white;
+
+  text-decoration: none;
+
+  margin-left: 22px;
+
+  font-size: 14px;
+
+}
+
+.hero {
+
+  min-height: 390px;
+
+  background: linear-gradient(90deg, rgba(12,35,23,.88), rgba(12,35,23,.35)),
+
+  url("https://commons.wikimedia.org/wiki/Special:FilePath/Amanita_muscaria_mushrooms.jpg") center/cover;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 55px 8%;
+
+  color: white;
+
+}
+
+.hero h1 {
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(38px, 6vw, 65px);
+
+  max-width: 650px;
+
+  margin-bottom: 18px;
+
+}
+
+.hero p {
+
+  max-width: 500px;
+
+  line-height: 1.7;
+
+  font-size: 17px;
+
+}
+
+.hero button {
+
+  width: fit-content;
+
+  margin-top: 25px;
+
+  padding: 14px 25px;
+
+  border: none;
+
+  background: var(--gold);
+
+  color: #17271c;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  border-radius: 4px;
+
+}
+
+.intro {
+
+  text-align: center;
+
+  padding: 55px 20px 30px;
+
+}
+
+.intro h2 {
+
+  font-family: Georgia, serif;
+
+  font-size: 34px;
+
+  color: var(--green);
+
+  margin-bottom: 12px;
+
+}
+
+.intro p {
+
+  color: #6b7068;
+
+  line-height: 1.6;
+
+}
+
+.catalogue {
+
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 25px 25px 70px;
+
+}
+
+.controls {
+
+  display: flex;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 30px;
+
+}
+
+.controls input,
+
+.controls select {
+
+  padding: 14px;
+
+  border: 1px solid #d4d8ce;
+
+  border-radius: 5px;
+
+  background: white;
+
+  font-size: 15px;
+
+}
+
+.controls input {
+
+  flex: 1;
+
+  min-width: 210px;
+
+}
+
+.controls select {
+
+  min-width: 170px;
+
+}
+
+.grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+
+  gap: 25px;
+
+}
+
+.card {
+
+  background: white;
+
+  border-radius: 9px;
+
+  overflow: hidden;
+
+  box-shadow: 0 4px 18px rgba(0,0,0,.06);
+
+  transition: transform .2s;
+
+}
+
+.card:hover {
+
+  transform: translateY(-5px);
+
+}
+
+.card img {
+
+  width: 100%;
+
+  height: 220px;
+
+  object-fit: cover;
+
+  background: #e4e7dd;
+
+}
+
+.card-content {
+
+  padding: 20px;
+
+}
+
+.card h3 {
+
+  font-family: Georgia, serif;
+
+  font-size: 23px;
+
+  color: var(--green);
+
+  margin-bottom: 7px;
+
+}
+
+.latin {
+
+  color: #8c8c7e;
+
+  font-style: italic;
+
+  font-size: 14px;
+
+  margin-bottom: 15px;
+
+}
+
+.card p {
+
+  font-size: 14px;
+
+  line-height: 1.6;
+
+  margin-bottom: 15px;
+
+}
+
+.tag {
+
+  display: inline-block;
+
+  padding: 6px 10px;
+
+  background: #edf1e9;
+
+  color: var(--green);
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  margin-bottom: 12px;
+
+}
+
+.details {
+
+  display: block;
+
+  width: 100%;
+
+  padding: 11px;
+
+  background: var(--green);
+
+  color: white;
+
+  border: none;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+}
+
+.details:hover {
+
+  background: #315b40;
+
+}
+
+.photo-credit {
+
+  display: block;
+
+  font-size: 11px;
+
+  margin-top: 12px;
+
+  color: #777;
+
+}
+
+.photo-credit a {
+
+  color: #526d59;
+
+}
+
+#modal {
+
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0,0,0,.7);
+
+  z-index: 10;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+}
+
+.modal-content {
+
+  background: white;
+
+  max-width: 550px;
+
+  width: 100%;
+
+  border-radius: 10px;
+
+  padding: 28px;
+
+  max-height: 85vh;
+
+  overflow-y: auto;
+
+}
+
+.modal-content h2 {
+
+  color: var(--green);
+
+  font-family: Georgia, serif;
+
+  margin-bottom: 15px;
+
+}
+
+.modal-content p {
+
+  line-height: 1.7;
+
+  margin: 12px 0;
+
+}
+
+.close {
+
+  float: right;
+
+  border: none;
+
+  background: none;
+
+  font-size: 27px;
+
+  cursor: pointer;
+
+}
+
+.warning {
+
+  background: #fff1e7;
+
+  color: #873e19;
+
+  padding: 18px;
+
+  text-align: center;
+
+  line-height: 1.5;
+
+  font-size: 13px;
+
+}
+
+footer {
+
+  background: var(--green);
+
+  color: white;
+
+  text-align: center;
+
+  padding: 35px 20px;
+
+  line-height: 1.8;
+
+}
+
+@media(max-width:600px) {
+
+  header {
+
+    flex-direction: column;
+
+    gap: 17px;
+
+  }
+
+  nav a {
+
+    margin: 0 7px;
+
+  }
+
+  .hero {
+
+    min-height: 350px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">🍄 MYCONATURE</div>
+
+  <nav>
+
+    <a href="#accueil">Accueil</a>
+
+    <a href="#catalogue">Catalogue</a>
+
+    <a href="#apropos">À propos</a>
+
+  </nav>
+
+</header>
+
+<section class="hero" id="accueil">
+
+  <h1>Explorez le monde fascinant des champignons.</h1>
+
+  <p>
+
+    Découvrez les espèces, leurs caractéristiques,
+
+    leurs habitats et leurs particularités à travers
+
+    un catalogue mycologique illustré.
+
+  </p>
+
+  <button onclick="document.getElementById('catalogue').scrollIntoView({behavior:'smooth'})">
+
+    Explorer le catalogue
+
+  </button>
+
+</section>
+
+<section class="intro" id="apropos">
+
+  <h2>Le monde des champignons</h2>
+
+  <p>
+
+    Un espace de découverte pour apprendre à reconnaître
+
+    et comprendre les différentes espèces de champignons.
+
+  </p>
+
+</section>
+
+<main class="catalogue" id="catalogue">
+
+  <div class="controls">
+
+    <input
+
+      type="search"
+
+      id="search"
+
+      placeholder="Rechercher un champignon..."
+
+      oninput="filterMushrooms()"
+
+    >
+
+    <select id="category" onchange="filterMushrooms()">
+
+      <option value="all">Toutes les catégories</option>
+
+      <option value="comestible">Espèces réputées comestibles</option>
+
+      <option value="toxique">Espèces toxiques</option>
+
+      <option value="autre">Autres espèces</option>
+
+    </select>
+
+  </div>
+
+  <div class="grid" id="mushroomGrid"></div>
+
+</main>
+
+<div class="warning">
+
+  ⚠️ Attention : ce catalogue est uniquement informatif.
+
+  Ne consommez jamais un champignon sur la base d'une photographie
+
+  ou d'une identification en ligne. Faites vérifier toute récolte
+
+  par un mycologue ou un pharmacien compétent.
+
+</div>
+
+<div id="modal" onclick="closeModal(event)">
+
+  <div class="modal-content">
+
+    <button class="close" onclick="closeModal()">×</button>
+
+    <div id="modalText"></div>
+
+  </div>
+
+</div>
+
+<footer>
+
+  <h2>🍄 MYCONATURE</h2>
+
+  <p>À la découverte de la diversité des champignons.</p>
+
+  <p>Catalogue mycologique – 2026</p>
+
+</footer>
+
+<script>
+
+const mushrooms = [
+
+  {
+
+    name: "Amanite tue-mouches",
+
+    latin: "Amanita muscaria",
+
+    category: "toxique",
+
+    tag: "Toxique",
+
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Amanita_muscaria_mushrooms.jpg",
+
+    source: "https://commons.wikimedia.org/wiki/File:Amanita_muscaria_mushrooms.jpg",
+
+    description: "Champignon reconnaissable à son chapeau rouge vif ponctué de flocons blancs.",
+
+    habitat: "Forêts de conifères et de feuillus, souvent à proximité des bouleaux et des pins.",
+
+    season: "Fin de l'été et automne",
+
+    details: "L'Amanite tue-mouches appartient à la famille des Amanitacées. Son apparence très caractéristique en fait l'un des champignons les plus connus."
+
+  },
+
+  {
+
+    name: "Cèpe de Bordeaux",
+
+    latin: "Boletus edulis",
+
+    category: "comestible",
+
+    tag: "Espèce réputée comestible",
+
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Boletus_edulis.jpg",
+
+    source: "https://commons.wikimedia.org/wiki/File:Boletus_edulis.jpg",
+
+    description: "Bolet apprécié pour son chapeau brun et son pied robuste.",
+
+    habitat: "Forêts de feuillus et de conifères.",
+
+    season: "Été et automne",
+
+    details: "Le Cèpe de Bordeaux est un champignon appartenant à la famille des Boletaceae. Il est recherché en mycologie et en gastronomie."
+
+  },
+
+  {
+
+    name: "Girolle",
+
+    latin: "Cantharellus cibarius",
+
+    category: "comestible",
+
+    tag: "Espèce réputée comestible",
+
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Chanterelle_mushrooms_Cantharellus_cibarius.jpg",
+
+    source: "https://commons.wikimedia.org/wiki/File:Chanterelle_mushrooms_Cantharellus_cibarius.jpg",
+
+    description: "Champignon jaune à orangé, reconnaissable à sa forme en entonnoir.",
+
+    habitat: "Bois de feuillus et de conifères.",
+
+    season: "Été et automne",
+
+    details: "La girolle est une espèce mycorhizienne qui vit en association avec les racines de certains arbres."
+
+  },
+
+  {
+
+    name: "Morille comestible",
+
+    latin: "Morchella esculenta",
+
+    category: "comestible",
+
+    tag: "Espèce réputée comestible après cuisson",
+
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/M_esculenta.JPG",
+
+    source: "https://commons.wikimedia.org/wiki/File:M_esculenta.JPG",
+
+    description: "Champignon au chapeau alvéolé très caractéristique.",
+
+    habitat: "Bois, lisières, terrains humides et parfois jardins.",
+
+    season: "Printemps",
+
+    details: "La morille appartient à la famille des Morchellaceae. Elle possède un chapeau formé de nombreuses alvéoles. Elle est toxique crue ou insuffisamment cuite."
+
+  }
+
+];
+
+function displayMushrooms(list) {
+
+  const grid = document.getElementById("mushroomGrid");
+
+  grid.innerHTML = "";
+
+  if (list.length === 0) {
+
+    grid.innerHTML = "<p>Aucun champignon trouvé.</p>";
+
+    return;
+
+  }
+
+  list.forEach((mushroom) => {
+
+    const card = document.createElement("article");
+
+    card.className = "card";
+
+    card.innerHTML = `
+
+      <img
+
+        src="${mushroom.image}"
+
+        alt="${mushroom.name}"
+
+        loading="lazy"
+
+      >
+
+      <div class="card-content">
+
+        <span class="tag">${mushroom.tag}</span>
+
+        <h3>${mushroom.name}</h3>
+
+        <div class="latin">${mushroom.latin}</div>
+
+        <p>${mushroom.description}</p>
+
+        <button class="details">
+
+          Voir la fiche complète
+
+        </button>
+
+        <small class="photo-credit">
+
+          Photo :
+
+          <a href="${mushroom.source}" target="_blank" rel="noopener">
+
+            Wikimedia Commons
+
+          </a>
+
+        </small>
+
+      </div>
+
+    `;
+
+    card.querySelector("button").addEventListener("click", () => {
+
+      showDetails(mushroom);
+
+    });
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+function filterMushrooms() {
+
+  const search = document
+
+    .getElementById("search")
+
+    .value.toLowerCase();
+
+  const category = document
+
+    .getElementById("category")
+
+    .value;
+
+  const filtered = mushrooms.filter((m) => {
+
+    const matchesSearch =
+
+      m.name.toLowerCase().includes(search) ||
+
+      m.latin.toLowerCase().includes(search);
+
+    const matchesCategory =
+
+      category === "all" || m.category === category;
+
+    return matchesSearch && matchesCategory;
+
+  });
+
+  displayMushrooms(filtered);
+
+}
+
+function showDetails(mushroom) {
+
+  document.getElementById("modalText").innerHTML = `
+
+    <h2>${mushroom.name}</h2>
+
+    <p><i>${mushroom.latin}</i></p>
+
+    <p><strong>Catégorie :</strong> ${mushroom.tag}</p>
+
+    <p><strong>Description :</strong> ${mushroom.description}</p>
+
+    <p><strong>Habitat :</strong> ${mushroom.habitat}</p>
+
+    <p><strong>Période :</strong> ${mushroom.season}</p>
+
+    <p><strong>Informations :</strong> ${mushroom.details}</p>
+
+    <p><strong>Photographie :</strong>
+
+      <a href="${mushroom.source}" target="_blank" rel="noopener">
+
+        Voir la source
+
+      </a>
+
+    </p>
+
+    <p style="color:#9b401f;font-size:13px">
+
+      Identification indicative uniquement. Ne jamais consommer
+
+      un champignon sans validation par un spécialiste.
+
+    </p>
+
+  `;
+
+  document.getElementById("modal").style.display = "flex";
+
+}
+
+function closeModal(event) {
+
+  if (!event || event.target.id === "modal") {
+
+    document.getElementById("modal").style.display = "none";
+
+  }
+
+}
+
+displayMushrooms(mushrooms);
+
+</script>
+
+</body>
+
+</html>
