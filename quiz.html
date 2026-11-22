@@ -199,6 +199,19 @@ footer{background:#0b1211;color:#c7cbbf}
 .tree-toolbar button{border-radius:13px}
 @media(max-width:700px){.levels{grid-template-columns:1fr}.level{min-height:100px}.level-lock{font-size:9px;padding:5px 8px}}
 
+
+/* Rameaux périphériques et feuillage vivant, sans gêner les zones de lecture */
+.ambient-twigs{transform-origin:50% 50%;animation:twigDrift 19s ease-in-out infinite alternate}
+.ambient-leaf-cluster{transform-box:fill-box;transform-origin:center;animation:leafCanopyDrift 8.5s ease-in-out infinite alternate}
+.ambient-leaf-cluster path:nth-child(3n){fill:#84976a}
+.ambient-leaf-cluster path:nth-child(3n + 1){fill:#637f58}
+.ambient-leaf-cluster path:nth-child(3n + 2){fill:#a0a875}
+.ambient-leaf-cluster path:nth-child(4n){opacity:.76}
+.ambient-leaf-veins{transform-box:fill-box;transform-origin:center;animation:leafCanopyDrift 8.5s ease-in-out infinite alternate-reverse}
+@keyframes twigDrift{0%{transform:translateY(0) rotate(-.15deg)}100%{transform:translateY(4px) rotate(.2deg)}}
+@keyframes leafCanopyDrift{0%{transform:rotate(-1deg) translateY(0)}100%{transform:rotate(1.4deg) translateY(3px)}}
+@media(max-width:700px){.ambient-forest{opacity:.22}.ambient-twigs{opacity:.72}}
+@media(prefers-reduced-motion:reduce){.ambient-twigs,.ambient-leaf-cluster,.ambient-leaf-veins{animation:none!important}}
 /* Décor forestier d'ambiance : discret, fixe et non-interactif */
 .ambient-forest{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:.46}
 .ambient-forest svg{width:100%;height:100%;display:block}
@@ -238,6 +251,33 @@ footer{background:#0b1211;color:#c7cbbf}
 <g fill="url(#ambientGold)" opacity=".72">
  <path d="M175 405 C135 365 115 395 130 425 C150 442 168 425 175 405Z"/><path d="M1265 405 C1305 365 1325 395 1310 425 C1290 442 1272 425 1265 405Z"/>
  <path d="M365 80 C325 40 305 70 320 100 C340 117 358 100 365 80Z"/><path d="M1075 80 C1115 40 1135 70 1120 100 C1100 117 1082 100 1075 80Z"/>
+</g>
+
+<g class="ambient-twigs" fill="none" stroke="url(#ambientBark)" stroke-linecap="round">
+ <path d="M-24 430 C75 395 120 330 170 270 S245 205 315 190" stroke-width="8" opacity=".42"/>
+ <path d="M95 370 C145 365 190 330 218 285 M170 270 C175 225 205 195 245 165 M218 285 C270 280 300 250 328 220" stroke-width="3.5" opacity=".4"/>
+ <path d="M1464 455 C1365 415 1320 350 1270 290 S1195 225 1125 210" stroke-width="8" opacity=".4"/>
+ <path d="M1345 385 C1295 380 1250 345 1222 305 M1270 290 C1265 245 1235 215 1195 185 M1222 305 C1170 300 1140 270 1112 240" stroke-width="3.5" opacity=".38"/>
+ <path d="M-25 855 C70 825 105 770 155 720 S225 665 295 650 M1465 850 C1370 820 1335 765 1285 715 S1215 660 1145 645" stroke-width="6" opacity=".3"/>
+</g>
+<g class="ambient-leaf-cluster" fill="url(#ambientLeaf)" stroke="#a6b58b" stroke-width="1" opacity=".86">
+ <path d="M118 350 C63 302 39 337 60 373 C82 394 108 378 118 350Z"/>
+ <path d="M171 301 C124 243 94 274 112 313 C134 335 157 320 171 301Z"/>
+ <path d="M224 260 C181 207 151 235 169 274 C190 294 211 279 224 260Z"/>
+ <path d="M270 218 C233 168 205 190 220 229 C240 249 259 235 270 218Z"/>
+ <path d="M188 329 C224 278 255 299 239 338 C219 359 199 346 188 329Z"/>
+ <path d="M1320 366 C1375 318 1399 353 1378 389 C1356 410 1330 394 1320 366Z"/>
+ <path d="M1267 317 C1314 259 1344 290 1326 329 C1304 351 1281 336 1267 317Z"/>
+ <path d="M1214 276 C1257 223 1287 251 1269 290 C1248 310 1227 295 1214 276Z"/>
+ <path d="M1168 234 C1205 184 1233 206 1218 245 C1198 265 1179 251 1168 234Z"/>
+ <path d="M1252 345 C1216 294 1185 315 1201 354 C1221 375 1241 362 1252 345Z"/>
+ <path d="M94 765 C43 720 19 752 39 786 C60 806 83 791 94 765Z"/>
+ <path d="M170 712 C125 659 96 686 113 725 C134 746 157 731 170 712Z"/>
+ <path d="M1344 760 C1395 715 1419 747 1399 781 C1378 801 1355 786 1344 760Z"/>
+ <path d="M1268 708 C1313 655 1342 682 1325 721 C1304 742 1281 727 1268 708Z"/>
+</g>
+<g class="ambient-leaf-veins" fill="none" stroke="#c5cda9" stroke-width="1.1" opacity=".46">
+ <path d="M62 370 Q87 359 115 351 M112 311 Q140 300 168 301 M220 228 Q244 218 267 218 M1378 386 Q1350 375 1322 367 M1325 327 Q1298 315 1269 317 M1218 244 Q1193 233 1170 234 M40 784 Q66 774 92 766 M113 723 Q141 710 168 712 M1398 779 Q1372 768 1346 760 M1325 720 Q1297 706 1270 708"/>
 </g>
 </svg></div>
 <header class="site-header">
