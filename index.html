@@ -893,6 +893,12 @@ footer {
       <option>Printemps</option><option>Été–automne</option><option>Automne</option><option>Fin été–automne</option>
       <option>Printemps–automne</option><option>Été–début automne</option>
     </select>
+    <select id="rarityFilter" onchange="filterMushrooms()" aria-label="Filtrer par statut régional">
+      <option value="all">Tous les statuts régionaux</option>
+      <option value="umbrella">Espèces parapluie régionales</option>
+      <option value="determinant">Espèces déterminantes régionales</option>
+      <option value="notListed">Non inscrites sur la liste régionale</option>
+    </select>
     <select id="priceFilter" onchange="filterMushrooms()" aria-label="Filtrer par prix au kilo">
       <option value="all">Tous les prix / non cotés</option>
       <option value="under25">Moins de 25 €/kg</option>
@@ -3190,6 +3196,7 @@ function filterMushrooms() {
   const habitat = value("habitatFilter");
   const season = value("seasonFilter");
   const price = value("priceFilter");
+  const rarity = value("rarityFilter");
   const sort = value("sortBy");
 
   const filtered = mushrooms.filter((m) => {
@@ -3198,13 +3205,18 @@ function filterMushrooms() {
     const matchesFamily = family === "all" || m.family === family;
     const matchesHabitat = habitat === "all" || m.habitatType === habitat;
     const matchesSeason = season === "all" || m.seasonGroup === season;
+    const matchesRarity =
+      rarity === "all" ||
+      (rarity === "umbrella" && m.rarity === "Espèce parapluie régionale") ||
+      (rarity === "determinant" && m.rarity === "Espèce déterminante régionale") ||
+      (rarity === "notListed" && m.rarity === "Non inscrite sur la liste régionale des espèces déterminantes consultée");
     const matchesPrice =
       price === "all" ||
       (price === "unquoted" && m.priceMin === null) ||
       (price === "under25" && m.priceMin !== null && m.priceMin < 25) ||
       (price === "25to50" && m.priceMin !== null && m.priceMax <= 50 && m.priceMax >= 25) ||
       (price === "over50" && m.priceMin !== null && m.priceMax > 50);
-    return matchesSearch && matchesCategory && matchesFamily && matchesHabitat && matchesSeason && matchesPrice;
+    return matchesSearch && matchesCategory && matchesFamily && matchesHabitat && matchesSeason && matchesRarity && matchesPrice;
   });
 
   filtered.sort((a,b) => {
