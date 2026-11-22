@@ -80,6 +80,7 @@ header {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   pointer-events: auto;
+  text-decoration: none;
 }
 .menu-toggle span {
   display: block;
@@ -97,7 +98,7 @@ header {
   border-radius: 10px;
   box-shadow: 0 5px 20px rgba(0,0,0,.06);
 }
-.filter-panel.open { display: block; }
+.filter-panel:target { display: block; }
 .filter-panel-heading {
   display: flex;
   align-items: center;
@@ -624,9 +625,9 @@ footer {
       <a href="#catalogue">Catalogue</a>
       <a href="#apropos">À propos</a>
     </nav>
-    <button class="menu-toggle" id="filterToggle" type="button" aria-label="Ouvrir les filtres" aria-expanded="false" aria-controls="filterPanel">
+    <a class="menu-toggle" id="filterToggle" href="#filterPanel" aria-label="Ouvrir les filtres">
       <span></span><span></span><span></span>
-    </button>
+    </a>
   </div>
 </header>
 
@@ -670,7 +671,7 @@ footer {
   <section class="filter-panel" id="filterPanel" aria-label="Filtres et recherche">
     <div class="filter-panel-heading">
       <h2>Personnaliser le catalogue</h2>
-      <button type="button" class="filter-close" id="filterClose">Fermer ×</button>
+      <a class="filter-close" id="filterClose" href="#catalogue">Fermer ×</a>
     </div>
   <div class="controls">
 
@@ -1215,30 +1216,6 @@ function displayMushrooms(list) {
   });
 
 }
-
-function toggleFilters(force) {
-  const panel = document.getElementById("filterPanel");
-  const button = document.getElementById("filterToggle");
-  const shouldOpen = typeof force === "boolean" ? force : !panel.classList.contains("open");
-  panel.classList.toggle("open", shouldOpen);
-  button.setAttribute("aria-expanded", String(shouldOpen));
-  button.setAttribute("aria-label", shouldOpen ? "Fermer les filtres" : "Ouvrir les filtres");
-}
-
-// Gestion déléguée des commandes du panneau : fonctionne même si le script
-// est chargé après la création du bouton et capte aussi les clics sur les traits.
-document.addEventListener("click", (event) => {
-  const toggleButton = event.target.closest("#filterToggle");
-  const closeButton = event.target.closest("#filterClose");
-
-  if (toggleButton) {
-    event.preventDefault();
-    toggleFilters();
-  } else if (closeButton) {
-    event.preventDefault();
-    toggleFilters(false);
-  }
-}, true);
 
 function filterMushrooms() {
 
