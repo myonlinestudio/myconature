@@ -47,19 +47,76 @@ body {
 }
 
 header {
-
   background: var(--green);
-
   color: white;
-
-  padding: 22px 7%;
-
+  padding: 16px 7%;
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
-
+  gap: 16px;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.menu-toggle {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 7px;
+  background: transparent;
+  cursor: pointer;
+}
+.menu-toggle span {
+  display: block;
+  width: 21px;
+  height: 2px;
+  border-radius: 2px;
+  background: white;
+}
+.filter-panel {
+  display: none;
+  margin: 0 0 28px;
+  padding: 22px;
+  background: white;
+  border: 1px solid #e0e4da;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.06);
+}
+.filter-panel.open { display: block; }
+.filter-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.filter-panel-heading h2, .catalogue-heading h2 {
+  color: var(--green);
+  font-family: Georgia, serif;
+  font-size: 24px;
+}
+.filter-close {
+  border: 0;
+  background: transparent;
+  color: #526d59;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 8px;
+}
+.catalogue-heading {
+  margin: 8px 0 22px;
+}
+.catalogue-heading p {
+  margin-top: 7px;
+  color: #6b7068;
+  line-height: 1.5;
 }
 
 .logo {
@@ -511,20 +568,14 @@ footer {
 }
 
 @media(max-width:600px) {
-
-  header {
-
-    flex-direction: column;
-
-    gap: 17px;
-
-  }
-
-  nav a {
-
-    margin: 0 7px;
-
-  }
+  header { flex-direction: row; padding: 13px 5%; }
+  .logo { font-size: 20px; }
+  header nav { display: none; }
+  .header-actions { gap: 0; }
+  nav a { margin: 0 7px; }
+  .filter-panel { padding: 16px; }
+  .filter-panel-heading h2 { font-size: 21px; }
+  .catalogue-heading h2 { font-size: 25px; }
 
   .hero {
 
@@ -558,19 +609,17 @@ footer {
 <body>
 
 <header>
-
   <div class="logo">🍄 MYCONATURE</div>
-
-  <nav>
-
-    <a href="#accueil">Accueil</a>
-
-    <a href="#catalogue">Catalogue</a>
-
-    <a href="#apropos">À propos</a>
-
-  </nav>
-
+  <div class="header-actions">
+    <nav>
+      <a href="#accueil">Accueil</a>
+      <a href="#catalogue">Catalogue</a>
+      <a href="#apropos">À propos</a>
+    </nav>
+    <button class="menu-toggle" id="filterToggle" type="button" aria-label="Ouvrir les filtres" aria-expanded="false" aria-controls="filterPanel" onclick="toggleFilters()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
 
 <section class="hero" id="accueil">
@@ -610,7 +659,11 @@ footer {
 </section>
 
 <main class="catalogue" id="catalogue">
-
+  <section class="filter-panel" id="filterPanel" aria-label="Filtres et recherche">
+    <div class="filter-panel-heading">
+      <h2>Personnaliser le catalogue</h2>
+      <button type="button" class="filter-close" onclick="toggleFilters(false)">Fermer ×</button>
+    </div>
   <div class="controls">
 
     <input
@@ -670,6 +723,11 @@ footer {
   </div>
 
   <p class="price-note">Prix indicatifs au kilo : cotations de gros et relevés de marché, variables selon l'origine, la saison et la qualité. Les espèces non cotées ne disposent pas d'un prix fiable dans les relevés consultés. Repères consultés le 13 novembre 2026 : <a href="https://husfarm.com/fr/produit/champignon/" target="_blank" rel="noopener">cotations des marchés français</a> ; <a href="https://hallesx.com/marche" target="_blank" rel="noopener">relevés de marchés</a>. Ces prix de gros ne sont pas des prix garantis au détail.</p>
+  </section>
+  <div class="catalogue-heading">
+    <h2>Les champignons</h2>
+    <p>Explorez les espèces et ouvrez une fiche pour en savoir plus.</p>
+  </div>
   <div class="grid" id="mushroomGrid"></div>
 
 </main>
@@ -1148,6 +1206,15 @@ function displayMushrooms(list) {
 
   });
 
+}
+
+function toggleFilters(force) {
+  const panel = document.getElementById("filterPanel");
+  const button = document.getElementById("filterToggle");
+  const shouldOpen = typeof force === "boolean" ? force : !panel.classList.contains("open");
+  panel.classList.toggle("open", shouldOpen);
+  button.setAttribute("aria-expanded", String(shouldOpen));
+  button.setAttribute("aria-label", shouldOpen ? "Fermer les filtres" : "Ouvrir les filtres");
 }
 
 function filterMushrooms() {
