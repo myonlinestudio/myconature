@@ -588,6 +588,12 @@ nav a {
   font-size: 16px;
   line-height: 1.6;
 }
+.rarity-note {
+  margin: 12px 0 0;
+  color: #777;
+  font-size: .82rem;
+  line-height: 1.5;
+}
 .species-facts {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -976,6 +982,7 @@ const mushrooms = [
     name: "Amanite tue-mouches",
 
     latin: "Amanita muscaria",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1006,6 +1013,7 @@ const mushrooms = [
     name: "Cèpe de Bordeaux",
 
     latin: "Boletus edulis",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Boletacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1036,6 +1044,7 @@ const mushrooms = [
     name: "Girolle",
 
     latin: "Cantharellus cibarius",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Cantharellacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1066,6 +1075,7 @@ const mushrooms = [
     name: "Morille comestible",
 
     latin: "Morchella esculenta",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Morchellacées",
     habitatType: "Forêt de feuillus / lisière",
     seasonGroup: "Printemps",
@@ -1095,6 +1105,7 @@ const mushrooms = [
 {
   "name": "Pied-de-mouton",
   "latin": "Hydnum repandum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Hydnacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1118,6 +1129,7 @@ const mushrooms = [
 {
   "name": "Coulemelle",
   "latin": "Macrolepiota procera",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Prairie / lisière",
     seasonGroup: "Été–automne",
@@ -1142,6 +1154,7 @@ const mushrooms = [
 {
   "name": "Coprin chevelu",
   "latin": "Coprinus comatus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
     seasonGroup: "Printemps–automne",
@@ -1165,6 +1178,7 @@ const mushrooms = [
 {
   "name": "Trompette-de-la-mort",
   "latin": "Craterellus cornucopioides",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Cantharellacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Automne",
@@ -1188,6 +1202,7 @@ const mushrooms = [
 {
   "name": "Amanite phalloïde",
   "latin": "Amanita phalloides",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Amanitacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Fin été–automne",
@@ -1211,6 +1226,7 @@ const mushrooms = [
 {
   "name": "Rosé-des-prés",
   "latin": "Agaricus campestris",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
     seasonGroup: "Printemps–automne",
@@ -1235,6 +1251,7 @@ const mushrooms = [
 {
   "name": "Lactaire délicieux",
   "latin": "Lactarius deliciosus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Russulacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Fin été–automne",
@@ -1259,6 +1276,7 @@ const mushrooms = [
 {
   "name": "Bolet Satan",
   "latin": "Rubroboletus satanas",
+    rarity: "Espèce parapluie régionale",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–début automne",
@@ -1282,6 +1300,7 @@ const mushrooms = [
 {
   "name": "Russule verdoyante",
   "latin": "Russula virescens",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -1305,6 +1324,7 @@ const mushrooms = [
 {
   "name": "Fausse girolle",
   "latin": "Hygrophoropsis aurantiaca",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Hygrophoropsidacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Fin été–automne",
@@ -1328,6 +1348,7 @@ const mushrooms = [
   {
     name: "Agaric élevé",
     latin: "Agaricus augustus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -1347,6 +1368,7 @@ const mushrooms = [
   {
     name: "Agaric des jachères",
     latin: "Agaricus arvensis",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Prairie / lisière",
     seasonGroup: "Été–automne",
@@ -1366,6 +1388,7 @@ const mushrooms = [
   {
     name: "Agaric des bois",
     latin: "Agaricus sylvicola",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -1385,6 +1408,7 @@ const mushrooms = [
   {
     name: "Agaric jaunissant",
     latin: "Agaricus xanthodermus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Prairie / lisière",
     seasonGroup: "Été–automne",
@@ -1404,6 +1428,7 @@ const mushrooms = [
   {
     name: "Champignon de Paris",
     latin: "Agaricus bisporus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
     seasonGroup: "Printemps–automne",
@@ -1423,6 +1448,7 @@ const mushrooms = [
   {
     name: "Amanite rougissante",
     latin: "Amanita rubescens",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1442,6 +1468,7 @@ const mushrooms = [
   {
     name: "Amanite citrine",
     latin: "Amanita citrina",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1461,6 +1488,7 @@ const mushrooms = [
   {
     name: "Amanite panthère",
     latin: "Amanita pantherina",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1480,6 +1508,7 @@ const mushrooms = [
   {
     name: "Amanite vaginée",
     latin: "Amanita vaginata",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1499,6 +1528,7 @@ const mushrooms = [
   {
     name: "Amanite printanière",
     latin: "Amanita verna",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Amanitacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Printemps",
@@ -1518,6 +1548,7 @@ const mushrooms = [
   {
     name: "Amanite vireuse",
     latin: "Amanita virosa",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1537,6 +1568,7 @@ const mushrooms = [
   {
     name: "Oronge",
     latin: "Amanita caesarea",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Amanitacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -1556,6 +1588,7 @@ const mushrooms = [
   {
     name: "Amanite ovoïde",
     latin: "Amanita ovoidea",
+    rarity: "Espèce parapluie régionale",
     family: "Amanitacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -1575,6 +1608,7 @@ const mushrooms = [
   {
     name: "Cèpe bronzé",
     latin: "Boletus aereus",
+    rarity: "Espèce parapluie régionale",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -1594,6 +1628,7 @@ const mushrooms = [
   {
     name: "Cèpe d’été",
     latin: "Boletus reticulatus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -1613,6 +1648,7 @@ const mushrooms = [
   {
     name: "Cèpe des pins",
     latin: "Boletus pinophilus",
+    rarity: "Espèce déterminante régionale",
     family: "Boletacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Été–automne",
@@ -1632,6 +1668,7 @@ const mushrooms = [
   {
     name: "Bolet bai",
     latin: "Imleria badia",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Boletacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1651,6 +1688,7 @@ const mushrooms = [
   {
     name: "Bolet à pied rouge",
     latin: "Neoboletus luridiformis",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Boletacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1670,6 +1708,7 @@ const mushrooms = [
   {
     name: "Bolet blafard",
     latin: "Suillellus luridus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -1689,6 +1728,7 @@ const mushrooms = [
   {
     name: "Bolet à beau pied",
     latin: "Caloboletus calopus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Boletacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1708,6 +1748,7 @@ const mushrooms = [
   {
     name: "Bolet radicant",
     latin: "Caloboletus radicans",
+    rarity: "Espèce déterminante régionale",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -1727,6 +1768,7 @@ const mushrooms = [
   {
     name: "Bolet appendiculé",
     latin: "Butyriboletus appendiculatus",
+    rarity: "Espèce déterminante régionale",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -1746,6 +1788,7 @@ const mushrooms = [
   {
     name: "Bolet jaune",
     latin: "Suillus luteus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Suillacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Été–automne",
@@ -1765,6 +1808,7 @@ const mushrooms = [
   {
     name: "Bolet granulé",
     latin: "Suillus granulatus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Suillacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Été–automne",
@@ -1784,6 +1828,7 @@ const mushrooms = [
   {
     name: "Bolet élégant",
     latin: "Suillus grevillei",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Suillacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Été–automne",
@@ -1803,6 +1848,7 @@ const mushrooms = [
   {
     name: "Bolet rude",
     latin: "Leccinum scabrum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -1822,6 +1868,7 @@ const mushrooms = [
   {
     name: "Bolet orangé",
     latin: "Leccinum versipelle",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Boletacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1841,6 +1888,7 @@ const mushrooms = [
   {
     name: "Bolet roux",
     latin: "Leccinum aurantiacum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Boletacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1860,6 +1908,7 @@ const mushrooms = [
   {
     name: "Bolet sous-tomenteux",
     latin: "Xerocomus subtomentosus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Boletacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1879,6 +1928,7 @@ const mushrooms = [
   {
     name: "Laccaire laqué",
     latin: "Laccaria laccata",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Hydnangiacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1898,6 +1948,7 @@ const mushrooms = [
   {
     name: "Laccaire améthyste",
     latin: "Laccaria amethystina",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Hydnangiacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1917,6 +1968,7 @@ const mushrooms = [
   {
     name: "Pied-bleu",
     latin: "Lepista nuda",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Tricholomatacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Automne",
@@ -1936,6 +1988,7 @@ const mushrooms = [
   {
     name: "Clitocybe inversé",
     latin: "Paralepista flaccida",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Tricholomatacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -1955,6 +2008,7 @@ const mushrooms = [
   {
     name: "Clitocybe nébuleux",
     latin: "Clitocybe nebularis",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Tricholomatacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Automne",
@@ -1974,6 +2028,7 @@ const mushrooms = [
   {
     name: "Clitocybe blanchi",
     latin: "Clitocybe rivulosa",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Tricholomatacées",
     habitatType: "Prairie / pelouse",
     seasonGroup: "Été–automne",
@@ -1993,6 +2048,7 @@ const mushrooms = [
   {
     name: "Marasme des Oréades",
     latin: "Marasmius oreades",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Marasmiacées",
     habitatType: "Prairie / pelouse",
     seasonGroup: "Printemps–automne",
@@ -2012,6 +2068,7 @@ const mushrooms = [
   {
     name: "Pleurote en huître",
     latin: "Pleurotus ostreatus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Pleurotacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Automne",
@@ -2031,6 +2088,7 @@ const mushrooms = [
   {
     name: "Pleurote du panicaut",
     latin: "Pleurotus eryngii",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Pleurotacées",
     habitatType: "Prairie / lisière",
     seasonGroup: "Été–automne",
@@ -2050,6 +2108,7 @@ const mushrooms = [
   {
     name: "Armillaire couleur de miel",
     latin: "Armillaria mellea",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Physalacriacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Automne",
@@ -2069,6 +2128,7 @@ const mushrooms = [
   {
     name: "Hypholome en touffes",
     latin: "Hypholoma fasciculare",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Strophariacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Printemps–automne",
@@ -2088,6 +2148,7 @@ const mushrooms = [
   {
     name: "Hypholome couleur de brique",
     latin: "Hypholoma lateritium",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Strophariacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Automne",
@@ -2107,6 +2168,7 @@ const mushrooms = [
   {
     name: "Pholiote changeante",
     latin: "Kuehneromyces mutabilis",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Strophariacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Printemps–automne",
@@ -2126,6 +2188,7 @@ const mushrooms = [
   {
     name: "Collybie à pied velouté",
     latin: "Flammulina velutipes",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Physalacriacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Automne",
@@ -2145,6 +2208,7 @@ const mushrooms = [
   {
     name: "Pholiote écailleuse",
     latin: "Pholiota squarrosa",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Strophariacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Automne",
@@ -2164,6 +2228,7 @@ const mushrooms = [
   {
     name: "Coprin micacé",
     latin: "Coprinellus micaceus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Psathyrellacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Printemps–automne",
@@ -2183,6 +2248,7 @@ const mushrooms = [
   {
     name: "Mycène en casque",
     latin: "Mycena galericulata",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Mycénacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Printemps–automne",
@@ -2202,6 +2268,7 @@ const mushrooms = [
   {
     name: "Mycène à lait rouge",
     latin: "Mycena haematopus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Mycénacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Printemps–automne",
@@ -2221,6 +2288,7 @@ const mushrooms = [
   {
     name: "Tricholome terreux",
     latin: "Tricholoma terreum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Tricholomatacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Automne",
@@ -2240,6 +2308,7 @@ const mushrooms = [
   {
     name: "Tricholome prétentieux",
     latin: "Tricholoma portentosum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Tricholomatacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Automne",
@@ -2259,6 +2328,7 @@ const mushrooms = [
   {
     name: "Tricholome équestre",
     latin: "Tricholoma equestre",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Tricholomatacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Automne",
@@ -2278,6 +2348,7 @@ const mushrooms = [
   {
     name: "Tricholome soufré",
     latin: "Tricholoma sulphureum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Tricholomatacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2297,6 +2368,7 @@ const mushrooms = [
   {
     name: "Cortinaire couleur de rocou",
     latin: "Cortinarius caperatus",
+    rarity: "Espèce déterminante régionale",
     family: "Cortinariacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2316,6 +2388,7 @@ const mushrooms = [
   {
     name: "Cortinaire couleur de rocou mortel",
     latin: "Cortinarius orellanus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Cortinariacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2335,6 +2408,7 @@ const mushrooms = [
   {
     name: "Cortinaire violet",
     latin: "Cortinarius violaceus",
+    rarity: "Espèce parapluie régionale",
     family: "Cortinariacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2354,6 +2428,7 @@ const mushrooms = [
   {
     name: "Russule charbonnière",
     latin: "Russula cyanoxantha",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Russulacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2373,6 +2448,7 @@ const mushrooms = [
   {
     name: "Russule émétique",
     latin: "Russula emetica",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Russulacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Été–automne",
@@ -2392,6 +2468,7 @@ const mushrooms = [
   {
     name: "Russule comestible",
     latin: "Russula vesca",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2411,6 +2488,7 @@ const mushrooms = [
   {
     name: "Russule ocre et blanc",
     latin: "Russula ochroleuca",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Russulacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2430,6 +2508,7 @@ const mushrooms = [
   {
     name: "Russule intègre",
     latin: "Russula integra",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Russulacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Été–automne",
@@ -2449,6 +2528,7 @@ const mushrooms = [
   {
     name: "Lactaire à toison",
     latin: "Lactarius torminosus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2468,6 +2548,7 @@ const mushrooms = [
   {
     name: "Lactaire délicieux des sapins",
     latin: "Lactarius deterrimus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Russulacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Été–automne",
@@ -2487,6 +2568,7 @@ const mushrooms = [
   {
     name: "Lactaire tranquille",
     latin: "Lactarius quietus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2506,6 +2588,7 @@ const mushrooms = [
   {
     name: "Lactaire velouté",
     latin: "Lactifluus vellereus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2525,6 +2608,7 @@ const mushrooms = [
   {
     name: "Hydne roussissant",
     latin: "Hydnum rufescens",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Hydnacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2544,6 +2628,7 @@ const mushrooms = [
   {
     name: "Chanterelle en tube",
     latin: "Craterellus tubaeformis",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Cantharellacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Automne",
@@ -2563,6 +2648,7 @@ const mushrooms = [
   {
     name: "Sparassis crépu",
     latin: "Sparassis crispa",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Sparassidacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Été–automne",
@@ -2582,6 +2668,7 @@ const mushrooms = [
   {
     name: "Hydne hérisson",
     latin: "Hericium erinaceus",
+    rarity: "Espèce parapluie régionale",
     family: "Hericiacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Automne",
@@ -2601,6 +2688,7 @@ const mushrooms = [
   {
     name: "Langue-de-bœuf",
     latin: "Fistulina hepatica",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Fistulinacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2620,6 +2708,7 @@ const mushrooms = [
   {
     name: "Polypore soufré",
     latin: "Laetiporus sulphureus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Laetiporacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2639,6 +2728,7 @@ const mushrooms = [
   {
     name: "Ganoderme luisant",
     latin: "Ganoderma lucidum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Ganodermatacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2658,6 +2748,7 @@ const mushrooms = [
   {
     name: "Oreille-de-Judas",
     latin: "Auricularia auricula-judae",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Auriculariacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Automne",
@@ -2677,6 +2768,7 @@ const mushrooms = [
   {
     name: "Trémelle mésentérique",
     latin: "Tremella mesenterica",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Trémellacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Printemps–automne",
@@ -2696,6 +2788,7 @@ const mushrooms = [
   {
     name: "Vesse-de-loup perlée",
     latin: "Lycoperdon perlatum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2715,6 +2808,7 @@ const mushrooms = [
   {
     name: "Vesse-de-loup en poire",
     latin: "Lycoperdon pyriforme",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2734,6 +2828,7 @@ const mushrooms = [
   {
     name: "Vesse-de-loup géante",
     latin: "Calvatia gigantea",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
     seasonGroup: "Été–automne",
@@ -2753,6 +2848,7 @@ const mushrooms = [
   {
     name: "Scléroderme commun",
     latin: "Scleroderma citrinum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Sclérodermatacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2772,6 +2868,7 @@ const mushrooms = [
   {
     name: "Géastre à trois enveloppes",
     latin: "Geastrum triplex",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Géastracées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2791,6 +2888,7 @@ const mushrooms = [
   {
     name: "Clavaire coralloïde",
     latin: "Clavulina coralloides",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Clavulinacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2810,6 +2908,7 @@ const mushrooms = [
   {
     name: "Clavaire jaune",
     latin: "Ramaria flava",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Gomphacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2829,6 +2928,7 @@ const mushrooms = [
   {
     name: "Truffe noire du Périgord",
     latin: "Tuber melanosporum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Tuberacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Automne",
@@ -2848,6 +2948,7 @@ const mushrooms = [
   {
     name: "Truffe d’été",
     latin: "Tuber aestivum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Tuberacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2867,6 +2968,7 @@ const mushrooms = [
   {
     name: "Pézize vésiculeuse",
     latin: "Peziza vesiculosa",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Pézizacées",
     habitatType: "Prairie / pelouse",
     seasonGroup: "Printemps–automne",
@@ -2886,6 +2988,7 @@ const mushrooms = [
   {
     name: "Helvelle crépue",
     latin: "Helvella crispa",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Helvellacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2905,6 +3008,7 @@ const mushrooms = [
   {
     name: "Helvelle lacuneuse",
     latin: "Helvella lacunosa",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Helvellacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -2924,6 +3028,7 @@ const mushrooms = [
   {
     name: "Verpe de Bohême",
     latin: "Verpa bohemica",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Morchellacées",
     habitatType: "Forêt de feuillus / lisière",
     seasonGroup: "Printemps",
@@ -2943,6 +3048,7 @@ const mushrooms = [
   {
     name: "Gyromitre",
     latin: "Gyromitra esculenta",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Discinacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Printemps",
@@ -2962,6 +3068,7 @@ const mushrooms = [
   {
     name: "Amanite phalloïde",
     latin: "Amanita phalloides",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Amanitacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -2981,6 +3088,7 @@ const mushrooms = [
   {
     name: "Bolet Satan",
     latin: "Rubroboletus satanas",
+    rarity: "Espèce parapluie régionale",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -3002,6 +3110,7 @@ const mushrooms = [
   {
     name: "Trompette de la mort",
     latin: "Craterellus cornucopioides",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Cantharellacées",
     habitatType: "Forêt de feuillus",
     seasonGroup: "Été–automne",
@@ -3021,6 +3130,7 @@ const mushrooms = [
   {
     name: "Pied-de-mouton",
     latin: "Hydnum repandum",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Hydnacées",
     habitatType: "Forêt mixte",
     seasonGroup: "Été–automne",
@@ -3040,6 +3150,7 @@ const mushrooms = [
   {
     name: "Coulemelle",
     latin: "Macrolepiota procera",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Prairie / lisière",
     seasonGroup: "Été–automne",
@@ -3059,6 +3170,7 @@ const mushrooms = [
   {
     name: "Coprin chevelu",
     latin: "Coprinus comatus",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
     seasonGroup: "Printemps–automne",
@@ -3078,6 +3190,7 @@ const mushrooms = [
   {
     name: "Rosé-des-prés",
     latin: "Agaricus campestris",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
     seasonGroup: "Printemps–automne",
@@ -3097,6 +3210,7 @@ const mushrooms = [
   {
     name: "Fausse girolle",
     latin: "Hygrophoropsis aurantiaca",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Hygrophoropsidacées",
     habitatType: "Forêt de conifères",
     seasonGroup: "Été–automne",
@@ -3116,6 +3230,7 @@ const mushrooms = [
   {
     name: "Morillon",
     latin: "Morchella semilibera",
+    rarity: "Non inscrite sur la liste régionale des espèces déterminantes consultée",
     family: "Morchellacées",
     habitatType: "Forêt de feuillus / lisière",
     seasonGroup: "Printemps",
@@ -3284,8 +3399,10 @@ function showDetails(mushroom) {
       <div class="detail-item"><span>Famille</span><strong>${mushroom.family}</strong></div>
       <div class="detail-item"><span>Milieu</span><strong>${mushroom.habitatType}</strong></div>
       <div class="detail-item"><span>Saison</span><strong>${mushroom.season}</strong></div>
+      <div class="detail-item"><span>Rareté / statut régional</span><strong>${mushroom.rarity}</strong></div>
       ${price}
     </div>
+    <p class="rarity-note">Cette indication reprend la liste des espèces déterminantes du Nord et du Pas-de-Calais. « Non inscrite » ne signifie pas que l’espèce est commune ou sans enjeu : cela indique uniquement qu’elle ne figure pas dans cette liste.</p>
 
     <section class="species-section">
       <h3>Où le trouver ?</h3>
