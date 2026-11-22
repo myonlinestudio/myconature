@@ -62,6 +62,49 @@ header {
   align-items: center;
   gap: 22px;
 }
+.quick-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.quick-search-toggle {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 50%;
+  color: white;
+  background: transparent;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+.quick-search-toggle:hover,
+.quick-search-toggle:focus-visible {
+  background: rgba(255,255,255,.12);
+  border-color: white;
+}
+.quick-search-toggle svg { width: 21px; height: 21px; }
+.quick-search-input {
+  width: 0;
+  min-width: 0;
+  opacity: 0;
+  padding: 11px 0;
+  border: 0;
+  border-radius: 5px;
+  outline: none;
+  transition: width .22s ease, opacity .18s ease, padding .22s ease;
+}
+.quick-search.is-open .quick-search-input {
+  width: 210px;
+  opacity: 1;
+  padding: 11px 12px;
+}
+@media(max-width:600px) {
+  .quick-search.is-open .quick-search-input { width: min(42vw, 170px); }
+  .quick-search-toggle { width: 42px; height: 42px; }
+}
 .menu-toggle {
   width: 60px;
   height: 60px;
@@ -765,7 +808,20 @@ footer {
       <a href="#catalogue">Catalogue</a>
       <a href="#apropos">À propos</a>
     </nav>
-    
+    <div class="quick-search" id="quickSearch">
+      <input class="quick-search-input" id="quickSearchInput" type="search"
+        placeholder="Rechercher une espèce..." aria-label="Rechercher une espèce"
+        oninput="quickSearchSpecies()" onkeydown="if(event.key==='Enter'){document.getElementById('catalogue').scrollIntoView({behavior:'smooth'});}"
+      >
+      <button class="quick-search-toggle" type="button" aria-label="Ouvrir la recherche"
+        aria-expanded="false" onclick="toggleQuickSearch()" title="Rechercher une espèce">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="10.8" cy="10.8" r="6.8"></circle>
+          <path d="m16 16 5 5"></path>
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -3271,6 +3327,27 @@ function displayMushrooms(list) {
 
   });
 
+}
+
+function toggleQuickSearch() {
+  const container = document.getElementById("quickSearch");
+  const input = document.getElementById("quickSearchInput");
+  const button = container.querySelector("button");
+  const isOpen = container.classList.toggle("is-open");
+  button.setAttribute("aria-expanded", String(isOpen));
+  button.setAttribute("aria-label", isOpen ? "Fermer la recherche" : "Ouvrir la recherche");
+  if (isOpen) input.focus();
+  else {
+    input.value = "";
+    document.getElementById("search").value = "";
+    filterMushrooms();
+  }
+}
+
+function quickSearchSpecies() {
+  const query = document.getElementById("quickSearchInput").value;
+  document.getElementById("search").value = query;
+  filterMushrooms();
 }
 
 function filterMushrooms() {
