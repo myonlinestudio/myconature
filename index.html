@@ -608,23 +608,7 @@ nav a {
   text-transform: uppercase;
   letter-spacing: .06em;
 }
-.rarity-item strong {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-}
-.rarity-stars {
-  color: #bd8a35;
-  font-size: 19px;
-  letter-spacing: 3px;
-  line-height: 1.1;
-}
-.rarity-word {
-  color: #293b2d;
-  font-size: 13px;
-  font-weight: 600;
-}
+
 .detail-item strong {
   display: block;
   color: #293b2d;
@@ -898,10 +882,6 @@ footer {
       <option>Forêt mixte</option><option>Forêt de feuillus</option><option>Forêt de conifères</option>
       <option>Forêt de feuillus / lisière</option><option>Prairie / lisière</option><option>Prairie / pelouse</option>
     </select>
-    <select id="rarityFilter" onchange="filterMushrooms()" aria-label="Filtrer par fréquence">
-      <option value="all">Fréquence régionale</option>
-      <option>Non évaluée</option>
-    </select>
     <select id="seasonFilter" onchange="filterMushrooms()" aria-label="Filtrer par saison">
       <option value="all">Toutes les saisons</option>
       <option>Printemps</option><option>Été–automne</option><option>Automne</option><option>Fin été–automne</option>
@@ -978,9 +958,11 @@ footer {
       <a href="https://fongiref.fongifrance.fr/" target="_blank" rel="noopener">FongiRef</a> ·
       <a href="https://fongibase.fongifrance.fr/" target="_blank" rel="noopener">FongiBase</a> ·
       <a href="https://fongidoc.fongifrance.fr/" target="_blank" rel="noopener">FongiDoc</a> ·
-      <a href="https://hdf.fongifrance.fr/" target="_blank" rel="noopener">Atlas mycologique des Hauts-de-France</a>
+      <a href="https://hdf.fongifrance.fr/" target="_blank" rel="noopener">Atlas mycologique des Hauts-de-France</a> ·
+      <a href="https://www.anses.fr/fr/actualite/cueillette-consommation-champignons-attention-aux-risques-dintoxications" target="_blank" rel="noopener">Anses – Sécurité des cueillettes</a>
     </p>
-    <p>Les périodes de fructification et les indications de fréquence sont données à titre indicatif : elles peuvent varier selon les régions, les habitats et les conditions météorologiques. Les niveaux de rareté du catalogue ne constituent pas des statuts officiels de conservation.</p>
+    <p>Les périodes de fructification sont indicatives et peuvent varier selon les conditions météorologiques et les milieux. Ce catalogue est un support documentaire : il ne permet pas d’identifier avec certitude un champignon ni de garantir sa comestibilité. Ne consommez jamais une récolte sur la seule base d’une fiche ou d’une photographie ; faites-la contrôler par un pharmacien ou une association mycologique.</p>
+    <p><a href="https://www.anses.fr/fr/actualite/cueillette-consommation-champignons-attention-aux-risques-dintoxications" target="_blank" rel="noopener">Conseils de sécurité de l’Anses</a></p>
   </div>
 
 </footer>
@@ -996,7 +978,6 @@ const mushrooms = [
     latin: "Amanita muscaria",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1016,7 +997,7 @@ const mushrooms = [
 
     season: "Fin de l'été et automne",
 
-    details: "L'Amanite tue-mouches appartient à la famille des Amanitacées. Son apparence très caractéristique en fait l'un des champignons les plus connus."
+    details: "Espèce toxique contenant notamment de l’acide iboténique et du muscimol. Elle peut provoquer des troubles digestifs et neurologiques. Ne pas consommer."
 
   },
 
@@ -1027,7 +1008,6 @@ const mushrooms = [
     latin: "Boletus edulis",
     family: "Boletacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: 20,
     priceMax: 38,
@@ -1058,7 +1038,6 @@ const mushrooms = [
     latin: "Cantharellus cibarius",
     family: "Cantharellacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: 15,
     priceMax: 30,
@@ -1078,7 +1057,7 @@ const mushrooms = [
 
     season: "Été et automne",
 
-    details: "La girolle est une espèce mycorhizienne qui vit en association avec les racines de certains arbres."
+    details: "Girolle mycorhizienne des bois. Des confusions avec des espèces toxiques, notamment certains clitocybes orangés, sont possibles. Ne pas consommer sans identification experte."
 
   },
 
@@ -1089,7 +1068,6 @@ const mushrooms = [
     latin: "Morchella esculenta",
     family: "Morchellacées",
     habitatType: "Forêt de feuillus / lisière",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps",
     priceMin: 40,
     priceMax: 46,
@@ -1109,7 +1087,7 @@ const mushrooms = [
 
     season: "Printemps",
 
-    details: "La morille appartient à la famille des Morchellaceae. Elle possède un chapeau formé de nombreuses alvéoles. Elle est toxique crue ou insuffisamment cuite."
+    details: "Morille toxique crue ou insuffisamment cuite. Une cuisson complète est indispensable ; l’Anses recommande de cuire les champignons cueillis au moins 20 minutes. Ne pas consommer sans identification experte."
 
   }
 ,
@@ -1119,7 +1097,6 @@ const mushrooms = [
   "latin": "Hydnum repandum",
     family: "Hydnacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: 15,
     priceMax: 22,
@@ -1143,7 +1120,6 @@ const mushrooms = [
   "latin": "Macrolepiota procera",
     family: "Agaricacées",
     habitatType: "Prairie / lisière",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1168,7 +1144,6 @@ const mushrooms = [
   "latin": "Coprinus comatus",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -1192,7 +1167,6 @@ const mushrooms = [
   "latin": "Craterellus cornucopioides",
     family: "Cantharellacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: 16,
     priceMax: 25,
@@ -1216,7 +1190,6 @@ const mushrooms = [
   "latin": "Amanita phalloides",
     family: "Amanitacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Fin été–automne",
     priceMin: null,
     priceMax: null,
@@ -1240,7 +1213,6 @@ const mushrooms = [
   "latin": "Agaricus campestris",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -1265,7 +1237,6 @@ const mushrooms = [
   "latin": "Lactarius deliciosus",
     family: "Russulacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Fin été–automne",
     priceMin: null,
     priceMax: null,
@@ -1290,7 +1261,6 @@ const mushrooms = [
   "latin": "Rubroboletus satanas",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–début automne",
     priceMin: null,
     priceMax: null,
@@ -1314,7 +1284,6 @@ const mushrooms = [
   "latin": "Russula virescens",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1338,7 +1307,6 @@ const mushrooms = [
   "latin": "Hygrophoropsis aurantiaca",
     family: "Hygrophoropsidacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Fin été–automne",
     priceMin: null,
     priceMax: null,
@@ -1362,7 +1330,6 @@ const mushrooms = [
     latin: "Agaricus augustus",
     family: "Agaricacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1382,7 +1349,6 @@ const mushrooms = [
     latin: "Agaricus arvensis",
     family: "Agaricacées",
     habitatType: "Prairie / lisière",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1394,7 +1360,7 @@ const mushrooms = [
     description: "Agaric pâle des prairies, à chapeau blanc crème et anneau ample.",
     habitat: "Prairies, pâtures et espaces herbeux, parfois en lisière.",
     season: "Été et automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Agaric des prairies. Il peut être confondu avec l’Agaric jaunissant, toxique. Une identification experte est indispensable ; ne pas consommer sur la base de cette fiche."
   },
 
   {
@@ -1402,7 +1368,6 @@ const mushrooms = [
     latin: "Agaricus sylvicola",
     family: "Agaricacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1414,7 +1379,7 @@ const mushrooms = [
     description: "Agaric forestier clair, souvent élancé, aux lamelles rosées puis brun chocolat.",
     habitat: "Bois de feuillus et forêts mixtes.",
     season: "Été et automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Agaric forestier pouvant être confondu avec des agarics jaunissants toxiques et d’autres espèces dangereuses. Ne pas consommer sans identification experte."
   },
 
   {
@@ -1422,7 +1387,6 @@ const mushrooms = [
     latin: "Agaricus xanthodermus",
     family: "Agaricacées",
     habitatType: "Prairie / lisière",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1442,7 +1406,6 @@ const mushrooms = [
     latin: "Agaricus bisporus",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -1462,7 +1425,6 @@ const mushrooms = [
     latin: "Amanita rubescens",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1474,7 +1436,7 @@ const mushrooms = [
     description: "Amanite dont la chair et les blessures prennent des teintes rosées à rougeâtres.",
     habitat: "Forêts de feuillus et de conifères, en association avec les arbres.",
     season: "Été et automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Espèce consommée uniquement après cuisson complète dans les usages mycologiques. Elle est toxique crue et peut être confondue avec l’Amanite panthère, toxique. Ne pas consommer sans identification experte."
   },
 
   {
@@ -1482,7 +1444,6 @@ const mushrooms = [
     latin: "Amanita citrina",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1502,7 +1463,6 @@ const mushrooms = [
     latin: "Amanita pantherina",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1522,7 +1482,6 @@ const mushrooms = [
     latin: "Amanita vaginata",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1534,7 +1493,7 @@ const mushrooms = [
     description: "Amanite élancée, souvent grisâtre, dépourvue d’anneau et munie d’une volve en sac.",
     habitat: "Bois, clairières et lisières.",
     season: "Été et automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "L’absence d’anneau et la présence d’une volve en sac sont des caractères importants, mais l’identification des amanites est délicate. Des confusions avec des amanites mortelles sont possibles. Ne pas consommer sur la base de cette fiche."
   },
 
   {
@@ -1542,7 +1501,6 @@ const mushrooms = [
     latin: "Amanita verna",
     family: "Amanitacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps",
     priceMin: null,
     priceMax: null,
@@ -1562,7 +1520,6 @@ const mushrooms = [
     latin: "Amanita virosa",
     family: "Amanitacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1582,7 +1539,6 @@ const mushrooms = [
     latin: "Amanita caesarea",
     family: "Amanitacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1602,7 +1558,6 @@ const mushrooms = [
     latin: "Amanita ovoidea",
     family: "Amanitacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1614,7 +1569,7 @@ const mushrooms = [
     description: "Grande amanite blanche, massive, avec des restes de voile floconneux.",
     habitat: "Bois thermophiles sur sols calcaires, surtout dans le sud.",
     season: "Été et automne",
-    details: "Des intoxications graves ont été rapportées et son statut est considéré comme toxique dans plusieurs références. Ne pas consommer. Espèce surtout méridionale ; sa présence dans les Hauts-de-France n’est pas établie ici."
+    details: "Des intoxications ont été rapportées. Par prudence, ne pas consommer. Espèce thermophile surtout connue dans les régions méridionales."
   },
 
   {
@@ -1622,7 +1577,6 @@ const mushrooms = [
     latin: "Boletus aereus",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1642,7 +1596,6 @@ const mushrooms = [
     latin: "Boletus reticulatus",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1662,7 +1615,6 @@ const mushrooms = [
     latin: "Boletus pinophilus",
     family: "Boletacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1682,7 +1634,6 @@ const mushrooms = [
     latin: "Imleria badia",
     family: "Boletacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1702,7 +1653,6 @@ const mushrooms = [
     latin: "Neoboletus luridiformis",
     family: "Boletacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1714,7 +1664,7 @@ const mushrooms = [
     description: "Bolet au chapeau brun et au pied ponctué de rouge, dont la chair bleuit fortement.",
     habitat: "Bois de feuillus et de conifères.",
     season: "Été et automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Toxique cru. Les usages mycologiques ne le considèrent consommable qu’après cuisson suffisante, mais l’identification et la préparation sont délicates. Ne pas consommer sur la base de cette fiche."
   },
 
   {
@@ -1722,7 +1672,6 @@ const mushrooms = [
     latin: "Suillellus luridus",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1742,7 +1691,6 @@ const mushrooms = [
     latin: "Caloboletus calopus",
     family: "Boletacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1762,7 +1710,6 @@ const mushrooms = [
     latin: "Caloboletus radicans",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1782,7 +1729,6 @@ const mushrooms = [
     latin: "Butyriboletus appendiculatus",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1802,7 +1748,6 @@ const mushrooms = [
     latin: "Suillus luteus",
     family: "Suillacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1822,19 +1767,18 @@ const mushrooms = [
     latin: "Suillus granulatus",
     family: "Suillacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
     priceLabel: "Non cotée",
-    category: "comestible",
-    tag: "Réputé comestible — identification à confirmer",
+    category: "autre",
+    tag: "À éviter — troubles digestifs rapportés",
     image: "https://commons.wikimedia.org/wiki/Special:FilePath/Suillus_granulatus.jpg",
     source: "https://www.inaturalist.org/search?q=Suillus%20granulatus",
     description: "Petit bolet à chapeau brun orangé et pores qui exsudent parfois des gouttelettes laiteuses.",
     habitat: "Sous les pins, surtout dans les bois clairs.",
     season: "Été et automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Des troubles digestifs et des cas d’intoxication ont été rapportés après consommation. Par prudence, ne pas consommer."
   },
 
   {
@@ -1842,7 +1786,6 @@ const mushrooms = [
     latin: "Suillus grevillei",
     family: "Suillacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1862,7 +1805,6 @@ const mushrooms = [
     latin: "Leccinum scabrum",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1882,7 +1824,6 @@ const mushrooms = [
     latin: "Leccinum versipelle",
     family: "Boletacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1902,7 +1843,6 @@ const mushrooms = [
     latin: "Leccinum aurantiacum",
     family: "Boletacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1918,11 +1858,10 @@ const mushrooms = [
   },
 
   {
-    name: "Bolet subtomenteux",
+    name: "Bolet sous-tomenteux",
     latin: "Xerocomus subtomentosus",
     family: "Boletacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1934,15 +1873,14 @@ const mushrooms = [
     description: "Bolet de taille moyenne à chapeau velouté, brun olivâtre et pores jaunes.",
     habitat: "Bois de feuillus et forêts mixtes.",
     season: "Été et automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Bolet velouté des bois de feuillus et des forêts mixtes. La nomenclature de cette espèce varie selon les référentiels ; le nom affiché ici est conservé comme nom d’usage du catalogue."
   },
 
   {
     name: "Laccaire laqué",
     latin: "Laccaria laccata",
-    family: "Laccariacées",
+    family: "Hydnangiacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1960,9 +1898,8 @@ const mushrooms = [
   {
     name: "Laccaire améthyste",
     latin: "Laccaria amethystina",
-    family: "Laccariacées",
+    family: "Hydnangiacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1974,7 +1911,7 @@ const mushrooms = [
     description: "Petit champignon violet à lilas, du chapeau jusqu’au pied.",
     habitat: "Forêts de feuillus et de conifères, souvent dans la mousse.",
     season: "Été et automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Petit champignon violet des bois. Comme pour les autres espèces sauvages, l’identification et les risques de contamination du milieu doivent être pris en compte. Cette fiche ne recommande pas sa consommation."
   },
 
   {
@@ -1982,7 +1919,6 @@ const mushrooms = [
     latin: "Lepista nuda",
     family: "Tricholomatacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2002,7 +1938,6 @@ const mushrooms = [
     latin: "Paralepista flaccida",
     family: "Tricholomatacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2022,7 +1957,6 @@ const mushrooms = [
     latin: "Clitocybe nebularis",
     family: "Tricholomatacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2034,7 +1968,7 @@ const mushrooms = [
     description: "Grand champignon gris à chapeau nuageux et odeur forte caractéristique.",
     habitat: "Bois de feuillus et de conifères, souvent en cercles ou en groupes.",
     season: "Automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Espèce ayant été consommée dans certaines régions, mais associée à des intoxications digestives et à des réactions d’intolérance. Par prudence, ne pas consommer."
   },
 
   {
@@ -2042,7 +1976,6 @@ const mushrooms = [
     latin: "Clitocybe rivulosa",
     family: "Tricholomatacées",
     habitatType: "Prairie / pelouse",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2054,7 +1987,7 @@ const mushrooms = [
     description: "Petit champignon blanc à crème, poussant souvent en groupes dans l’herbe.",
     habitat: "Pelouses, prairies et bords de chemins.",
     season: "Été et automne",
-    details: "Espèce toxique ou potentiellement dangereuse. Ne jamais consommer sur la base d’une photographie ou d’une description ; faire vérifier toute récolte par un spécialiste."
+    details: "Champignon toxique contenant de la muscarine. Il peut être confondu avec de petits champignons de prairie comestibles, notamment le Marasme des Oréades. Ne pas consommer."
   },
 
   {
@@ -2062,7 +1995,6 @@ const mushrooms = [
     latin: "Marasmius oreades",
     family: "Marasmiacées",
     habitatType: "Prairie / pelouse",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -2074,7 +2006,7 @@ const mushrooms = [
     description: "Petit champignon beige à chapeau mamelonné, formant souvent des ronds de sorcières.",
     habitat: "Pelouses, prairies et pâtures.",
     season: "Printemps à automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Espèce réputée comestible, mais elle peut être confondue avec des clitocybes blancs toxiques, notamment Clitocybe rivulosa. Une identification experte est indispensable ; ne pas consommer sur la base de cette fiche."
   },
 
   {
@@ -2082,7 +2014,6 @@ const mushrooms = [
     latin: "Pleurotus ostreatus",
     family: "Pleurotacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2102,7 +2033,6 @@ const mushrooms = [
     latin: "Pleurotus eryngii",
     family: "Pleurotacées",
     habitatType: "Prairie / lisière",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2122,7 +2052,6 @@ const mushrooms = [
     latin: "Armillaria mellea",
     family: "Physalacriacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2134,7 +2063,7 @@ const mushrooms = [
     description: "Champignon en touffes, à chapeau miel et anneau sur le pied.",
     habitat: "Sur souches, racines et troncs de nombreux feuillus.",
     season: "Automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Cette espèce peut provoquer des troubles digestifs et nécessite une préparation adaptée ; des intoxications sont rapportées. Par prudence, cette fiche ne recommande pas sa consommation."
   },
 
   {
@@ -2142,7 +2071,6 @@ const mushrooms = [
     latin: "Hypholoma fasciculare",
     family: "Strophariacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -2162,7 +2090,6 @@ const mushrooms = [
     latin: "Hypholoma lateritium",
     family: "Strophariacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2182,7 +2109,6 @@ const mushrooms = [
     latin: "Kuehneromyces mutabilis",
     family: "Strophariacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -2202,7 +2128,6 @@ const mushrooms = [
     latin: "Flammulina velutipes",
     family: "Physalacriacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2222,7 +2147,6 @@ const mushrooms = [
     latin: "Pholiota squarrosa",
     family: "Strophariacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2242,7 +2166,6 @@ const mushrooms = [
     latin: "Coprinellus micaceus",
     family: "Psathyrellacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -2262,7 +2185,6 @@ const mushrooms = [
     latin: "Mycena galericulata",
     family: "Mycénacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -2282,7 +2204,6 @@ const mushrooms = [
     latin: "Mycena haematopus",
     family: "Mycénacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -2302,7 +2223,6 @@ const mushrooms = [
     latin: "Tricholoma terreum",
     family: "Tricholomatacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2314,7 +2234,7 @@ const mushrooms = [
     description: "Petit tricholome gris, au chapeau fibrilleux et aux lames claires.",
     habitat: "Sous les pins et autres conifères.",
     season: "Automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "La comestibilité de cette espèce fait l’objet de discussions et de réévaluations. Par prudence, cette fiche ne recommande pas sa consommation."
   },
 
   {
@@ -2322,7 +2242,6 @@ const mushrooms = [
     latin: "Tricholoma portentosum",
     family: "Tricholomatacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2342,7 +2261,6 @@ const mushrooms = [
     latin: "Tricholoma equestre",
     family: "Tricholomatacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2354,7 +2272,7 @@ const mushrooms = [
     description: "Tricholome jaune à jaune verdâtre, souvent associé aux pins.",
     habitat: "Pinèdes sur sols sableux ou acides.",
     season: "Automne",
-    details: "Espèce associée à des cas de rhabdomyolyse après consommation répétée. Sa vente est interdite en France. Ne pas consommer. L’identification ne doit jamais reposer sur une photographie."
+    details: "Espèce associée à des cas de rhabdomyolyse après consommation. Sa vente est interdite en France par le décret n° 2005-1184 du 19 septembre 2005. Ne pas consommer."
   },
 
   {
@@ -2362,7 +2280,6 @@ const mushrooms = [
     latin: "Tricholoma sulphureum",
     family: "Tricholomatacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2382,7 +2299,6 @@ const mushrooms = [
     latin: "Cortinarius caperatus",
     family: "Cortinariacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2394,7 +2310,7 @@ const mushrooms = [
     description: "Champignon ocre à chapeau ridé et anneau membraneux sur le pied.",
     habitat: "Bois clairs, landes et forêts de conifères.",
     season: "Été et automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Anciennement connu sous le nom Rozites caperatus. L’identification des cortinaires est délicate et certaines espèces du genre sont mortelles. Ne pas consommer sur la base de cette fiche."
   },
 
   {
@@ -2402,7 +2318,6 @@ const mushrooms = [
     latin: "Cortinarius orellanus",
     family: "Cortinariacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2414,7 +2329,7 @@ const mushrooms = [
     description: "Cortinaire fauve orangé, à chapeau sec et fibrilleux.",
     habitat: "Bois de feuillus, surtout sous les chênes et les hêtres.",
     season: "Été et automne",
-    details: "Espèce toxique ou potentiellement dangereuse. Ne jamais consommer sur la base d’une photographie ou d’une description ; faire vérifier toute récolte par un spécialiste."
+    details: "Champignon mortel contenant des orellanines, responsables d’atteintes rénales graves pouvant apparaître après un délai prolongé. Ne jamais consommer."
   },
 
   {
@@ -2422,7 +2337,6 @@ const mushrooms = [
     latin: "Cortinarius violaceus",
     family: "Cortinariacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2434,7 +2348,7 @@ const mushrooms = [
     description: "Grand cortinaire entièrement violet sombre, au chapeau velouté.",
     habitat: "Forêts de feuillus et de conifères.",
     season: "Été et automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Cortinaire violet. L’identification des espèces du genre Cortinarius est délicate et plusieurs espèces sont toxiques ou mortelles. Ne pas consommer sur la base de cette fiche."
   },
 
   {
@@ -2442,7 +2356,6 @@ const mushrooms = [
     latin: "Russula cyanoxantha",
     family: "Russulacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2462,7 +2375,6 @@ const mushrooms = [
     latin: "Russula emetica",
     family: "Russulacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2482,7 +2394,6 @@ const mushrooms = [
     latin: "Russula vesca",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2502,7 +2413,6 @@ const mushrooms = [
     latin: "Russula ochroleuca",
     family: "Russulacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2514,7 +2424,7 @@ const mushrooms = [
     description: "Russule jaune pâle à ocre, avec lames et pied blancs.",
     habitat: "Forêts de feuillus et de conifères, souvent sur sols acides.",
     season: "Été et automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Russule à saveur généralement âcre ou peu agréable, considérée sans intérêt culinaire. Ne pas consommer sur la base de cette fiche."
   },
 
   {
@@ -2522,7 +2432,6 @@ const mushrooms = [
     latin: "Russula integra",
     family: "Russulacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2542,7 +2451,6 @@ const mushrooms = [
     latin: "Lactarius torminosus",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2562,7 +2470,6 @@ const mushrooms = [
     latin: "Lactarius deterrimus",
     family: "Russulacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2582,7 +2489,6 @@ const mushrooms = [
     latin: "Lactarius quietus",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2602,7 +2508,6 @@ const mushrooms = [
     latin: "Lactifluus vellereus",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2622,7 +2527,6 @@ const mushrooms = [
     latin: "Hydnum rufescens",
     family: "Hydnacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2642,7 +2546,6 @@ const mushrooms = [
     latin: "Craterellus tubaeformis",
     family: "Cantharellacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2662,7 +2565,6 @@ const mushrooms = [
     latin: "Sparassis crispa",
     family: "Sparassidacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2682,7 +2584,6 @@ const mushrooms = [
     latin: "Hericium erinaceus",
     family: "Hericiacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2694,7 +2595,7 @@ const mushrooms = [
     description: "Champignon blanc en boule portant de longues aiguilles pendantes.",
     habitat: "Sur troncs et grosses branches de feuillus, notamment hêtres et chênes.",
     season: "Automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Espèce patrimoniale dans plusieurs régions et susceptible de faire l’objet de mesures locales de protection. Vérifier la réglementation locale avant toute cueillette ; privilégier l’observation."
   },
 
   {
@@ -2702,7 +2603,6 @@ const mushrooms = [
     latin: "Fistulina hepatica",
     family: "Fistulinacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2722,7 +2622,6 @@ const mushrooms = [
     latin: "Laetiporus sulphureus",
     family: "Laetiporacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2734,7 +2633,7 @@ const mushrooms = [
     description: "Grand polypore en consoles jaune soufre et orange, poussant en étages.",
     habitat: "Sur troncs et branches de feuillus, notamment chênes et saules.",
     season: "Été et automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Espèce parfois consommée jeune, mais des intoxications digestives ont été rapportées, notamment selon l’arbre hôte. Par prudence, éviter les spécimens poussant sur conifères ou robinier et ne pas consommer sans avis mycologique."
   },
 
   {
@@ -2742,7 +2641,6 @@ const mushrooms = [
     latin: "Ganoderma lucidum",
     family: "Ganodermatacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2754,7 +2652,7 @@ const mushrooms = [
     description: "Polypore laqué rouge brun, à surface brillante et pied parfois latéral.",
     habitat: "À la base des feuillus et sur racines ou souches.",
     season: "Été et automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Polypore coriace, non destiné à la consommation comme champignon alimentaire. Les usages traditionnels dits médicinaux ne constituent pas une preuve d’efficacité ni une recommandation thérapeutique."
   },
 
   {
@@ -2762,7 +2660,6 @@ const mushrooms = [
     latin: "Auricularia auricula-judae",
     family: "Auriculariacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2782,7 +2679,6 @@ const mushrooms = [
     latin: "Tremella mesenterica",
     family: "Trémellacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -2802,7 +2698,6 @@ const mushrooms = [
     latin: "Lycoperdon perlatum",
     family: "Agaricacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2814,7 +2709,7 @@ const mushrooms = [
     description: "Petite vesse-de-loup en forme de poire, blanche puis brunâtre, couverte de petites verrues.",
     habitat: "Bois, prairies et lisières, sur le sol.",
     season: "Été et automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "La chair doit être entièrement blanche et ferme. Risque de confusion avec des sclérodermes toxiques, dont la chair est sombre à maturité. Ne pas consommer sans identification experte."
   },
 
   {
@@ -2822,7 +2717,6 @@ const mushrooms = [
     latin: "Lycoperdon pyriforme",
     family: "Agaricacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2842,7 +2736,6 @@ const mushrooms = [
     latin: "Calvatia gigantea",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2854,7 +2747,7 @@ const mushrooms = [
     description: "Très grosse boule blanche pouvant atteindre un diamètre considérable.",
     habitat: "Prairies, pâtures, parcs et lisières riches en nutriments.",
     season: "Été et automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Comestible uniquement lorsque la chair est uniformément blanche et ferme. Toute coupe présentant des structures internes évoquant un jeune champignon à lames doit conduire à écarter le spécimen. Ne pas consommer sans identification experte."
   },
 
   {
@@ -2862,7 +2755,6 @@ const mushrooms = [
     latin: "Scleroderma citrinum",
     family: "Sclérodermatacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2882,7 +2774,6 @@ const mushrooms = [
     latin: "Geastrum triplex",
     family: "Géastracées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2902,7 +2793,6 @@ const mushrooms = [
     latin: "Clavulina coralloides",
     family: "Clavulinacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2920,21 +2810,20 @@ const mushrooms = [
   {
     name: "Clavaire jaune",
     latin: "Ramaria flava",
-    family: "Ramariacées",
+    family: "Gomphacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
     priceLabel: "Non cotée",
     category: "autre",
-    tag: "Autre — prudence",
+    tag: "À éviter — risque de troubles digestifs",
     image: "https://commons.wikimedia.org/wiki/Special:FilePath/Ramaria_flava.jpg",
     source: "https://www.inaturalist.org/search?q=Ramaria%20flava",
     description: "Champignon coralliforme jaune, fortement ramifié.",
     habitat: "Forêts de feuillus et de conifères, sur le sol.",
     season: "Été et automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Ramaire jaune. Certaines ramaires peuvent provoquer des troubles digestifs et leur identification est difficile. Par prudence, ne pas consommer."
   },
 
   {
@@ -2942,7 +2831,6 @@ const mushrooms = [
     latin: "Tuber melanosporum",
     family: "Tuberacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Automne",
     priceMin: null,
     priceMax: null,
@@ -2953,8 +2841,8 @@ const mushrooms = [
     source: "https://www.inaturalist.org/search?q=Tuber%20melanosporum",
     description: "Truffe souterraine à peau noire verruqueuse et chair sombre marbrée de veines claires.",
     habitat: "Sols calcaires sous chênes et noisetiers, surtout dans le sud de la France.",
-    season: "Automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    season: "Novembre à mars",
+    details: "Truffe souterraine associée notamment aux chênes et noisetiers sur sols calcaires. Espèce principalement cultivée et récoltée dans le sud de la France."
   },
 
   {
@@ -2962,7 +2850,6 @@ const mushrooms = [
     latin: "Tuber aestivum",
     family: "Tuberacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -2982,7 +2869,6 @@ const mushrooms = [
     latin: "Peziza vesiculosa",
     family: "Pézizacées",
     habitatType: "Prairie / pelouse",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -2994,7 +2880,7 @@ const mushrooms = [
     description: "Champignon en coupe beige à brun clair, souvent groupé.",
     habitat: "Tas de fumier, composts, sols enrichis et débris végétaux.",
     season: "Printemps à automne",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Pézize saprophyte des sols enrichis, composts et fumiers. Ne pas consommer crue ; par prudence, cette fiche ne recommande pas sa consommation."
   },
 
   {
@@ -3002,7 +2888,6 @@ const mushrooms = [
     latin: "Helvella crispa",
     family: "Helvellacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -3022,7 +2907,6 @@ const mushrooms = [
     latin: "Helvella lacunosa",
     family: "Helvellacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -3042,19 +2926,18 @@ const mushrooms = [
     latin: "Verpa bohemica",
     family: "Morchellacées",
     habitatType: "Forêt de feuillus / lisière",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps",
     priceMin: null,
     priceMax: null,
     priceLabel: "Non cotée",
-    category: "autre",
-    tag: "Autre — prudence",
+    category: "toxique",
+    tag: "Toxique — ne pas consommer",
     image: "https://commons.wikimedia.org/wiki/Special:FilePath/Verpa_bohemica.jpg",
     source: "https://www.inaturalist.org/search?q=Verpa%20bohemica",
     description: "Champignon printanier au chapeau plissé en forme de dé à coudre, libre autour du pied.",
     habitat: "Bois alluviaux, ripisylves et lisières humides.",
     season: "Printemps",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Champignon printanier ressemblant aux morilles. Des intoxications ont été associées à cette espèce ; elle contient des substances toxiques de type gyromitrine. Ne pas consommer."
   },
 
   {
@@ -3062,7 +2945,6 @@ const mushrooms = [
     latin: "Gyromitra esculenta",
     family: "Discinacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps",
     priceMin: null,
     priceMax: null,
@@ -3074,7 +2956,7 @@ const mushrooms = [
     description: "Champignon printanier au chapeau brun rougeâtre fortement plissé, évoquant un cerveau.",
     habitat: "Forêts de conifères, souvent sur sols sableux.",
     season: "Printemps",
-    details: "Champignon contenant de la gyromitrine, responsable d’intoxications graves pouvant être mortelles. Sa vente est interdite en France. Ne jamais consommer ; les vapeurs de cuisson peuvent également présenter un risque."
+    details: "Champignon contenant de la gyromitrine, responsable d’intoxications graves pouvant être mortelles. Sa vente est interdite en France par le décret n° 91-1039 du 7 octobre 1991. Ne jamais consommer ; les vapeurs de cuisson peuvent également présenter un risque."
   },
 
   {
@@ -3082,19 +2964,18 @@ const mushrooms = [
     latin: "Amanita phalloides",
     family: "Amanitacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
     priceLabel: "Non cotée",
     category: "toxique",
-    tag: "Toxique — ne pas consommer",
+    tag: "Mortelle — ne jamais consommer",
     image: "https://commons.wikimedia.org/wiki/Special:FilePath/Amanita_phalloides.jpg",
     source: "https://www.inaturalist.org/search?q=Amanita%20phalloides",
     description: "Amanite à chapeau souvent vert olive, lames blanches, anneau et volve en sac à la base du pied.",
     habitat: "Sous les chênes, hêtres et autres feuillus, parfois sous les conifères.",
     season: "Printemps à automne",
-    details: "Espèce toxique ou potentiellement dangereuse. Ne jamais consommer sur la base d’une photographie ou d’une description ; faire vérifier toute récolte par un spécialiste."
+    details: "Champignon mortel contenant des amatoxines responsables du syndrome phalloïdien et d’atteintes hépatiques graves. Ne jamais consommer."
   },
 
   {
@@ -3102,7 +2983,6 @@ const mushrooms = [
     latin: "Rubroboletus satanas",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -3124,7 +3004,6 @@ const mushrooms = [
     latin: "Craterellus cornucopioides",
     family: "Cantharellacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -3144,7 +3023,6 @@ const mushrooms = [
     latin: "Hydnum repandum",
     family: "Hydnacées",
     habitatType: "Forêt mixte",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -3164,7 +3042,6 @@ const mushrooms = [
     latin: "Macrolepiota procera",
     family: "Agaricacées",
     habitatType: "Prairie / lisière",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -3176,7 +3053,7 @@ const mushrooms = [
     description: "Grand champignon à chapeau écailleux et pied élancé orné d’un anneau mobile.",
     habitat: "Clairières, lisières, prairies et bois clairs.",
     season: "Printemps à automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Espèce réputée comestible, mais la confusion avec de petites lépiotes mortelles ou avec d’autres espèces toxiques est possible. Ne pas consommer sans identification experte."
   },
 
   {
@@ -3184,7 +3061,6 @@ const mushrooms = [
     latin: "Coprinus comatus",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -3204,7 +3080,6 @@ const mushrooms = [
     latin: "Agaricus campestris",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -3216,7 +3091,7 @@ const mushrooms = [
     description: "Agaric de prairie à chapeau blanc, lamelles roses puis brun chocolat et anneau discret.",
     habitat: "Prairies, pâtures et pelouses.",
     season: "Printemps à automne",
-    details: "Espèce réputée comestible dans la littérature mycologique, mais les confusions restent possibles. Cette fiche ne constitue pas une recommandation de consommation."
+    details: "Agaric des prairies pouvant être confondu avec l’Agaric jaunissant, toxique. Une identification experte est indispensable ; ne pas consommer sur la base de cette fiche."
   },
 
   {
@@ -3224,7 +3099,6 @@ const mushrooms = [
     latin: "Hygrophoropsis aurantiaca",
     family: "Hygrophoropsidacées",
     habitatType: "Forêt de conifères",
-    rarity: "Non évaluée",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -3244,7 +3118,6 @@ const mushrooms = [
     latin: "Morchella semilibera",
     family: "Morchellacées",
     habitatType: "Forêt de feuillus / lisière",
-    rarity: "Non évaluée",
     seasonGroup: "Printemps",
     priceMin: null,
     priceMax: null,
@@ -3256,7 +3129,7 @@ const mushrooms = [
     description: "Morille à chapeau alvéolé dont la partie inférieure reste libre du pied.",
     habitat: "Lisières, bois humides et terrains alluviaux, souvent au printemps.",
     season: "Printemps",
-    details: "Espèce dont la comestibilité n’est pas recommandée ici. Les caractères morphologiques et les espèces proches doivent être examinés par un spécialiste."
+    details: "Morille demi-libre, parfois appelée Mitrophora semilibera dans des ouvrages plus anciens. Comme toutes les morilles, elle est toxique crue ou insuffisamment cuite. Ne pas consommer sans identification experte."
   }
 ];
 
@@ -3362,7 +3235,6 @@ function filterMushrooms() {
   const category = value("category");
   const family = value("familyFilter");
   const habitat = value("habitatFilter");
-  const rarity = value("rarityFilter");
   const season = value("seasonFilter");
   const price = value("priceFilter");
   const sort = value("sortBy");
@@ -3372,7 +3244,6 @@ function filterMushrooms() {
     const matchesCategory = category === "all" || m.category === category;
     const matchesFamily = family === "all" || m.family === family;
     const matchesHabitat = habitat === "all" || m.habitatType === habitat;
-    const matchesRarity = rarity === "all" || m.rarity === rarity;
     const matchesSeason = season === "all" || m.seasonGroup === season;
     const matchesPrice =
       price === "all" ||
@@ -3380,16 +3251,14 @@ function filterMushrooms() {
       (price === "under25" && m.priceMin !== null && m.priceMin < 25) ||
       (price === "25to50" && m.priceMin !== null && m.priceMax <= 50 && m.priceMax >= 25) ||
       (price === "over50" && m.priceMin !== null && m.priceMax > 50);
-    return matchesSearch && matchesCategory && matchesFamily && matchesHabitat && matchesRarity && matchesSeason && matchesPrice;
+    return matchesSearch && matchesCategory && matchesFamily && matchesHabitat && matchesSeason && matchesPrice;
   });
 
-  const rarityOrder = {"Commun": 1, "Rare": 2, "Très rare": 3, "Non évaluée": 99};
   filtered.sort((a,b) => {
     if (sort === "name") return a.name.localeCompare(b.name, "fr");
     if (sort === "family") return a.family.localeCompare(b.family, "fr") || a.name.localeCompare(b.name, "fr");
     if (sort === "priceAsc") return (a.priceMin ?? Infinity) - (b.priceMin ?? Infinity);
     if (sort === "priceDesc") return (b.priceMax ?? -Infinity) - (a.priceMax ?? -Infinity);
-    if (sort === "rarity") return (rarityOrder[a.rarity] ?? 99) - (rarityOrder[b.rarity] ?? 99);
     return 0;
   });
   displayMushrooms(filtered);
@@ -3399,8 +3268,6 @@ function filterMushrooms() {
 function showDetails(mushroom) {
 
   const photos = (mushroom.photos || [mushroom.image]).filter(Boolean);
-  const rarity = mushroom.rarity || "Non évaluée";
-  const rarityLabel = `<div class="detail-item rarity-item"><span>Fréquence locale</span><strong><span class="rarity-word">${rarity === "Non évaluée" ? "Donnée non vérifiée" : rarity}</span></strong></div>`;
   const price = mushroom.priceLabel && !/non cot|non commercial/i.test(mushroom.priceLabel)
     ? `<div class="detail-item"><span>Prix indicatif</span><strong>${mushroom.priceLabel}</strong></div>`
     : "";
@@ -3417,7 +3284,6 @@ function showDetails(mushroom) {
       <div class="detail-item"><span>Famille</span><strong>${mushroom.family}</strong></div>
       <div class="detail-item"><span>Milieu</span><strong>${mushroom.habitatType}</strong></div>
       <div class="detail-item"><span>Saison</span><strong>${mushroom.season}</strong></div>
-      ${rarityLabel}
       ${price}
     </div>
 
