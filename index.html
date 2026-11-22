@@ -565,6 +565,23 @@ nav a {
   text-transform: uppercase;
   letter-spacing: .06em;
 }
+.rarity-item strong {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+.rarity-stars {
+  color: #bd8a35;
+  font-size: 19px;
+  letter-spacing: 3px;
+  line-height: 1.1;
+}
+.rarity-word {
+  color: #293b2d;
+  font-size: 13px;
+  font-weight: 600;
+}
 .detail-item strong {
   display: block;
   color: #293b2d;
@@ -926,7 +943,7 @@ const mushrooms = [
     latin: "Boletus edulis",
     family: "Boletacées",
     habitatType: "Forêt mixte",
-    rarity: "Assez courant",
+    rarity: "Commun",
     seasonGroup: "Été–automne",
     priceMin: 20,
     priceMax: 38,
@@ -957,7 +974,7 @@ const mushrooms = [
     latin: "Cantharellus cibarius",
     family: "Cantharellacées",
     habitatType: "Forêt mixte",
-    rarity: "Assez courant",
+    rarity: "Commun",
     seasonGroup: "Été–automne",
     priceMin: 15,
     priceMax: 30,
@@ -988,7 +1005,7 @@ const mushrooms = [
     latin: "Morchella esculenta",
     family: "Morchellacées",
     habitatType: "Forêt de feuillus / lisière",
-    rarity: "Peu courant",
+    rarity: "Rare",
     seasonGroup: "Printemps",
     priceMin: 40,
     priceMax: 46,
@@ -1018,7 +1035,7 @@ const mushrooms = [
   "latin": "Hydnum repandum",
     family: "Hydnacées",
     habitatType: "Forêt mixte",
-    rarity: "Assez courant",
+    rarity: "Commun",
     seasonGroup: "Été–automne",
     priceMin: 15,
     priceMax: 22,
@@ -1042,7 +1059,7 @@ const mushrooms = [
   "latin": "Macrolepiota procera",
     family: "Agaricacées",
     habitatType: "Prairie / lisière",
-    rarity: "Assez courant",
+    rarity: "Commun",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1091,7 +1108,7 @@ const mushrooms = [
   "latin": "Craterellus cornucopioides",
     family: "Cantharellacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Assez courant",
+    rarity: "Commun",
     seasonGroup: "Automne",
     priceMin: 16,
     priceMax: 25,
@@ -1115,7 +1132,7 @@ const mushrooms = [
   "latin": "Amanita phalloides",
     family: "Amanitacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Assez courant",
+    rarity: "Commun",
     seasonGroup: "Fin été–automne",
     priceMin: null,
     priceMax: null,
@@ -1139,7 +1156,7 @@ const mushrooms = [
   "latin": "Agaricus campestris",
     family: "Agaricacées",
     habitatType: "Prairie / pelouse",
-    rarity: "Assez courant",
+    rarity: "Commun",
     seasonGroup: "Printemps–automne",
     priceMin: null,
     priceMax: null,
@@ -1164,7 +1181,7 @@ const mushrooms = [
   "latin": "Lactarius deliciosus",
     family: "Russulacées",
     habitatType: "Forêt de conifères",
-    rarity: "Assez courant",
+    rarity: "Commun",
     seasonGroup: "Fin été–automne",
     priceMin: null,
     priceMax: null,
@@ -1189,7 +1206,7 @@ const mushrooms = [
   "latin": "Rubroboletus satanas",
     family: "Boletacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Peu courant",
+    rarity: "Rare",
     seasonGroup: "Été–début automne",
     priceMin: null,
     priceMax: null,
@@ -1213,7 +1230,7 @@ const mushrooms = [
   "latin": "Russula virescens",
     family: "Russulacées",
     habitatType: "Forêt de feuillus",
-    rarity: "Peu courant",
+    rarity: "Rare",
     seasonGroup: "Été–automne",
     priceMin: null,
     priceMax: null,
@@ -1375,6 +1392,9 @@ function filterMushrooms() {
 function showDetails(mushroom) {
 
   const photos = (mushroom.photos || [mushroom.image]).filter(Boolean);
+  const rarity = mushroom.rarity || "Commun";
+  const rarityStars = rarity === "Très rare" ? 3 : rarity === "Rare" ? 2 : 1;
+  const rarityLabel = `<div class="detail-item rarity-item"><span>Rareté</span><strong><span class="rarity-stars" role="img" aria-label="${rarityStars} étoile${rarityStars > 1 ? "s" : ""}">${"★".repeat(rarityStars)}</span><span class="rarity-word">${rarity}</span></strong></div>`;
   const price = mushroom.priceLabel && !/non cot|non commercial/i.test(mushroom.priceLabel)
     ? `<div class="detail-item"><span>Prix indicatif</span><strong>${mushroom.priceLabel}</strong></div>`
     : "";
@@ -1391,7 +1411,7 @@ function showDetails(mushroom) {
       <div class="detail-item"><span>Famille</span><strong>${mushroom.family}</strong></div>
       <div class="detail-item"><span>Milieu</span><strong>${mushroom.habitatType}</strong></div>
       <div class="detail-item"><span>Saison</span><strong>${mushroom.season}</strong></div>
-      <div class="detail-item"><span>Fréquence</span><strong>${mushroom.rarity}</strong></div>
+      ${rarityLabel}
       ${price}
     </div>
 
