@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#183b2b">
+<title>Quiz des cèpes | MycoNature</title>
+<style>
+:root{--green:#183b2b;--light:#f5f5ef;--gold:#c6a66b;--text:#242820}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:var(--light);color:var(--text);min-height:100vh}
+header{background:var(--green);color:#fff;padding:16px 7%;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.logo{font:25px Georgia,serif;letter-spacing:2px;color:#fff;text-decoration:none}
+header nav{display:flex;gap:22px;align-items:center}
+header nav a{color:#fff;text-decoration:none;font-size:14px}
+header nav a:hover{text-decoration:underline}
+.quiz-page{max-width:1000px;margin:0 auto;padding:44px 22px 70px}
+.quiz-hero{text-align:center;padding:36px 20px 30px}
+.quiz-eyebrow{color:#8b7448;text-transform:uppercase;letter-spacing:.15em;font-size:12px;font-weight:700}
+.quiz-hero h1{font:clamp(36px,6vw,58px) Georgia,serif;color:var(--green);margin:14px 0}
+.quiz-hero p{max-width:650px;margin:auto;color:#626b60;line-height:1.7;font-size:16px}
+.quiz-box{max-width:760px;margin:0 auto;background:#fff;border-radius:16px;padding:clamp(20px,4vw,34px);box-shadow:0 10px 35px rgba(23,44,29,.08)}
+.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:18px}
+.quiz-kicker{color:#71806e;font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:700}
+.quiz-box h2{color:var(--green);font:bold 27px Georgia,serif;margin:5px 0 12px}
+.quiz-box p{line-height:1.6}
+.quiz-career{background:#f3f5ef;padding:16px;border-radius:10px;margin:18px 0 24px}
+.quiz-career-line{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px}
+.quiz-progress{height:9px;background:#e2e7dd;border-radius:9px;overflow:hidden;margin-top:11px}
+.quiz-progress>span{display:block;height:100%;background:#b99a5d;transition:width .25s}
+.quiz-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
+.quiz-level{border:1px solid #dce2d8;border-radius:10px;background:white;color:#294432;padding:18px 10px;cursor:pointer;font-weight:700;transition:.2s}
+.quiz-level:hover{border-color:#b99a5d;background:#faf8f1;transform:translateY(-2px)}
+.quiz-level small{display:block;margin-top:7px;color:#777;font-weight:400;line-height:1.4}
+.quiz-primary{display:inline-flex;justify-content:center;border:0;border-radius:6px;padding:13px 20px;background:var(--green);color:#fff;font-weight:700;cursor:pointer}
+.quiz-primary:hover{background:#315b40}
+.quiz-question-meta{display:flex;justify-content:space-between;color:#687365;font-size:13px;margin:18px 0 9px}
+.quiz-question{font:bold 22px Georgia,serif;color:#263d2c;line-height:1.35;margin:20px 0}
+.quiz-answers{display:grid;gap:10px}
+.quiz-answer{width:100%;text-align:left;padding:14px 15px;border:1px solid #dce2d8;border-radius:8px;background:#fff;color:#28352a;cursor:pointer;line-height:1.45}
+.quiz-answer:disabled{cursor:default;opacity:1}
+.quiz-answer.correct{border-color:#3d8150;background:#edf7ee}
+.quiz-answer.incorrect{border-color:#b75c48;background:#fff0ec}
+.quiz-explanation{margin:16px 0;padding:15px;background:#f3f5ef;border-left:3px solid #b99a5d;border-radius:5px;line-height:1.6}
+.quiz-result{text-align:center;padding:12px 0 4px}
+.quiz-result-score{color:var(--green);font:bold 42px Georgia,serif;margin:14px 0}
+.quiz-note{color:#777;font-size:12px;margin-top:16px;line-height:1.5}
+.quiz-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:25px 0}
+.quiz-benefit{background:#fff;padding:17px;border-radius:10px;text-align:center;border:1px solid #e5e8e0}
+.quiz-benefit strong{display:block;color:var(--green);margin:6px 0}
+.quiz-benefit span{font-size:13px;color:#6b7068;line-height:1.5}
+footer{background:var(--green);color:#fff;text-align:center;padding:26px 20px;font-size:13px;line-height:1.7}
+.quiz-launch{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid rgba(255,255,255,.55);border-radius:24px;background:rgba(255,255,255,.08);color:#fff;font-weight:700;cursor:pointer;white-space:nowrap}.quiz-launch:hover{background:rgba(255,255,255,.16)}.quiz-launch svg{width:19px;height:19px}#quizOverlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(8,20,13,.78);padding:18px;align-items:center;justify-content:center}#quizOverlay.is-visible{display:flex}.quiz-box{width:min(680px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:14px;padding:clamp(20px,4vw,32px);box-shadow:0 20px 70px #0005}.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:18px}.quiz-kicker{color:#71806e;font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:700}.quiz-close{border:0;background:#f0f2ed;color:#314b36;width:38px;height:38px;border-radius:50%;font-size:23px;cursor:pointer}.quiz-box h2{color:var(--green);font:bold 29px Georgia,serif;margin:5px 0 12px}.quiz-box p{line-height:1.6}.quiz-career{background:#f3f5ef;padding:14px 16px;border-radius:9px;margin:16px 0 20px}.quiz-career-line{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px}.quiz-progress{height:8px;background:#e2e7dd;border-radius:9px;overflow:hidden;margin-top:10px}.quiz-progress>span{display:block;height:100%;background:#b99a5d;transition:width .25s}.quiz-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0}.quiz-level{border:1px solid #dce2d8;border-radius:9px;background:white;color:#294432;padding:14px 8px;cursor:pointer;font-weight:700}.quiz-level:hover{border-color:#b99a5d;background:#faf8f1}.quiz-level small{display:block;margin-top:5px;color:#777;font-weight:400}.quiz-primary{display:inline-flex;justify-content:center;border:0;border-radius:6px;padding:13px 20px;background:var(--green);color:#fff;font-weight:700;cursor:pointer}.quiz-question-meta{display:flex;justify-content:space-between;color:#687365;font-size:13px;margin:18px 0 9px}.quiz-question{font:bold 22px Georgia,serif;color:#263d2c;line-height:1.35;margin-bottom:18px}.quiz-answers{display:grid;gap:10px}.quiz-answer{width:100%;text-align:left;padding:14px 15px;border:1px solid #dce2d8;border-radius:8px;background:#fff;color:#28352a;cursor:pointer;line-height:1.45}.quiz-answer:disabled{cursor:default;opacity:1}.quiz-answer.correct{border-color:#3d8150;background:#edf7ee}.quiz-answer.incorrect{border-color:#b75c48;background:#fff0ec}.quiz-explanation{margin:16px 0;padding:15px;background:#f3f5ef;border-left:3px solid #b99a5d;border-radius:5px;line-height:1.6}.quiz-result{text-align:center;padding:12px 0 4px}.quiz-result-score{color:var(--green);font:bold 42px Georgia,serif;margin:14px 0}.quiz-note{color:#777;font-size:12px;margin-top:16px;line-height:1.5}@media(max-width:600px){.header-actions{gap:9px}.quiz-launch{width:42px;height:42px;min-height:42px;padding:0;justify-content:center;border-radius:50%;font-size:0}.quiz-launch svg{width:21px;height:21px}.quiz-levels{gap:6px}.quiz-level{padding:12px 4px;font-size:13px}.quiz-box h2{font-size:25px}}
+
+@media(max-width:600px){header{padding:14px 5%}.logo{font-size:20px}header nav{gap:12px}header nav a{font-size:12px}.quiz-page{padding:25px 14px 45px}.quiz-hero{padding:20px 8px 24px}.quiz-levels{gap:7px}.quiz-level{padding:14px 5px;font-size:13px}.quiz-benefits{grid-template-columns:1fr}.quiz-box h2{font-size:23px}}
+</style>
+</head>
+<body>
+<header>
+<a class="logo" href="index.html">🍄 MYCONATURE</a>
+<nav><a href="index.html">Accueil du site</a><a href="index.html#catalogue">Catalogue</a></nav>
+</header>
+<main class="quiz-page">
+<section class="quiz-hero">
+<div class="quiz-eyebrow">MycoNature · Espace d’apprentissage</div>
+<h1>Le quiz des cèpes</h1>
+<p>Prêt à tester ton œil de mycologue ? Réponds à des questions aléatoires, découvre les explications et fais évoluer ton rang au fil de tes parties.</p>
+</section>
+<section class="quiz-benefits" aria-label="Fonctionnalités du quiz">
+<div class="quiz-benefit"><div>🎯</div><strong>3 difficultés</strong><span>Des premières notions aux questions expertes.</span></div>
+<div class="quiz-benefit"><div>🧠</div><strong>Apprendre en jouant</strong><span>Une explication après chaque réponse.</span></div>
+<div class="quiz-benefit"><div>🏆</div><strong>Évoluer</strong><span>Des points cumulés et un rang qui progresse.</span></div>
+</section>
+<section class="quiz-box">
+<div class="quiz-top"><div><div class="quiz-kicker">Ton parcours mycologique</div><h2>Choisis ton défi</h2></div></div>
+<div class="quiz-career">
+<div class="quiz-career-line"><strong id="quizRank">🌱 Débutant</strong><span><strong id="quizPoints">0</strong> points cumulés</span></div>
+<div class="quiz-progress"><span id="quizCareerBar" style="width:0%"></span></div>
+<p id="quizNextRank" style="font-size:12px;color:#687365;margin-top:8px">Encore 50 points pour le niveau suivant.</p>
+</div>
+<div id="quizContent">
+<p>Chaque partie comprend 5 questions. Une bonne réponse rapporte 10 points. Sélectionne une difficulté pour commencer.</p>
+<div class="quiz-levels">
+<button class="quiz-level" onclick="startQuiz('facile')">🌱 Facile<small>Les bases et les caractéristiques essentielles</small></button>
+<button class="quiz-level" onclick="startQuiz('intermediaire')">🍃 Intermédiaire<small>Reconnaissance et connaissances mycologiques</small></button>
+<button class="quiz-level" onclick="startQuiz('expert')">🌳 Expert<small>Aller plus loin dans les détails</small></button>
+</div>
+<p class="quiz-note">Tes points sont conservés sur cet appareil. Le rang « Professionnel » est un objectif ludique, pas une qualification ou une certification.</p>
+</div>
+</section>
+</main>
+<footer>🍄 MYCONATURE · Apprendre, observer et respecter le monde des champignons.<br><a href="index.html" style="color:#fff">Retour au catalogue</a></footer>
+<script>
+const cepesQuiz={
+facile:[
+["Quel est le nom scientifique du cèpe de Bordeaux ?",["Boletus edulis","Boletus satanas","Suillus luteus","Amanita caesarea"],0,"Le cèpe de Bordeaux est Boletus edulis, l'une des espèces les plus connues du groupe des cèpes."],
+["Sous quelle forme se trouve la surface fertile sous le chapeau ?",["Des lamelles","Des tubes terminés par des pores","Des aiguillons","Des plis en lames"],1,"Les bolets possèdent une couche de tubes qui s'ouvrent en petits pores sous le chapeau, et non des lamelles."],
+["Quelle couleur ont généralement les pores d'un jeune cèpe de Bordeaux ?",["Blancs","Rouge vif","Noirs","Violets"],0,"Chez les jeunes Boletus edulis, les pores sont blancs, puis deviennent jaune pâle à jaune olivâtre avec l'âge."],
+["Le cèpe de Bordeaux vit le plus souvent en association avec :",["Des arbres","Des insectes uniquement","Des algues marines","Des herbes sans arbre"],0,"C'est un champignon mycorhizien : son mycélium échange des ressources avec les racines de certains arbres."],
+["Quelle partie du champignon observe-t-on principalement lors d'une cueillette ?",["Le mycélium entier","Le sporophore (partie visible)","Les racines de l'arbre","Les spores dans le sol"],1,"Le cèpe visible est le sporophore, organe reproducteur. La majeure partie du champignon, le mycélium, reste dans le sol."],
+["Quel élément est particulièrement utile pour reconnaître un bolet ?",["La présence ou l'absence de pores","La couleur de l'herbe voisine","La taille de l'arbre proche","L'odeur du sol uniquement"],0,"L'observation de la face inférieure du chapeau, du pied, du chapeau et de la chair est essentielle."]
+],
+intermediaire:[
+["Quel caractère est souvent visible sur le haut du pied de Boletus edulis ?",["Un réseau blanchâtre (réticulation)","Une volve en sac","Un anneau membraneux marqué","Des écailles noires"],0,"Le cèpe de Bordeaux présente fréquemment un réseau blanchâtre sur la partie supérieure du pied. Ce caractère doit être combiné aux autres critères."],
+["Quel bolet est connu pour son amertume très forte et peut être confondu avec un cèpe ?",["Tylopilus felleus","Boletus aereus","Boletus pinophilus","Imleria badia"],0,"Tylopilus felleus, le bolet amer, possède souvent un réseau sombre sur le pied et des pores qui rosissent avec l'âge. Sa chair est extrêmement amère."],
+["Avec quels arbres le cèpe de Bordeaux peut-il former des mycorhizes ?",["Chênes, hêtres, châtaigniers ou conifères selon les stations","Uniquement les peupliers","Uniquement les arbres fruitiers","Aucun arbre"],0,"Boletus edulis est associé à différents arbres, feuillus ou conifères. Les partenaires varient selon les milieux et les régions."],
+["Que deviennent généralement les pores d'un cèpe de Bordeaux âgé ?",["Jaune olivâtre","Rouge sang","Bleu électrique en permanence","Ils deviennent des lamelles"],0,"La couche de tubes évolue avec la maturité : les pores passent du blanc au jaune, puis à une teinte olivâtre."],
+["Quel groupe de caractères aide le mieux à distinguer les espèces de cèpes ?",["Chapeau, pores, pied, réseau, chair et écologie","La seule taille du chapeau","La couleur générale d'une photo","Le lieu de vente"],0,"Une identification sérieuse repose sur plusieurs caractères macroscopiques et écologiques, parfois complétés par la microscopie."],
+["Le cèpe de Bordeaux est principalement :",["Mycorhizien","Parasite obligatoire des insectes","Saprophyte du bois mort uniquement","Aquatique"],0,"Il vit en symbiose mycorhizienne avec des arbres, contrairement aux espèces qui décomposent principalement le bois mort."]
+],
+expert:[
+["Quel nom désigne le cèpe bronzé ?",["Boletus aereus","Boletus edulis","Boletus pinophilus","Boletus reticulatus"],0,"Boletus aereus est le cèpe bronzé, reconnaissable notamment à son chapeau brun très sombre à aspect bronzé."],
+["Quel cèpe est particulièrement associé aux pins dans de nombreuses descriptions écologiques ?",["Boletus pinophilus","Boletus aereus","Tylopilus felleus","Rubroboletus satanas"],0,"Boletus pinophilus, le cèpe des pins, est souvent associé aux pins, même si les associations écologiques peuvent varier."],
+["Quel caractère du bolet satan peut alerter lors d'une comparaison avec les cèpes ?",["Pores rouges et teintes rougeâtres sur le pied","Pores toujours blancs et pied brun uniforme","Présence de lamelles blanches","Une volve en sac"],0,"Rubroboletus satanas présente des pores rouges à orangés et un pied trapu avec des teintes rouges. Il est toxique."],
+["Pourquoi le bleuissement à la coupe ne suffit-il pas à identifier un bolet ?",["De nombreuses espèces différentes peuvent bleuir, ou non","Tous les bolets bleissants sont comestibles","Le bleuissement indique toujours une toxicité mortelle","Il remplace l'observation des pores"],0,"Le bleuissement est un indice parmi d'autres. Des espèces comestibles, toxiques ou sans intérêt peuvent bleuir, et des cèpes ne bleuissent pas."],
+["Quelle est la fonction principale des pores sous le chapeau ?",["Libérer les spores produites dans les tubes","Absorber l'eau pour nourrir l'arbre","Fixer le champignon au sol","Produire les racines"],0,"Les tubes constituent l'hyménophore : les spores sont produites à leur surface et se dispersent depuis les pores."],
+["Pourquoi deux bolets ressemblant à des cèpes peuvent-ils appartenir à des espèces différentes ?",["Des caractères microscopiques, chimiques et génétiques peuvent les distinguer","La couleur du chapeau suffit toujours","Ils sont forcément de la même espèce","Seule leur taille change"],0,"La taxonomie des bolets peut nécessiter des caractères microscopiques, des réactions chimiques et parfois des analyses moléculaires."]
+]};
+const quizRanks=[{name:"Débutant",icon:"🌱",min:0,next:50},{name:"Intermédiaire",icon:"🍃",min:50,next:120},{name:"Avancé",icon:"🌳",min:120,next:200},{name:"Professionnel",icon:"🏆",min:200,next:null}];
+let quizState={level:"facile",questions:[],index:0,correct:0,answered:false};
+function getQuizPoints(){try{return Math.max(0,Number(localStorage.getItem("myconatureQuizPoints"))||0)}catch(e){return 0}}
+function setQuizPoints(n){try{localStorage.setItem("myconatureQuizPoints",String(n))}catch(e){}}
+function updateQuizCareer(){const p=getQuizPoints();const r=[...quizRanks].reverse().find(x=>p>=x.min)||quizRanks[0];const next=r.next;document.getElementById("quizRank").textContent=r.icon+" "+r.name;document.getElementById("quizPoints").textContent=p;document.getElementById("quizCareerBar").style.width=next===null?"100%":Math.min(100,(p-r.min)/(next-r.min)*100)+"%";document.getElementById("quizNextRank").textContent=next===null?"Rang maximal atteint dans ce premier parcours !":(next-p)+" points avant le rang "+quizRanks[quizRanks.indexOf(r)+1].name+"."}
+function openQuiz(){document.getElementById("quizOverlay").classList.add("is-visible");document.body.style.overflow="hidden";updateQuizCareer()}
+function closeQuiz(){document.getElementById("quizOverlay").classList.remove("is-visible");document.body.style.overflow=""}
+function startQuiz(level){quizState={level:level,questions:cepesQuiz[level].slice().sort(()=>Math.random()-.5).slice(0,5),index:0,correct:0,answered:false};renderQuizQuestion()}
+function renderQuizQuestion(){const s=quizState,q=s.questions[s.index],names={facile:"Facile",intermediaire:"Intermédiaire",expert:"Expert"};let html='<div class="quiz-question-meta"><span>'+names[s.level]+'</span><span>Question '+(s.index+1)+' / 5</span></div><div class="quiz-progress"><span style="width:'+(s.index/5*100)+'%"></span></div><div class="quiz-question">'+q[0]+'</div><div class="quiz-answers">';q[1].forEach((a,i)=>{html+='<button class="quiz-answer" type="button" onclick="answerQuiz('+i+')">'+String.fromCharCode(65+i)+'. '+a+'</button>'});html+='</div><div id="quizFeedback"></div>';document.getElementById("quizContent").innerHTML=html}
+function answerQuiz(choice){if(quizState.answered)return;quizState.answered=true;const q=quizState.questions[quizState.index],buttons=document.querySelectorAll(".quiz-answer"),good=choice===q[2];buttons.forEach((b,i)=>{b.disabled=true;if(i===q[2])b.classList.add("correct");else if(i===choice)b.classList.add("incorrect")});if(good){quizState.correct++;setQuizPoints(getQuizPoints()+10);updateQuizCareer()}document.getElementById("quizFeedback").innerHTML='<div class="quiz-explanation"><strong>'+(good?"Bonne réponse ! +10 points":"Pas tout à fait.")+'</strong><br>'+q[3]+'</div><button class="quiz-primary" type="button" onclick="nextQuizQuestion()">'+(quizState.index===4?"Voir mon résultat":"Question suivante")+'</button>'}
+function nextQuizQuestion(){if(quizState.index<4){quizState.index++;quizState.answered=false;renderQuizQuestion();return}const score=quizState.correct*10;document.getElementById("quizContent").innerHTML='<div class="quiz-result"><div class="quiz-kicker">Partie terminée</div><h2>Bien joué !</h2><div class="quiz-result-score">'+quizState.correct+' / 5</div><p>'+score+' points gagnés pendant cette partie.</p><p>Ton total : <strong>'+getQuizPoints()+' points</strong>.</p><div class="quiz-explanation">Continue à t’entraîner sur les trois niveaux pour faire progresser ton rang mycologique.</div><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px"><button class="quiz-primary" onclick="startQuiz(\''+quizState.level+'\')">Rejouer ce niveau</button><button class="quiz-primary" onclick="showQuizLevels()">Changer de niveau</button></div><p class="quiz-note">Le rang « Professionnel » est un niveau ludique, pas une qualification ni une certification mycologique.</p></div>';updateQuizCareer()}
+function showQuizLevels(){document.getElementById("quizContent").innerHTML='<p>Choisis ton niveau pour lancer une nouvelle série de 5 questions aléatoires.</p><div class="quiz-levels"><button class="quiz-level" onclick="startQuiz(\'facile\')">Facile<small>Les bases</small></button><button class="quiz-level" onclick="startQuiz(\'intermediaire\')">Intermédiaire<small>Bien connaître</small></button><button class="quiz-level" onclick="startQuiz(\'expert\')">Expert<small>Aller plus loin</small></button></div>'}
+
+updateQuizCareer();
+</script>
+</body>
+</html>
