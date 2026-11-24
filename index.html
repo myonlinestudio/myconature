@@ -208,6 +208,9 @@ header {
 
 }
 
+.universe-link { display:inline-flex; align-items:center; gap:7px; padding:9px 14px; border:1px solid rgba(255,255,255,.42); border-radius:999px; color:#fff; background:rgba(255,255,255,.08); text-decoration:none; font-size:13px; white-space:nowrap; transition:background .2s ease,border-color .2s ease; }
+.universe-link:hover { background:rgba(255,255,255,.17); border-color:rgba(255,255,255,.8); }
+
 nav a {
 
   color: white;
@@ -751,6 +754,7 @@ footer {
 
 @media(max-width:600px) {
   header { flex-direction: row; padding: 13px 5%; }
+  .universe-link { padding:8px 10px; font-size:12px; }
   .logo { font-size: 20px; }
   header nav { display: none; }
   .header-actions { gap: 0; }
@@ -799,6 +803,7 @@ footer {
       <a href="#catalogue">Catalogue</a>
       <a href="#apropos">À propos</a>
     </nav>
+    <a class="universe-link" href="https://myonlinestudio.github.io/Le-colonel/" aria-label="Découvrir Le Colonel">🧀 <span>Le Colonel</span></a>
     <div class="quick-search" id="quickSearch">
       <input class="quick-search-input" id="quickSearchInput" type="search"
         placeholder="Rechercher une espèce..." aria-label="Rechercher une espèce"
